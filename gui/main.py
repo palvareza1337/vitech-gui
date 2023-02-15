@@ -134,6 +134,7 @@ def change_table(event):
             results = sql_service.buscar_maquinas_por_area(id)
             for result in results:
                 table.insert("", tk.END, values=(result[0], result[5]))
+
         case "maquina":
             table['columns'] = ('Zona', 'Punto', 'Ejes', 'Fecha', 'Ver archivo')
             table.heading('Zona', text='Zona')
@@ -143,7 +144,15 @@ def change_table(event):
             table.heading('Ver archivo', text='Ver archivo')
             results = sql_service.buscar_zona_analisis_por_maquina(id)
             for result in results:
-                table.insert("", tk.END, values=(result[2], "", "3", "", "proximamente"))
+                zona = result[0]
+                results2 = sql_service.buscar_sensor_por_zona(zona)
+                for result2 in results2:
+                    lectura = sql_service.buscar_lectura_por_sensor(result2[0])
+                    if lectura[2] != None:
+                        count = 3
+                    else:
+                        count = 1
+                    table.insert("", tk.END, values=(result[2], result2[2], count, lectura[0][1], "proximamente"))
 
         case "zona":
             table['columns'] = ('Punto', 'Eje', 'Fecha', 'Ver archivo')
@@ -153,16 +162,22 @@ def change_table(event):
             table.heading('Ver archivo', text='Ver archivo')
             results = sql_service.buscar_sensor_por_zona(id)
             for result in results:
-                table.insert("", tk.END, values=(result[0], '', '', '', ''))
+                lectura = sql_service.buscar_lectura_por_sensor(result[0])
+                if lectura[2] != None:
+                    count = 3
+                else:
+                    count = 1
+                table.insert("", tk.END, values=(result[2], count, lectura[0][1], "proximamente"))
+
         case "sensor":
             table['columns'] = ('Eje', 'Fecha')# lecturas
             table.heading('Eje', text='Eje')
             table.heading('Fecha', text='Fecha')
             results = sql_service.buscar_lecturas_por_sensor(id)
             for result in results:
-                table.insert("", tk.END, values=(result[4], result[2]))
-                table.insert("", tk.END, values=(result[5], result[2]))
-                table.insert("", tk.END, values=(result[6], result[2]))
+                table.insert("", tk.END, values=(result[4], result[1]))
+                table.insert("", tk.END, values=(result[5], result[1]))
+                table.insert("", tk.END, values=(result[6], result[1]))
 
 
 
