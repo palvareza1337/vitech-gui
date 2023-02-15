@@ -148,7 +148,7 @@ def change_table(event):
                 results2 = sql_service.buscar_sensor_por_zona(zona)
                 for result2 in results2:
                     lectura = sql_service.buscar_lectura_por_sensor(result2[0])
-                    if lectura[2] != None:
+                    if lectura[0][-2] != None:
                         count = 3
                     else:
                         count = 1
