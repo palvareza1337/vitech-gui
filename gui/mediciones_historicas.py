@@ -31,7 +31,7 @@ table.heading("column2", text="Columna 2")
 table.heading("column3", text="Columna 3")
 table.heading("column4", text="Columna 4")
 
-table.focus_set()
+#table.focus_set()
 
 
 for i in range(5):
@@ -48,7 +48,9 @@ def change_table(event):
         item_text = tree.item(selected_item)["text"]
         if item_text == "Carpeta 1":
             for i in range(5):
-                values = (f"{i+1}A", f"{i+1}B", f"{i+1}C", f"{i+1}D")
+                values = [(f"{i+1}A", f"{i+1}B", f"{i+1}C", f"{i+1}D"),(f"{i+1}z", f"{i+1}y", f"{i+1}x", f"{i+1}v")]
+                table['columns'] = ('column1', 'column2', 'column3', 'column4', 'column4')
+                print(table['columns'])
                 table.item(table.get_children()[i], values=values)
         elif item_text == "Carpeta 2":
             for i in range(5):

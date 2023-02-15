@@ -106,10 +106,7 @@ def OnSelect(event):
 
 treeview.bind("<Double-1>", OnDoubleClick)
 #treeview.bind("<Button-1>", OnSingleClick)
-treeview.bind("<<TreeviewSelect>>", OnSelect)
-
-
-
+#treeview.bind("<<TreeviewSelect>>", OnSelect)
 
 # creacion de tabs
 graphs = tk.Frame(root, bg="green")
@@ -117,11 +114,64 @@ graphs.pack(side=tk.RIGHT, fill=tk.BOTH, expand=1)
 tabControl = CustomNotebook(graphs)
 tabControl.pack(fill=tk.BOTH, expand=1)
 
-frame_mediciones = tk.Canvas(root, background='green')
+table = ttk.Treeview(tabControl, columns=('#0'), show="headings")
+
+def change_table(event):
+    selected_item = treeview.selection()
+    try:
+        tipo, id = selected_item[0].split(">:<")
+    except:
+        return 
+    
+    for item in table.get_children():
+        table.delete(item)
+    print(tipo)
+    match tipo:
+        case "area":
+            table['columns'] = ('maquina', 'N° puntos')
+            table.heading('maquina', text='maquina')
+            table.heading('N° puntos', text='N° puntos')
+            results = sql_service.buscar_maquinas_por_area(id)
+            for result in results:
+                table.insert("", tk.END, values=(result[0], result[5]))
+        case "maquina":
+            table['columns'] = ('Zona', 'Punto', 'Ejes', 'Fecha', 'Ver archivo')
+            table.heading('Zona', text='Zona')
+            table.heading('Punto', text='Punto')
+            table.heading('Ejes', text='Ejes')
+            table.heading('Fecha', text='Fecha')
+            table.heading('Ver archivo', text='Ver archivo')
+            results = sql_service.buscar_zona_analisis_por_maquina(id)
+            for result in results:
+                table.insert("", tk.END, values=(result[2], "", "3", "", "proximamente"))
+
+        case "zona":
+            table['columns'] = ('Punto', 'Eje', 'Fecha', 'Ver archivo')
+            table.heading('Punto', text='Punto')
+            table.heading('Eje', text='Eje')
+            table.heading('Fecha', text='Fecha')
+            table.heading('Ver archivo', text='Ver archivo')
+            results = sql_service.buscar_sensor_por_zona(id)
+            for result in results:
+                table.insert("", tk.END, values=(result[0], '', '', '', ''))
+        case "sensor":
+            table['columns'] = ('Eje', 'Fecha')# lecturas
+            table.heading('Eje', text='Eje')
+            table.heading('Fecha', text='Fecha')
+            results = sql_service.buscar_lecturas_por_sensor(id)
+            for result in results:
+                table.insert("", tk.END, values=(result[4], result[2]))
+                table.insert("", tk.END, values=(result[5], result[2]))
+                table.insert("", tk.END, values=(result[6], result[2]))
+
+
+
+treeview.bind("<<TreeviewSelect>>", change_table)
+
 
 def listar_mediciones():
-    tabControl.add(frame_mediciones, text='Mediciónes historica') 
-    tabControl.select(frame_mediciones)
+    tabControl.add(table, text='Mediciónes historica') 
+    tabControl.select(table)
 
 tk.Button(tab1, text='Mediciones Historicas', command=partial(listar_mediciones)).pack(side=tk.LEFT)
 
