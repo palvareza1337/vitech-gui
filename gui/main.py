@@ -114,7 +114,10 @@ graphs.pack(side=tk.RIGHT, fill=tk.BOTH, expand=1)
 tabControl = CustomNotebook(graphs)
 tabControl.pack(fill=tk.BOTH, expand=1)
 
-table = ttk.Treeview(tabControl, columns=('#0'), show="headings")
+mediciones_historicas = tk.Canvas(tabControl)
+
+table = ttk.Treeview(mediciones_historicas, columns=('#0'), show="headings")
+table.pack(fill=tk.BOTH, side=tk.LEFT, expand=1)
 
 def change_table(event):
     selected_item = treeview.selection()
@@ -185,8 +188,8 @@ treeview.bind("<<TreeviewSelect>>", change_table)
 
 
 def listar_mediciones():
-    tabControl.add(table, text='Mediciónes historica') 
-    tabControl.select(table)
+    tabControl.add(mediciones_historicas, text='Mediciónes historica') 
+    tabControl.select(mediciones_historicas)
 
 tk.Button(tab1, text='Mediciones Historicas', command=partial(listar_mediciones)).pack(side=tk.LEFT)
 
