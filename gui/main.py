@@ -181,12 +181,12 @@ def change_table(event):
             table.heading('Fecha', text='Fecha')
             results = sql_service.buscar_lecturas_por_sensor(id)
             for result in results:
-                table.insert("", tk.END, values=(result[4], result[1]))
-                table.insert("", tk.END, values=(result[5], result[1]))
-                table.insert("", tk.END, values=(result[6], result[1]))
+                table.insert("", tk.END, iid=result[4], values=(result[4], result[1]))
+                table.insert("", tk.END, iid=result[5], values=(result[5], result[1]))
+                table.insert("", tk.END, iid=result[6], values=(result[6], result[1]))
 
 
-table.bind("<Double-1>", prueba)
+table.bind("<Double-1>", OnDoubleClick)
 treeview.bind("<<TreeviewSelect>>", change_table)
 
 
