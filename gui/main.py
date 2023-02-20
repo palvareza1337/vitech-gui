@@ -90,9 +90,10 @@ treeview = ttk.Treeview(sidebar)
 treeview.pack(fill=tk.BOTH, expand=1)
 
 def OnDoubleClick(event):
-    item = treeview.selection()[0]
-    filename, name, sample_rate = item.split("<:>")
-    print("you clicked on", item)
+    filename = treeview.selection()[0]
+    query = sql_service.get_pestana(filename)
+    sample_rate = query[0]
+    name = '/'.join(query[1:]) + filename[0]
     filename = s3_service.get_reading(filename)
     newtab(filename, name, sample_rate)
 
@@ -103,6 +104,8 @@ def OnSelect(event):
     item = treeview.selection()
     print(item)
 
+def prueba(event):
+    print("clickeaste")
 
 treeview.bind("<Double-1>", OnDoubleClick)
 #treeview.bind("<Button-1>", OnSingleClick)
@@ -183,7 +186,7 @@ def change_table(event):
                 table.insert("", tk.END, values=(result[6], result[1]))
 
 
-
+table.bind("<Double-1>", prueba)
 treeview.bind("<<TreeviewSelect>>", change_table)
 
 

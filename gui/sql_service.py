@@ -74,8 +74,25 @@ def buscar_lectura_por_sensor(id_sensor):
 def ultima_lectura():
   cursor.execute(f"SELECT * FROM lectura WHERE date_time = (SELECT MAX(date_time) from lectura);")
   result = cursor.fetchone()
-  return result# recover 2 and 4
+  return result
+
+def get_pestana(filename):
+  cursor.execute(f"SELECT lectura.sample_rate, area.nom_area, maquina.modelo, zona_analisis.nombre_zona, sensor.nombre_punto\
+                  FROM lectura\
+                  INNER JOIN sensor ON sensor.id_sensor=lectura.id_sensor\
+                  INNER JOIN zona_analisis ON zona_analisis.id_zona_analisis=sensor.id_zona_analisis\
+                  INNER JOIN maquina ON maquina.id_maquina=zona_analisis.id_maquina\
+                  INNER JOIN area ON area.id_area=maquina.id_area\
+                  WHERE ruta_canal1 OR ruta_canal2 OR ruta_canal3 = '{filename}';")
+
+  print(filename)
+                  
+  result = cursor.fetchone()
+  return result
 
 end = time.time()
 
 print("conected to db in " + str(end-start) + " seconds")
+
+if __name__ == '__main__' : 
+  print(get_pestana("Z - 1892763021-18-2023 7,19,16 PM.csv"))

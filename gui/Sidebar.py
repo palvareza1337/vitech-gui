@@ -8,18 +8,17 @@ Este código es un conjunto de funciones que se utilizan para poblar un widget T
 """
 
 
-def populate_lectura(id_sensor, tree: ttk.Treeview, tabname_stack): # tabname_stack es una lista que se utiliza para crear las rutas de los elementos en el Treeview
+def populate_lectura(id_sensor, tree: ttk.Treeview): # tabname_stack es una lista que se utiliza para crear las rutas de los elementos en el Treeview
     tipo, id_sensor_db = id_sensor.split('>:<')
     print(id_sensor)
     lecturas = sql_service.buscar_lectura_por_sensor(id_sensor_db)
     # [('189276403', datetime.datetime(2023, 1, 18, 18, 15, 48), 25980, 0.0, 'C:\\Ruta\\X - 1892764031-18-2023 6,15,48 PM.csv', 
     # 'C:\\Ruta\\Y - 1892764031-18-2023 6,15,48 PM.csv', 'C:\\Ruta\\Z - 1892764031-18-2023 6,15,48 PM.csv')]
-    tabname = '/'.join(tabname_stack)
     try:
-        tree.insert(id_sensor, tk.END, text="Horizontal", iid=lecturas[-1][-3] + "<:>" + tabname + "/Horizontal" + "<:>" + str(lecturas[-1][2]), open=False)
+        tree.insert(id_sensor, tk.END, text="Horizontal", iid=lecturas[-1][-3], open=False)
         if (lecturas[-1] != None):
-            tree.insert(id_sensor, tk.END, text="Vertical", iid=lecturas[-1][-2] + "<:>" + tabname + "/Vertical" + "<:>" + str(lecturas[-1][2]), open=False)
-            tree.insert(id_sensor, tk.END, text="Axial", iid=lecturas[-1][-1] + "<:>" + tabname + "/Axial" + "<:>" + str(lecturas[-1][2]), open=False)
+            tree.insert(id_sensor, tk.END, text="Vertical", iid=lecturas[-1][-2], open=False)
+            tree.insert(id_sensor, tk.END, text="Axial", iid=lecturas[-1][-1], open=False)
     except:
         return
 
@@ -33,40 +32,39 @@ y luego llamar a populate_lectura para agregar las lecturas del sensor al Treevi
 
 
 
-def populate_sensor(id_zona, tree: ttk.Treeview, tabname_stack):
+def populate_sensor(id_zona, tree: ttk.Treeview):
     tipo, id_zona_db = id_zona.split('>:<')
     sensores = sql_service.buscar_sensor_por_zona(id_zona_db)
     # [('189276403', 'qwerty21', 'Rodamiento 1', 'B', '100%')]
     for sensor in sensores:
         treeParent = tree.insert(id_zona, tk.END, text=sensor[2], iid='sensor>:<' + sensor[0], open=False)
-        populate_lectura(treeParent, tree, tabname_stack + [sensor[2]])
+        populate_lectura(treeParent, tree)
 
 
-def populate_zonas(id_maquina, tree: ttk.Treeview, tabname_stack):
+def populate_zonas(id_maquina, tree: ttk.Treeview):
     tipo, id_maquina_db = id_maquina.split('>:<')
     zonas = sql_service.buscar_zona_analisis_por_maquina(id_maquina_db)
     # [('qwerty21', 'j879w1', 'sistema de transmision', '', 1)]
     for zona in zonas:
         treeParent = tree.insert(id_maquina, tk.END, text=zona[2], iid='zona>:<' + zona[0], open=False)
-        populate_sensor(treeParent, tree, tabname_stack + [zona[2]])
+        populate_sensor(treeParent, tree)
 
 
-def populate_maquina(id_area, tree: ttk.Treeview, tabname_stack):
+def populate_maquina(id_area, tree: ttk.Treeview):
     tipo, id_area_db = id_area.split('>:<')
     maquinas = sql_service.buscar_maquinas_por_area(id_area_db)
     # [('j879w1', 'e435y7', 'movil', 12345678, 'liebher', 1, 10, 4, '')]
     for maquina in maquinas:
         treeParent = tree.insert(id_area, tk.END, text=maquina[4], iid='maquina>:<' + maquina[0], open=False)
-        populate_zonas(treeParent, tree, tabname_stack + [maquina[4]])
+        populate_zonas(treeParent, tree)
 
 
 def populate_area(id_sucursal, tree: ttk.Treeview):
     areas = sql_service.buscar_areas_por_sucursal(id_sucursal)
     # [('e435y7', '85296374', 'Apilado', 1)]
     for area in areas:
-        tabname_stack =[area[2]]
         treeParent = tree.insert(id_sucursal, tk.END, text=area[2], iid='area>:<' + area[0], open=False)
-        populate_maquina(treeParent, tree, tabname_stack)
+        populate_maquina(treeParent, tree)
  
  
 def populate_sidebar(tree: ttk.Treeview): 
