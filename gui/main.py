@@ -53,12 +53,38 @@ root.iconbitmap(icon)
 ribbon = ttk.Notebook(root)
 ribbon.pack(side=tk.TOP, fill=tk.BOTH)
 
+def nueva_maquina():
+    def guardar_nueva_maquina():
+        nombre = entrada_nombre.get()
+        descripcion = entrada_descripcion.get()
+        # Lógica para guardar la nueva máquina en la base de datos
+        print(f"Nombre: {nombre}\nDescripción: {descripcion}")
+        ventana_nueva_maquina.destroy()
+        
+    ventana_nueva_maquina = tk.Toplevel(root)
+    ventana_nueva_maquina.wm_title("Nueva Máquina")
+    
+    etiqueta_nombre = tk.Label(ventana_nueva_maquina, text="Nombre:")
+    etiqueta_nombre.pack()
+    entrada_nombre = tk.Entry(ventana_nueva_maquina)
+    entrada_nombre.pack()
+    
+    etiqueta_descripcion = tk.Label(ventana_nueva_maquina, text="Descripción:")
+    etiqueta_descripcion.pack()
+    entrada_descripcion = tk.Entry(ventana_nueva_maquina)
+    entrada_descripcion.pack()
+    
+    boton_guardar = tk.Button(ventana_nueva_maquina, text="Guardar", command=guardar_nueva_maquina) 
+    boton_guardar.pack()
 
+
+    
 tab1 = tk.Frame(ribbon)
 ribbon.add(tab1, text='Iniciar')
 tk.Button(tab1, text='Iniciar Sesion').pack(side=tk.LEFT)
 tk.Button(tab1, text='Cerrar Sesion', command=partial(sesion.cerrar_sesion, root)).pack(side=tk.LEFT)
-tk.Button(tab1, text='Nueva Máquina').pack(side=tk.LEFT)
+#tk.Button(tab1, text='Nueva Máquina').pack(side=tk.LEFT)
+tk.Button(tab1, text='Nueva Máquina', command=nueva_maquina).pack(side=tk.LEFT)
 tk.Button(tab1, text='Nuevo Reporte').pack(side=tk.LEFT)
 
 
