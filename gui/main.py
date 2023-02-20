@@ -190,7 +190,7 @@ def change_table(event):
             table.heading('Eje', text='Eje')
             table.heading('Fecha', text='Fecha')
             results = sql_service.buscar_lecturas_por_sensor(id)
-            zona = sql_service.buscar_nombre_zona_por_id_sensor(results[0][0])[0]
+            zona = sql_service.buscar_nombre_punto_por_id_sensor(results[0][0])[0]
             for result in results:
                 table.insert("", tk.END, iid=result[4], values=(zona, 'Horizontal', result[1]))
                 table.insert("", tk.END, iid=result[5], values=(zona, 'Vertical', result[1]))

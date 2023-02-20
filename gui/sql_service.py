@@ -71,10 +71,9 @@ def buscar_lectura_por_sensor(id_sensor):
   result = cursor.fetchall()
   return result
 
-def buscar_nombre_zona_por_id_sensor(id_sensor):
-  cursor.execute(f"SELECT nombre_zona\
-                 FROM zona_analisis\
-                 INNER JOIN sensor ON sensor.id_zona_analisis = zona_analisis.id_zona_analisis\
+def buscar_nombre_punto_por_id_sensor(id_sensor):
+  cursor.execute(f"SELECT nombre_punto\
+                 FROM sensor\
                  WHERE id_sensor={id_sensor}")
   result = cursor.fetchone()
   return result
