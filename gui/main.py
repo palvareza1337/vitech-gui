@@ -142,20 +142,19 @@ def change_table(event):
     print(tipo)
     match tipo:
         case "area":
-            table['columns'] = ('maquina', 'N° puntos')
-            table.heading('maquina', text='maquina')
+            table['columns'] = ('modelo', 'N° puntos')
+            table.heading('modelo', text='modelo')
             table.heading('N° puntos', text='N° puntos')
             results = sql_service.buscar_maquinas_por_area(id)
             for result in results:
-                table.insert("", tk.END, values=(result[0], result[5]))
+                table.insert("", tk.END, values=(result[4], result[5]))
 
         case "maquina":
-            table['columns'] = ('Zona', 'Punto', 'Ejes', 'Fecha', 'Ver archivo')
+            table['columns'] = ('Zona', 'Punto', 'Ejes', 'Fecha')
             table.heading('Zona', text='Zona')
             table.heading('Punto', text='Punto')
             table.heading('Ejes', text='Ejes')
             table.heading('Fecha', text='Fecha')
-            table.heading('Ver archivo', text='Ver archivo')
             results = sql_service.buscar_zona_analisis_por_maquina(id)
             for result in results:
                 zona = result[0]
@@ -166,14 +165,13 @@ def change_table(event):
                         count = 3
                     else:
                         count = 1
-                    table.insert("", tk.END, values=(result[2], result2[2], count, lectura[0][1], "proximamente"))
+                    table.insert("", tk.END, values=(result[2], result2[2], count, lectura[0][1]))
 
         case "zona":
-            table['columns'] = ('Punto', 'Eje', 'Fecha', 'Ver archivo')
+            table['columns'] = ('Punto', 'Ejes', 'Fecha')
             table.heading('Punto', text='Punto')
-            table.heading('Eje', text='Eje')
+            table.heading('Ejes', text='Cantidad de ejes')
             table.heading('Fecha', text='Fecha')
-            table.heading('Ver archivo', text='Ver archivo')
             results = sql_service.buscar_sensor_por_zona(id)
             for result in results:
                 lectura = sql_service.buscar_lectura_por_sensor(result[0])
@@ -181,17 +179,19 @@ def change_table(event):
                     count = 3
                 else:
                     count = 1
-                table.insert("", tk.END, values=(result[2], count, lectura[0][1], "proximamente"))
+                table.insert("", tk.END, values=(result[2], count, lectura[0][1]))
 
         case "sensor":
-            table['columns'] = ('Eje', 'Fecha')# lecturas
+            table['columns'] = ('punto', 'Eje', 'Fecha')# lecturas
+            table.heading('punto', text='Punto')
             table.heading('Eje', text='Eje')
             table.heading('Fecha', text='Fecha')
             results = sql_service.buscar_lecturas_por_sensor(id)
+            zona = sql_service.buscar_nombre_zona_por_id_sensor(results[0][0])[0]
             for result in results:
-                table.insert("", tk.END, iid=result[4], values=(result[4], result[1]))
-                table.insert("", tk.END, iid=result[5], values=(result[5], result[1]))
-                table.insert("", tk.END, iid=result[6], values=(result[6], result[1]))
+                table.insert("", tk.END, iid=result[4], values=(zona, 'Horizontal', result[1]))
+                table.insert("", tk.END, iid=result[5], values=(zona, 'Vertical', result[1]))
+                table.insert("", tk.END, iid=result[6], values=(zona, 'Axial', result[1]))
 
 
 table.bind("<Double-1>", OnDoubleClickhistorico)
