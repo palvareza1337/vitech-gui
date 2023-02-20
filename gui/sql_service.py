@@ -83,11 +83,12 @@ def get_pestana(filename):
                   INNER JOIN zona_analisis ON zona_analisis.id_zona_analisis=sensor.id_zona_analisis\
                   INNER JOIN maquina ON maquina.id_maquina=zona_analisis.id_maquina\
                   INNER JOIN area ON area.id_area=maquina.id_area\
-                  WHERE ruta_canal1 OR ruta_canal2 OR ruta_canal3 = '{filename}';")
+                  WHERE ruta_canal1 = '{filename}' OR ruta_canal2 = '{filename}' OR ruta_canal3 = '{filename}';")
 
   print(filename)
                   
   result = cursor.fetchone()
+  print(result)
   return result
 
 end = time.time()

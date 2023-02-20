@@ -93,7 +93,7 @@ def OnDoubleClick(event):
     filename = treeview.selection()[0]
     query = sql_service.get_pestana(filename)
     sample_rate = query[0]
-    name = '/'.join(query[1:]) + filename[0]
+    name = '/'.join(query[1:]) + '/' + filename[0]
     filename = s3_service.get_reading(filename)
     newtab(filename, name, sample_rate)
 
