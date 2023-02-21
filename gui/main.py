@@ -58,6 +58,7 @@ def nueva_maquina():
         nombre = entrada_modelo.get()
         descripcion = entrada_descripcion.get("1.0", tk.END)
         # Lógica para guardar la nueva máquina en la base de datos
+        # query = sql_service.agregar_maquina(combo_tipo, entrada_sucursal, entrada_modelo, entrada_puntos, combo_criticidad, entrada_pendiente_deg, entrada_descripcion)
         print(f"Tipo: {combo_tipo.get()}\nModelo: {nombre}\nCant. Puntos de monitoreo: {entrada_puntos.get()}\nNivel de criticidad: {combo_criticidad.get()}\nPendiente de degradación: {entrada_pendiente_deg.get()}\nDescripción: {descripcion}")
         ventana_nueva_maquina.destroy()
 
@@ -107,9 +108,8 @@ def nueva_maquina():
 
     etiqueta_pendiente_deg = tk.Label(ventana_nueva_maquina, text="Pendiente de degradación:")
     etiqueta_pendiente_deg.pack()
-
     # Creamos el widget "Entry"
-    entrada_pendiente_deg = tk.Entry(ventana_nueva_maquina, validate="key")
+    entrada_pendiente_deg = tk.Entry(ventana_nueva_maquina)
     entrada_pendiente_deg.pack()
 
     # Función para validar la entrada como un número con máximo 8 dígitos
@@ -126,7 +126,16 @@ def nueva_maquina():
         except ValueError:
             return False
     
-    entrada_pendiente_deg.config(validatecommand=(ventana_nueva_maquina.register(validar_numero), "%P"))
+    # Creamos la etiqueta
+    etiqueta_sucursal = tk.Label(ventana_nueva_maquina, text="Contacto sucursal:")
+    etiqueta_sucursal.pack()
+
+    # Creamos el widget "Entry"
+    entrada_sucursal = tk.Entry(ventana_nueva_maquina, validate="key")
+    entrada_sucursal.pack()
+
+    # Agregamos la validación para que solo se permitan números con máximo 8 dígitos
+    entrada_sucursal.config(validatecommand=(ventana_nueva_maquina.register(validar_numero), "%P"))
 
     etiqueta_descripcion = tk.Label(ventana_nueva_maquina, text="Descripción:")
     etiqueta_descripcion.pack()

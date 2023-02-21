@@ -98,6 +98,11 @@ def get_pestana(filename):
   print(result)
   return result
 
+def agregar_maquina(id_area, tipo_maquina, contacto_sucursal, modelo, cant_puntos_monitoreo, criticidad, pendiente_degradacion, notas):
+  cursor.execute(f"INSERT INTO maquina VALUES( , {id_area}, {tipo_maquina}, {contacto_sucursal}, {modelo}, {cant_puntos_monitoreo}, {pendiente_degradacion}, {notas})")
+
+
+
 end = time.time()
 
 print("conected to db in " + str(end-start) + " seconds")
