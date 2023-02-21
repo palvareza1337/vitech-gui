@@ -55,27 +55,90 @@ ribbon.pack(side=tk.TOP, fill=tk.BOTH)
 
 def nueva_maquina():
     def guardar_nueva_maquina():
-        nombre = entrada_nombre.get()
-        descripcion = entrada_descripcion.get()
+        nombre = entrada_modelo.get()
+        descripcion = entrada_descripcion.get("1.0", tk.END)
         # Lógica para guardar la nueva máquina en la base de datos
-        print(f"Nombre: {nombre}\nDescripción: {descripcion}")
+        print(f"Tipo: {combo_tipo.get()}\nModelo: {nombre}\nCant. Puntos de monitoreo: {entrada_puntos.get()}\nNivel de criticidad: {combo_criticidad.get()}\nPendiente de degradación: {entrada_pendiente_deg.get()}\nDescripción: {descripcion}")
         ventana_nueva_maquina.destroy()
-        
+
+    def cancelar():
+        ventana_nueva_maquina.destroy()
+
     ventana_nueva_maquina = tk.Toplevel(root)
-    ventana_nueva_maquina.wm_title("Nueva Máquina")
+    ventana_nueva_maquina.title("Nueva Máquina")
+    ventana_nueva_maquina.geometry("500x500")
+    ventana_nueva_maquina.resizable(False, False)
+    ventana_nueva_maquina.attributes('-topmost', 'true')
+    ventana_nueva_maquina.focus_force()
+
+    # Crear frame para la información básica
+    frame_info_basica = tk.LabelFrame(ventana_nueva_maquina, text="Información básica")
+    frame_info_basica.pack(padx=10, pady=10)
+
+    etiqueta_tipo = tk.Label(frame_info_basica, text="Tipo:")
+    etiqueta_tipo.grid(row=0, column=0, sticky="w")
+    opciones_tipo = ["Fija", "Movil"]
+    combo_tipo = ttk.Combobox(frame_info_basica, values=opciones_tipo, state="readonly")
+    combo_tipo.grid(row=0, column=1, padx=5, pady=5)
+
+    etiqueta_modelo = tk.Label(frame_info_basica, text="Modelo:")
+    etiqueta_modelo.grid(row=1, column=0, sticky="w")
+    entrada_modelo = tk.Entry(frame_info_basica)
+    entrada_modelo.grid(row=1, column=1, padx=5, pady=5)
+
+    # Crear frame para la información avanzada
+    frame_info_avanzada = tk.LabelFrame(ventana_nueva_maquina, text="Información avanzada")
+    frame_info_avanzada.pack(padx=10, pady=10)
+
+    etiqueta_puntos = tk.Label(frame_info_avanzada, text="Cant. Puntos de monitoreo:")
+    etiqueta_puntos.grid(row=0, column=0, sticky="w")
+    entrada_puntos = tk.Entry(frame_info_avanzada)
+    entrada_puntos.grid(row=0, column=1, padx=5, pady=5)
+
+    etiqueta_criticidad = tk.Label(ventana_nueva_maquina, text="Nivel de criticidad:")
+    etiqueta_criticidad.pack()
+
+    # Creamos la lista de opciones
+    opciones_criticidad = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+
+    # Creamos el widget "Combobox"
+    combo_criticidad = ttk.Combobox(ventana_nueva_maquina, values=opciones_criticidad, state="readonly")
+    combo_criticidad.pack()
+
+    etiqueta_pendiente_deg = tk.Label(ventana_nueva_maquina, text="Pendiente de degradación:")
+    etiqueta_pendiente_deg.pack()
+
+    # Creamos el widget "Entry"
+    entrada_pendiente_deg = tk.Entry(ventana_nueva_maquina, validate="key")
+    entrada_pendiente_deg.pack()
+
+    # Función para validar la entrada como un número con máximo 8 dígitos
+    def validar_numero(new_value):
+        if not new_value:
+            return True
     
-    etiqueta_nombre = tk.Label(ventana_nueva_maquina, text="Nombre:")
-    etiqueta_nombre.pack()
-    entrada_nombre = tk.Entry(ventana_nueva_maquina)
-    entrada_nombre.pack()
+        try:
+            float(new_value)
+            if len(new_value) <= 8: # Verifica que el número tenga como máximo 8 dígitos
+                return True
+            else:
+                return False
+        except ValueError:
+            return False
     
+    entrada_pendiente_deg.config(validatecommand=(ventana_nueva_maquina.register(validar_numero), "%P"))
+
     etiqueta_descripcion = tk.Label(ventana_nueva_maquina, text="Descripción:")
     etiqueta_descripcion.pack()
-    entrada_descripcion = tk.Entry(ventana_nueva_maquina)
+
+    # Creamos el widget "Text"
+    entrada_descripcion = tk.Text(ventana_nueva_maquina, height=5)
     entrada_descripcion.pack()
-    
+
     boton_guardar = tk.Button(ventana_nueva_maquina, text="Guardar", command=guardar_nueva_maquina) 
     boton_guardar.pack()
+
+
 
 
     
@@ -141,8 +204,6 @@ def OnSelect(event):
     item = treeview.selection()
     print(item)
 
-def prueba(event):
-    print("clickeaste")
 
 treeview.bind("<Double-1>", OnDoubleClick)
 #treeview.bind("<Button-1>", OnSingleClick)
