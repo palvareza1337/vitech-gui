@@ -79,7 +79,7 @@ def nueva_maquina():
     etiqueta_tipo = tk.Label(frame_info_basica, text="Tipo:")
     etiqueta_tipo.grid(row=0, column=0, sticky="w")
     opciones_tipo = ["Fija", "Movil"]
-    combo_tipo = ttk.Combobox(frame_info_basica, values=opciones_tipo, state="readonly")
+    combo_tipo = ttk.Combobox(frame_info_basica, values=opciones_tipo, state="readonly") 
     combo_tipo.grid(row=0, column=1, padx=5, pady=5)
 
     etiqueta_modelo = tk.Label(frame_info_basica, text="Modelo:")
@@ -144,11 +144,15 @@ def nueva_maquina():
     entrada_descripcion = tk.Text(ventana_nueva_maquina, height=5)
     entrada_descripcion.pack()
 
-    boton_cancelar = tk.Button(ventana_nueva_maquina, text="Cancelar", command=cancelar) 
-    boton_cancelar.pack()
+    botones_frame = tk.Frame(ventana_nueva_maquina)
+    botones_frame.pack(pady=10)
 
-    boton_guardar = tk.Button(ventana_nueva_maquina, text="Guardar", command=guardar_nueva_maquina) 
-    boton_guardar.pack()
+    boton_cancelar = tk.Button(botones_frame, text="Cancelar", command=cancelar, bg="#9b9b9b") 
+    boton_cancelar.grid(row=0, column=0, padx=5)
+
+    boton_guardar = tk.Button(botones_frame, text="Guardar", command=guardar_nueva_maquina, bg="#3366CC") 
+    boton_guardar.grid(row=0, column=1, padx=5)
+
 
 
 
