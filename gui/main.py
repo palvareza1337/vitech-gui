@@ -144,6 +144,9 @@ def nueva_maquina():
     entrada_descripcion = tk.Text(ventana_nueva_maquina, height=5)
     entrada_descripcion.pack()
 
+    boton_cancelar = tk.Button(ventana_nueva_maquina, text="Cancelar", command=cancelar) 
+    boton_cancelar.pack()
+
     boton_guardar = tk.Button(ventana_nueva_maquina, text="Guardar", command=guardar_nueva_maquina) 
     boton_guardar.pack()
 
