@@ -64,8 +64,8 @@ def nueva_maquina():
         nombre = entrada_modelo.get()
         descripcion = entrada_descripcion.get("1.0", tk.END)
         # Lógica para guardar la nueva máquina en la base de datos
-        #query = sql_service.agregar_maquina(id_area, combo_tipo, entrada_sucursal, entrada_modelo, entrada_puntos, combo_criticidad, entrada_pendiente_deg, entrada_descripcion)
-        print(f"Tipo: {combo_tipo.get()}\nModelo: {nombre}\nCant. Puntos de monitoreo: {entrada_puntos.get()}\nNivel de criticidad: {combo_criticidad.get()}\nPendiente de degradación: {entrada_pendiente_deg.get()}\nDescripción: {descripcion}")
+        id_area = combo_area.get().split(' - ')[0]
+        query = sql_service.agregar_maquina(id_area, combo_tipo.get(), entrada_sucursal.get(), entrada_modelo.get(), entrada_puntos.get(), combo_criticidad.get(), entrada_pendiente_deg.get(), entrada_descripcion.get('1.0', tk.END))
         ventana_nueva_maquina.destroy()
 
     def cancelar():
@@ -129,19 +129,6 @@ def nueva_maquina():
     etiqueta_puntos.grid(row=0, column=0, sticky="w")
     entrada_puntos = tk.Entry(frame_info_avanzada)
     entrada_puntos.grid(row=0, column=1, padx=5, pady=5)
-    
-    """
-    etiqueta_area = tk.Label(ventana_nueva_maquina, text="Seleccione Área:")
-    etiqueta_area.pack()
-
-    # Creamos la lista de opciones
-    opciones_area = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
-
-    # Creamos el widget "Combobox"
-    combo_area = ttk.Combobox(ventana_nueva_maquina, values=opciones_area, state="readonly")
-    combo_area.pack()
-
-    """
     
 
     etiqueta_criticidad = tk.Label(ventana_nueva_maquina, text="Nivel de criticidad:")
