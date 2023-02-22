@@ -83,9 +83,11 @@ def nueva_maquina():
     frame_info_previa.pack(padx=10, pady=10)
 
     def actualizar_areas_cmbx(cmbx: ttk.Combobox, event):
-        print(event.widget.get())
-        cmbx['values'] = ["Verde", "Azul", "Rojo", "Amarillo"]
-        print(cmbx['values'])
+        sucursal_selected = event.widget.get()
+        sucursal_selected_id = sucursal_selected.split(" - ")[0]
+        query_areas = sql_service.buscar_areas_por_sucursal(sucursal_selected_id)
+        opciones_area = [x[0] + " - " + x[2] for x in query_areas]
+        cmbx['values'] = opciones_area
     
     etiqueta_sucursal_id = tk.Label(frame_info_previa, text="Sucursal:")
     etiqueta_sucursal_id.grid(row=0, column=0, sticky="w")
