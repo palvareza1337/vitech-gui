@@ -36,6 +36,8 @@ import Sidebar
 from CustomNotebook import CustomNotebook
 from CustomToolbar import CustomToolbar
 
+global id_empresa 
+id_empresa = 17123456 
 
 # literal un diccionario para convertir XYZ a HORIZONTAL VERTICAL Y AXIAL
 mapping_ejes = {'X': 'Horizontal', 'Y': 'Vertical', 'Z': 'Axial'}
@@ -54,11 +56,15 @@ ribbon = ttk.Notebook(root)
 ribbon.pack(side=tk.TOP, fill=tk.BOTH)
 
 def nueva_maquina():
+
+    # Lógica para recuperar información relacionada
+
+
     def guardar_nueva_maquina():
         nombre = entrada_modelo.get()
         descripcion = entrada_descripcion.get("1.0", tk.END)
         # Lógica para guardar la nueva máquina en la base de datos
-        #query = sql_service.agregar_maquina('', id_area, combo_tipo, entrada_sucursal, entrada_modelo, entrada_puntos, combo_criticidad, entrada_pendiente_deg, entrada_descripcion)
+        #query = sql_service.agregar_maquina(id_area, combo_tipo, entrada_sucursal, entrada_modelo, entrada_puntos, combo_criticidad, entrada_pendiente_deg, entrada_descripcion)
         print(f"Tipo: {combo_tipo.get()}\nModelo: {nombre}\nCant. Puntos de monitoreo: {entrada_puntos.get()}\nNivel de criticidad: {combo_criticidad.get()}\nPendiente de degradación: {entrada_pendiente_deg.get()}\nDescripción: {descripcion}")
         ventana_nueva_maquina.destroy()
 
@@ -67,10 +73,35 @@ def nueva_maquina():
 
     ventana_nueva_maquina = tk.Toplevel(root)
     ventana_nueva_maquina.title("Nueva Máquina")
-    ventana_nueva_maquina.geometry("500x500")
+    ventana_nueva_maquina.geometry("500x550")
     ventana_nueva_maquina.resizable(False, False)
     ventana_nueva_maquina.attributes('-topmost', 'true')
     ventana_nueva_maquina.focus_force()
+
+    # Crear frame para la información previa
+    frame_info_previa = tk.LabelFrame(ventana_nueva_maquina, text="Información Previa")
+    frame_info_previa.pack(padx=10, pady=10)
+
+    def actualizar_areas_cmbx(cmbx: ttk.Combobox, event):
+        print(event.widget.get())
+        cmbx['values'] = ["Verde", "Azul", "Rojo", "Amarillo"]
+        print(cmbx['values'])
+    
+    etiqueta_sucursal_id = tk.Label(frame_info_previa, text="Sucursal:")
+    etiqueta_sucursal_id.grid(row=0, column=0, sticky="w")
+    query_sucursales = sql_service.buscar_sucursales_por_empresa(id_empresa)
+    opciones_sucursal_id = [x[0] + " - " + x[2] for x in query_sucursales]
+    combo_sucursal_id = ttk.Combobox(frame_info_previa, values=opciones_sucursal_id, state="readonly") 
+    combo_sucursal_id.grid(row=0, column=1, padx=5, pady=5)
+
+    etiqueta_area = tk.Label(frame_info_previa, text="Área:")
+    etiqueta_area.grid(row=1, column=0, sticky="w")
+    opciones_area = ["Fija", "Movil"]
+    combo_area = ttk.Combobox(frame_info_previa, values=opciones_area, state="readonly") 
+    combo_area.grid(row=1, column=1, padx=5, pady=5)
+    
+    actualizar_areas_cmbx_partial = partial(actualizar_areas_cmbx, combo_area)
+    combo_sucursal_id.bind("<<ComboboxSelected>>", actualizar_areas_cmbx_partial)
 
     # Crear frame para la información básica
     frame_info_basica = tk.LabelFrame(ventana_nueva_maquina, text="Información básica")
@@ -86,6 +117,7 @@ def nueva_maquina():
     etiqueta_modelo.grid(row=1, column=0, sticky="w")
     entrada_modelo = tk.Entry(frame_info_basica)
     entrada_modelo.grid(row=1, column=1, padx=5, pady=5)
+    
 
     # Crear frame para la información avanzada
     frame_info_avanzada = tk.LabelFrame(ventana_nueva_maquina, text="Información avanzada")
@@ -95,6 +127,20 @@ def nueva_maquina():
     etiqueta_puntos.grid(row=0, column=0, sticky="w")
     entrada_puntos = tk.Entry(frame_info_avanzada)
     entrada_puntos.grid(row=0, column=1, padx=5, pady=5)
+    
+    """
+    etiqueta_area = tk.Label(ventana_nueva_maquina, text="Seleccione Área:")
+    etiqueta_area.pack()
+
+    # Creamos la lista de opciones
+    opciones_area = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+
+    # Creamos el widget "Combobox"
+    combo_area = ttk.Combobox(ventana_nueva_maquina, values=opciones_area, state="readonly")
+    combo_area.pack()
+
+    """
+    
 
     etiqueta_criticidad = tk.Label(ventana_nueva_maquina, text="Nivel de criticidad:")
     etiqueta_criticidad.pack()
