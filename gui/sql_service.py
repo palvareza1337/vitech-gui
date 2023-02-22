@@ -101,8 +101,7 @@ def get_pestana(filename):
 def agregar_maquina(id_area, tipo_maquina, contacto_sucursal, modelo, cant_puntos_monitoreo, criticidad, pendiente_degradacion, notas):
   print(f"INSERT INTO maquina VALUES(NULL, '{id_area}', '{tipo_maquina}', '{contacto_sucursal}', '{modelo}', '{cant_puntos_monitoreo}', '{criticidad}', '{pendiente_degradacion}', '{notas}')")
   cursor.execute(f"INSERT INTO maquina VALUES(NULL, '{id_area}', '{tipo_maquina}', '{contacto_sucursal}', '{modelo}', '{cant_puntos_monitoreo}', '{criticidad}', '{pendiente_degradacion}', '{notas}')")
-  
-
+  db.commit()
 
 end = time.time()
 
