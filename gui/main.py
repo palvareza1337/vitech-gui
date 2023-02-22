@@ -58,7 +58,7 @@ def nueva_maquina():
         nombre = entrada_modelo.get()
         descripcion = entrada_descripcion.get("1.0", tk.END)
         # Lógica para guardar la nueva máquina en la base de datos
-        # query = sql_service.agregar_maquina(combo_tipo, entrada_sucursal, entrada_modelo, entrada_puntos, combo_criticidad, entrada_pendiente_deg, entrada_descripcion)
+        #query = sql_service.agregar_maquina('', id_area, combo_tipo, entrada_sucursal, entrada_modelo, entrada_puntos, combo_criticidad, entrada_pendiente_deg, entrada_descripcion)
         print(f"Tipo: {combo_tipo.get()}\nModelo: {nombre}\nCant. Puntos de monitoreo: {entrada_puntos.get()}\nNivel de criticidad: {combo_criticidad.get()}\nPendiente de degradación: {entrada_pendiente_deg.get()}\nDescripción: {descripcion}")
         ventana_nueva_maquina.destroy()
 
