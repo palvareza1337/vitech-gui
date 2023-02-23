@@ -112,10 +112,49 @@ def nueva_maquina():
     def manejar_clic_boton_area():
         ventana_nueva_area = tk.Toplevel(root)
         ventana_nueva_area.title("Nueva Área")
-        ventana_nueva_area.geometry("400x400")
+        ventana_nueva_area.geometry("400x350")
         ventana_nueva_area.resizable(False, False)
         ventana_nueva_area.attributes('-topmost', 'true')
         ventana_nueva_area.focus_force()
+
+        # Crear frame para la información básica
+        frame_info_basica = tk.LabelFrame(ventana_nueva_area, text="Información básica")
+        frame_info_basica.pack(padx=10, pady=10)
+
+        etiqueta_area = tk.Label(frame_info_basica, text="Área:")
+        etiqueta_area.grid(row=0, column=0, sticky="w")
+        entrada_area = tk.Entry(frame_info_basica)
+        entrada_area.grid(row=0, column=1, padx=5, pady=5)
+
+        etiqueta_maquina = tk.Label(frame_info_basica, text="Máquina:")
+        etiqueta_maquina.grid(row=1, column=0, sticky="w")
+        entrada_maquina = tk.Entry(frame_info_basica)
+        entrada_maquina.grid(row=1, column=1, padx=5, pady=5)
+
+        etiqueta_zona = tk.Label(frame_info_basica, text="Zona:")
+        etiqueta_zona.grid(row=2, column=0, sticky="w")
+        entrada_zona = tk.Entry(frame_info_basica)
+        entrada_zona.grid(row=2, column=1, padx=5, pady=5)
+
+        # Crear etiqueta para el Spinbox
+        etiqueta_spinbox = tk.Label(ventana_nueva_area, text="Puntos de análisis:")
+        etiqueta_spinbox.pack(padx=10, pady=10)
+
+        spinbox = tk.Spinbox(ventana_nueva_area, from_=1, to=20)
+        spinbox.pack()
+
+        def cancelar():
+            ventana_nueva_area.destroy()
+
+        botones_frame = tk.Frame(ventana_nueva_area)
+        botones_frame.pack(pady=50)
+
+        boton_cancelar = tk.Button(botones_frame, text="Cancelar", command=cancelar, bg="#9b9b9b") 
+        boton_cancelar.grid(row=0, column=0, padx=5)
+
+        boton_guardar = tk.Button(botones_frame, text="Guardar", command=cancelar, bg="#3366CC") 
+        boton_guardar.grid(row=0, column=1, padx=5)
+    
 
     boton_area.config(command=manejar_clic_boton_area)
 
@@ -190,6 +229,7 @@ def nueva_maquina():
     etiqueta_puntos.grid(row=0, column=0, sticky="w")
     entrada_puntos = tk.Entry(frame_info_avanzada)
     entrada_puntos.grid(row=0, column=1, padx=5, pady=5)
+
     
     """
     etiqueta_criticidad = tk.Label(ventana_nueva_maquina, text="Nivel de criticidad:")
@@ -247,7 +287,8 @@ def nueva_maquina():
     boton_cancelar = tk.Button(botones_frame, text="Cancelar", command=cancelar, bg="#9b9b9b") 
     boton_cancelar.grid(row=0, column=0, padx=5)
 
-    boton_guardar = tk.Button(botones_frame, text="Guardar", command=guardar_nueva_maquina, bg="#3366CC") 
+    #boton_guardar = tk.Button(botones_frame, text="Guardar", command=guardar_nueva_maquina, bg="#3366CC") 
+    boton_guardar = tk.Button(botones_frame, text="Guardar", command=cancelar, bg="#3366CC")
     boton_guardar.grid(row=0, column=1, padx=5)
 
 
