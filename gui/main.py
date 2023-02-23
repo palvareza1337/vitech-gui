@@ -105,12 +105,22 @@ def nueva_maquina():
 
     boton_sucursal.config(command=manejar_clic_boton_sucursal)
 
+    # Agregar botón a la izquierda de etiqueta_sucursal_id
+    boton_area = tk.Button(frame_info_previa, text="+")
+    boton_area.grid(row=1, column=0, padx=5, pady=5, sticky="w")
+
     etiqueta_area = tk.Label(frame_info_previa, text="Área:")
-    etiqueta_area.grid(row=1, column=0, sticky="w")
+    etiqueta_area.grid(row=1, column=1, sticky="w")
     opciones_area = ["Fija", "Movil"]
     combo_area = ttk.Combobox(frame_info_previa, values=opciones_area, state="readonly") 
-    combo_area.grid(row=1, column=1, padx=5, pady=5)
+    combo_area.grid(row=1, column=2, padx=5, pady=5)
     
+    # Función para manejar el evento de hacer clic en el botón de Sucursal
+    def manejar_clic_boton_area():
+        print("Haz clic en el botón Área")
+
+    boton_area.config(command=manejar_clic_boton_area)
+
     actualizar_areas_cmbx_partial = partial(actualizar_areas_cmbx, combo_area)
     combo_sucursal_id.bind("<<ComboboxSelected>>", actualizar_areas_cmbx_partial)
 
