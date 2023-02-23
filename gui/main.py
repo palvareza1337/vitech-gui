@@ -101,11 +101,16 @@ def nueva_maquina():
 
     # Función para manejar el evento de hacer clic en el botón de Sucursal
     def manejar_clic_boton_sucursal():
-        print("Haz clic en el botón Sucursal")
+        ventana_nueva_sucursal = tk.Toplevel(root)
+        ventana_nueva_sucursal.title("Nueva Sucursal")
+        ventana_nueva_sucursal.geometry("400x400")
+        ventana_nueva_sucursal.resizable(False, False)
+        ventana_nueva_sucursal.attributes('-topmost', 'true')
+        ventana_nueva_sucursal.focus_force()
 
     boton_sucursal.config(command=manejar_clic_boton_sucursal)
 
-    # Agregar botón a la izquierda de etiqueta_sucursal_id
+    # Agregar botón a la izquierda de etiqueta_area
     boton_area = tk.Button(frame_info_previa, text="+")
     boton_area.grid(row=1, column=0, padx=5, pady=5, sticky="w")
 
@@ -115,9 +120,14 @@ def nueva_maquina():
     combo_area = ttk.Combobox(frame_info_previa, values=opciones_area, state="readonly") 
     combo_area.grid(row=1, column=2, padx=5, pady=5)
     
-    # Función para manejar el evento de hacer clic en el botón de Sucursal
+    # Función para manejar el evento de hacer clic en el botón de Área
     def manejar_clic_boton_area():
-        print("Haz clic en el botón Área")
+        ventana_nueva_area = tk.Toplevel(root)
+        ventana_nueva_area.title("Nueva Área")
+        ventana_nueva_area.geometry("400x400")
+        ventana_nueva_area.resizable(False, False)
+        ventana_nueva_area.attributes('-topmost', 'true')
+        ventana_nueva_area.focus_force()
 
     boton_area.config(command=manejar_clic_boton_area)
 
@@ -128,11 +138,26 @@ def nueva_maquina():
     frame_info_basica = tk.LabelFrame(ventana_nueva_maquina, text="Información básica")
     frame_info_basica.pack(padx=10, pady=10)
 
+    # Agregar botón a la izquierda de etiqueta_tipo
+    boton_tipo = tk.Button(frame_info_basica, text="+")
+    boton_tipo.grid(row=0, column=0, padx=5, pady=5, sticky="w")
+
+    # Función para manejar el evento de hacer clic en el botón de Tipo
+    def manejar_clic_boton_tipo():
+        ventana_nueva_tipo = tk.Toplevel(root)
+        ventana_nueva_tipo.title("Nueva Tipo")
+        ventana_nueva_tipo.geometry("400x400")
+        ventana_nueva_tipo.resizable(False, False)
+        ventana_nueva_tipo.attributes('-topmost', 'true')
+        ventana_nueva_tipo.focus_force()
+
+    boton_tipo.config(command=manejar_clic_boton_tipo)
+
     etiqueta_tipo = tk.Label(frame_info_basica, text="Tipo:")
-    etiqueta_tipo.grid(row=0, column=0, sticky="w")
+    etiqueta_tipo.grid(row=0, column=1, sticky="w")
     opciones_tipo = ["Fija", "Movil"]
     combo_tipo = ttk.Combobox(frame_info_basica, values=opciones_tipo, state="readonly") 
-    combo_tipo.grid(row=0, column=1, padx=5, pady=5)
+    combo_tipo.grid(row=0, column=2, padx=5, pady=5)
 
     etiqueta_modelo = tk.Label(frame_info_basica, text="Modelo:")
     etiqueta_modelo.grid(row=1, column=0, sticky="w")
@@ -149,7 +174,7 @@ def nueva_maquina():
     entrada_puntos = tk.Entry(frame_info_avanzada)
     entrada_puntos.grid(row=0, column=1, padx=5, pady=5)
     
-
+    """
     etiqueta_criticidad = tk.Label(ventana_nueva_maquina, text="Nivel de criticidad:")
     etiqueta_criticidad.pack()
 
@@ -190,12 +215,13 @@ def nueva_maquina():
 
     # Agregamos la validación para que solo se permitan números con máximo 8 dígitos
     entrada_sucursal.config(validatecommand=(ventana_nueva_maquina.register(validar_numero), "%P"))
+    """
 
     etiqueta_descripcion = tk.Label(ventana_nueva_maquina, text="Descripción:")
     etiqueta_descripcion.pack()
 
     # Creamos el widget "Text"
-    entrada_descripcion = tk.Text(ventana_nueva_maquina, height=5)
+    entrada_descripcion = tk.Text(ventana_nueva_maquina, height=4)
     entrada_descripcion.pack()
 
     botones_frame = tk.Frame(ventana_nueva_maquina)
