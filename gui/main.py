@@ -81,6 +81,9 @@ def nueva_maquina():
     # Crear frame para la información previa
     frame_info_previa = tk.LabelFrame(ventana_nueva_maquina, text="Información Previa")
     frame_info_previa.pack(padx=10, pady=10)
+    # Agregar botón a la izquierda de etiqueta_sucursal_id
+    boton_sucursal = tk.Button(frame_info_previa, text="+")
+    boton_sucursal.grid(row=0, column=0, padx=5, pady=5, sticky="w")
 
     def actualizar_areas_cmbx(cmbx: ttk.Combobox, event):
         sucursal_selected = event.widget.get()
@@ -88,13 +91,19 @@ def nueva_maquina():
         query_areas = sql_service.buscar_areas_por_sucursal(sucursal_selected_id)
         opciones_area = [x[0] + " - " + x[2] for x in query_areas]
         cmbx['values'] = opciones_area
-    
+
     etiqueta_sucursal_id = tk.Label(frame_info_previa, text="Sucursal:")
-    etiqueta_sucursal_id.grid(row=0, column=0, sticky="w")
+    etiqueta_sucursal_id.grid(row=0, column=1, sticky="w")
     query_sucursales = sql_service.buscar_sucursales_por_empresa(id_empresa)
     opciones_sucursal_id = [x[0] + " - " + x[2] for x in query_sucursales]
     combo_sucursal_id = ttk.Combobox(frame_info_previa, values=opciones_sucursal_id, state="readonly") 
-    combo_sucursal_id.grid(row=0, column=1, padx=5, pady=5)
+    combo_sucursal_id.grid(row=0, column=2, padx=5, pady=5)
+
+    # Función para manejar el evento de hacer clic en el botón de Sucursal
+    def manejar_clic_boton_sucursal():
+        print("Haz clic en el botón Sucursal")
+
+    boton_sucursal.config(command=manejar_clic_boton_sucursal)
 
     etiqueta_area = tk.Label(frame_info_previa, text="Área:")
     etiqueta_area.grid(row=1, column=0, sticky="w")
