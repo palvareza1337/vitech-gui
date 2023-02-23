@@ -81,9 +81,7 @@ def nueva_maquina():
     # Crear frame para la información previa
     frame_info_previa = tk.LabelFrame(ventana_nueva_maquina, text="Información Previa")
     frame_info_previa.pack(padx=10, pady=10)
-    # Agregar botón a la izquierda de etiqueta_sucursal_id
-    boton_sucursal = tk.Button(frame_info_previa, text="+")
-    boton_sucursal.grid(row=0, column=0, padx=5, pady=5, sticky="w")
+    
 
     def actualizar_areas_cmbx(cmbx: ttk.Combobox, event):
         sucursal_selected = event.widget.get()
@@ -99,16 +97,6 @@ def nueva_maquina():
     combo_sucursal_id = ttk.Combobox(frame_info_previa, values=opciones_sucursal_id, state="readonly") 
     combo_sucursal_id.grid(row=0, column=2, padx=5, pady=5)
 
-    # Función para manejar el evento de hacer clic en el botón de Sucursal
-    def manejar_clic_boton_sucursal():
-        ventana_nueva_sucursal = tk.Toplevel(root)
-        ventana_nueva_sucursal.title("Nueva Sucursal")
-        ventana_nueva_sucursal.geometry("400x400")
-        ventana_nueva_sucursal.resizable(False, False)
-        ventana_nueva_sucursal.attributes('-topmost', 'true')
-        ventana_nueva_sucursal.focus_force()
-
-    boton_sucursal.config(command=manejar_clic_boton_sucursal)
 
     # Agregar botón a la izquierda de etiqueta_area
     boton_area = tk.Button(frame_info_previa, text="+")
@@ -131,6 +119,50 @@ def nueva_maquina():
 
     boton_area.config(command=manejar_clic_boton_area)
 
+
+    # Agregar botón a la izquierda de etiqueta_maquina
+    boton_maquina = tk.Button(frame_info_previa, text="+")
+    boton_maquina.grid(row=2, column=0, padx=5, pady=5, sticky="w")
+
+    etiqueta_maquina = tk.Label(frame_info_previa, text="Máquina:")
+    etiqueta_maquina.grid(row=2, column=1, sticky="w")
+    opciones_maquina = ["Fija", "Movil"]
+    combo_maquina = ttk.Combobox(frame_info_previa, values=opciones_maquina, state="readonly") 
+    combo_maquina.grid(row=2, column=2, padx=5, pady=5)
+    
+    # Función para manejar el evento de hacer clic en el botón de máquina
+    def manejar_clic_boton_maquina():
+        ventana_maquina = tk.Toplevel(root)
+        ventana_maquina.title("Nueva Máquina")
+        ventana_maquina.geometry("400x400")
+        ventana_maquina.resizable(False, False)
+        ventana_maquina.attributes('-topmost', 'true')
+        ventana_maquina.focus_force()
+
+    boton_maquina.config(command=manejar_clic_boton_maquina)
+
+
+# Agregar botón a la izquierda de etiqueta_zona
+    boton_zona = tk.Button(frame_info_previa, text="+")
+    boton_zona.grid(row=3, column=0, padx=5, pady=5, sticky="w")
+
+    etiqueta_zona = tk.Label(frame_info_previa, text="Zona:")
+    etiqueta_zona.grid(row=3, column=1, sticky="w")
+    opciones_zona = ["Fija", "Movil"]
+    combo_zona = ttk.Combobox(frame_info_previa, values=opciones_maquina, state="readonly") 
+    combo_zona.grid(row=3, column=2, padx=5, pady=5)
+    
+    # Función para manejar el evento de hacer clic en el botón de zona
+    def manejar_clic_boton_zona():
+        ventana_zona = tk.Toplevel(root)
+        ventana_zona.title("Nueva Zona")
+        ventana_zona.geometry("400x400")
+        ventana_zona.resizable(False, False)
+        ventana_zona.attributes('-topmost', 'true')
+        ventana_zona.focus_force()
+
+    boton_zona.config(command=manejar_clic_boton_zona)
+
     actualizar_areas_cmbx_partial = partial(actualizar_areas_cmbx, combo_area)
     combo_sucursal_id.bind("<<ComboboxSelected>>", actualizar_areas_cmbx_partial)
 
@@ -138,26 +170,11 @@ def nueva_maquina():
     frame_info_basica = tk.LabelFrame(ventana_nueva_maquina, text="Información básica")
     frame_info_basica.pack(padx=10, pady=10)
 
-    # Agregar botón a la izquierda de etiqueta_tipo
-    boton_tipo = tk.Button(frame_info_basica, text="+")
-    boton_tipo.grid(row=0, column=0, padx=5, pady=5, sticky="w")
-
-    # Función para manejar el evento de hacer clic en el botón de Tipo
-    def manejar_clic_boton_tipo():
-        ventana_nueva_tipo = tk.Toplevel(root)
-        ventana_nueva_tipo.title("Nueva Tipo")
-        ventana_nueva_tipo.geometry("400x400")
-        ventana_nueva_tipo.resizable(False, False)
-        ventana_nueva_tipo.attributes('-topmost', 'true')
-        ventana_nueva_tipo.focus_force()
-
-    boton_tipo.config(command=manejar_clic_boton_tipo)
-
     etiqueta_tipo = tk.Label(frame_info_basica, text="Tipo:")
-    etiqueta_tipo.grid(row=0, column=1, sticky="w")
+    etiqueta_tipo.grid(row=0, column=0, sticky="w")
     opciones_tipo = ["Fija", "Movil"]
     combo_tipo = ttk.Combobox(frame_info_basica, values=opciones_tipo, state="readonly") 
-    combo_tipo.grid(row=0, column=2, padx=5, pady=5)
+    combo_tipo.grid(row=0, column=1, padx=5, pady=5)
 
     etiqueta_modelo = tk.Label(frame_info_basica, text="Modelo:")
     etiqueta_modelo.grid(row=1, column=0, sticky="w")
