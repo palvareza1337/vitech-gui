@@ -81,6 +81,7 @@ def nueva_maquina():
     # Crear frame para la información previa
     frame_info_previa = tk.LabelFrame(ventana_nueva_maquina, text="Información Previa")
     frame_info_previa.pack(padx=10, pady=10)
+    
 
     def actualizar_areas_cmbx(cmbx: ttk.Combobox, event):
         sucursal_selected = event.widget.get()
@@ -88,20 +89,119 @@ def nueva_maquina():
         query_areas = sql_service.buscar_areas_por_sucursal(sucursal_selected_id)
         opciones_area = [x[0] + " - " + x[2] for x in query_areas]
         cmbx['values'] = opciones_area
-    
+
     etiqueta_sucursal_id = tk.Label(frame_info_previa, text="Sucursal:")
-    etiqueta_sucursal_id.grid(row=0, column=0, sticky="w")
+    etiqueta_sucursal_id.grid(row=0, column=1, sticky="w")
     query_sucursales = sql_service.buscar_sucursales_por_empresa(id_empresa)
     opciones_sucursal_id = [x[0] + " - " + x[2] for x in query_sucursales]
     combo_sucursal_id = ttk.Combobox(frame_info_previa, values=opciones_sucursal_id, state="readonly") 
-    combo_sucursal_id.grid(row=0, column=1, padx=5, pady=5)
+    combo_sucursal_id.grid(row=0, column=2, padx=5, pady=5)
+
+
+    # Agregar botón a la izquierda de etiqueta_area
+    boton_area = tk.Button(frame_info_previa, text="+")
+    boton_area.grid(row=1, column=0, padx=5, pady=5, sticky="w")
 
     etiqueta_area = tk.Label(frame_info_previa, text="Área:")
-    etiqueta_area.grid(row=1, column=0, sticky="w")
+    etiqueta_area.grid(row=1, column=1, sticky="w")
     opciones_area = ["Fija", "Movil"]
     combo_area = ttk.Combobox(frame_info_previa, values=opciones_area, state="readonly") 
-    combo_area.grid(row=1, column=1, padx=5, pady=5)
+    combo_area.grid(row=1, column=2, padx=5, pady=5)
     
+    # Función para manejar el evento de hacer clic en el botón de Área
+    def manejar_clic_boton_area():
+        ventana_nueva_area = tk.Toplevel(root)
+        ventana_nueva_area.title("Nueva Área")
+        ventana_nueva_area.geometry("400x350")
+        ventana_nueva_area.resizable(False, False)
+        ventana_nueva_area.attributes('-topmost', 'true')
+        ventana_nueva_area.focus_force()
+
+        # Crear frame para la información básica
+        frame_info_basica = tk.LabelFrame(ventana_nueva_area, text="Información básica")
+        frame_info_basica.pack(padx=10, pady=10)
+
+        etiqueta_area = tk.Label(frame_info_basica, text="Área:")
+        etiqueta_area.grid(row=0, column=0, sticky="w")
+        entrada_area = tk.Entry(frame_info_basica)
+        entrada_area.grid(row=0, column=1, padx=5, pady=5)
+
+        etiqueta_maquina = tk.Label(frame_info_basica, text="Máquina:")
+        etiqueta_maquina.grid(row=1, column=0, sticky="w")
+        entrada_maquina = tk.Entry(frame_info_basica)
+        entrada_maquina.grid(row=1, column=1, padx=5, pady=5)
+
+        etiqueta_zona = tk.Label(frame_info_basica, text="Zona:")
+        etiqueta_zona.grid(row=2, column=0, sticky="w")
+        entrada_zona = tk.Entry(frame_info_basica)
+        entrada_zona.grid(row=2, column=1, padx=5, pady=5)
+
+        # Crear etiqueta para el Spinbox
+        etiqueta_spinbox = tk.Label(ventana_nueva_area, text="Puntos de análisis:")
+        etiqueta_spinbox.pack(padx=10, pady=10)
+
+        spinbox = tk.Spinbox(ventana_nueva_area, from_=1, to=20)
+        spinbox.pack()
+
+        def cancelar():
+            ventana_nueva_area.destroy()
+
+        botones_frame = tk.Frame(ventana_nueva_area)
+        botones_frame.pack(pady=50)
+
+        boton_cancelar = tk.Button(botones_frame, text="Cancelar", command=cancelar, bg="#9b9b9b") 
+        boton_cancelar.grid(row=0, column=0, padx=5)
+
+        boton_guardar = tk.Button(botones_frame, text="Guardar", command=cancelar, bg="#3366CC") 
+        boton_guardar.grid(row=0, column=1, padx=5)
+    
+
+    boton_area.config(command=manejar_clic_boton_area)
+
+
+    # Agregar botón a la izquierda de etiqueta_maquina
+    boton_maquina = tk.Button(frame_info_previa, text="+")
+    boton_maquina.grid(row=2, column=0, padx=5, pady=5, sticky="w")
+
+    etiqueta_maquina = tk.Label(frame_info_previa, text="Máquina:")
+    etiqueta_maquina.grid(row=2, column=1, sticky="w")
+    opciones_maquina = ["Fija", "Movil"]
+    combo_maquina = ttk.Combobox(frame_info_previa, values=opciones_maquina, state="readonly") 
+    combo_maquina.grid(row=2, column=2, padx=5, pady=5)
+    
+    # Función para manejar el evento de hacer clic en el botón de máquina
+    def manejar_clic_boton_maquina():
+        ventana_maquina = tk.Toplevel(root)
+        ventana_maquina.title("Nueva Máquina")
+        ventana_maquina.geometry("400x400")
+        ventana_maquina.resizable(False, False)
+        ventana_maquina.attributes('-topmost', 'true')
+        ventana_maquina.focus_force()
+
+    boton_maquina.config(command=manejar_clic_boton_maquina)
+
+
+# Agregar botón a la izquierda de etiqueta_zona
+    boton_zona = tk.Button(frame_info_previa, text="+")
+    boton_zona.grid(row=3, column=0, padx=5, pady=5, sticky="w")
+
+    etiqueta_zona = tk.Label(frame_info_previa, text="Zona:")
+    etiqueta_zona.grid(row=3, column=1, sticky="w")
+    opciones_zona = ["Fija", "Movil"]
+    combo_zona = ttk.Combobox(frame_info_previa, values=opciones_maquina, state="readonly") 
+    combo_zona.grid(row=3, column=2, padx=5, pady=5)
+    
+    # Función para manejar el evento de hacer clic en el botón de zona
+    def manejar_clic_boton_zona():
+        ventana_zona = tk.Toplevel(root)
+        ventana_zona.title("Nueva Zona")
+        ventana_zona.geometry("400x400")
+        ventana_zona.resizable(False, False)
+        ventana_zona.attributes('-topmost', 'true')
+        ventana_zona.focus_force()
+
+    boton_zona.config(command=manejar_clic_boton_zona)
+
     actualizar_areas_cmbx_partial = partial(actualizar_areas_cmbx, combo_area)
     combo_sucursal_id.bind("<<ComboboxSelected>>", actualizar_areas_cmbx_partial)
 
@@ -129,8 +229,9 @@ def nueva_maquina():
     etiqueta_puntos.grid(row=0, column=0, sticky="w")
     entrada_puntos = tk.Entry(frame_info_avanzada)
     entrada_puntos.grid(row=0, column=1, padx=5, pady=5)
-    
 
+    
+    """
     etiqueta_criticidad = tk.Label(ventana_nueva_maquina, text="Nivel de criticidad:")
     etiqueta_criticidad.pack()
 
@@ -171,12 +272,13 @@ def nueva_maquina():
 
     # Agregamos la validación para que solo se permitan números con máximo 8 dígitos
     entrada_sucursal.config(validatecommand=(ventana_nueva_maquina.register(validar_numero), "%P"))
+    """
 
     etiqueta_descripcion = tk.Label(ventana_nueva_maquina, text="Descripción:")
     etiqueta_descripcion.pack()
 
     # Creamos el widget "Text"
-    entrada_descripcion = tk.Text(ventana_nueva_maquina, height=5)
+    entrada_descripcion = tk.Text(ventana_nueva_maquina, height=4)
     entrada_descripcion.pack()
 
     botones_frame = tk.Frame(ventana_nueva_maquina)
@@ -185,7 +287,8 @@ def nueva_maquina():
     boton_cancelar = tk.Button(botones_frame, text="Cancelar", command=cancelar, bg="#9b9b9b") 
     boton_cancelar.grid(row=0, column=0, padx=5)
 
-    boton_guardar = tk.Button(botones_frame, text="Guardar", command=guardar_nueva_maquina, bg="#3366CC") 
+    #boton_guardar = tk.Button(botones_frame, text="Guardar", command=guardar_nueva_maquina, bg="#3366CC") 
+    boton_guardar = tk.Button(botones_frame, text="Guardar", command=cancelar, bg="#3366CC")
     boton_guardar.grid(row=0, column=1, padx=5)
 
 
