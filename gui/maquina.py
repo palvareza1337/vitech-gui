@@ -57,7 +57,7 @@ def nueva_maquina(root):
     etiqueta_area = tk.Label(frame_info_previa, text="Área:")
     etiqueta_area.grid(row=1, column=1, sticky="w")
     opciones_area = ["Fija", "Movil"]
-    combo_area = ttk.Combobox(frame_info_previa, values=opciones_area, state="readonly") 
+    combo_area = ttk.Combobox(frame_info_previa, values=opciones_area, state="normal") 
     combo_area.grid(row=1, column=2, padx=5, pady=5)
     
     # Función para manejar el evento de hacer clic en el botón de Área
