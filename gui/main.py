@@ -115,9 +115,6 @@ def OnDoubleClickhistorico(event):
     filename = s3_service.get_reading(filename)
     newtab(filename, name, sample_rate)
 
-def OnSingleClick(event):
-    print("clickeaste")
-
 def OnSelect(event):
     item = treeview.selection()
     print(item)
