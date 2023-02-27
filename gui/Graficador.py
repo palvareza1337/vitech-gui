@@ -79,12 +79,13 @@ class grafico(tk.Canvas):
         ax2.plot(xf, 2/N * np.abs(yf[0:N//2]), color="#294fb8")
 
 
-  
-# Creating tkinter window and set dimensions
-window = tk.Tk() 
-window.title('graficador') 
-window.geometry('500x250')
 
-grafico(window, "Y - 18927630213-02-2023 16,55,34.csv").pack(side=tk.LEFT, fill=tk.BOTH, expand=1)
-
-tk.mainloop()
+if __name__ == "__main__":
+    # Creating tkinter window and set dimensions
+    window = tk.Tk() 
+    window.title('graficador') 
+    window.geometry('500x250')
+    
+    grafico(window, "Y - 18927630213-02-2023 16,55,34.csv").pack(side=tk.LEFT, fill=tk.BOTH, expand=1)
+    
+    tk.mainloop()
