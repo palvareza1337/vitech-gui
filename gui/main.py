@@ -23,11 +23,6 @@ from math import *
 import sys, os
 from fpdf import FPDF
 
-# profiler
-import cProfile, pstats
-import time
-start = time.time()
-
 # Custom Creations
 import sesion
 import sql_service
@@ -268,15 +263,7 @@ def newtab(filename, name, sample_rate):
 
 if __name__ == '__main__':
 
-#    pr = cProfile.Profile()
- #   pr.enable()  # start profiling
-
     Sidebar.populate_sidebar(treeview)
     end = time.time()
     print("Gui loaded in " + str(end-start) + " seconds")
     tk.mainloop()
-
-#    pr.disable()  # end profiling
-#    sortby = 'cumulative'
-#    ps = pstats.Stats(pr).sort_stats(sortby)
-#    ps.print_stats()
