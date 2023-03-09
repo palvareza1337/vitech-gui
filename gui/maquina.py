@@ -18,6 +18,7 @@ def nueva_maquina(root):
         # Lógica para guardar la nueva máquina en la base de datos
         id_area = combo_area.get().split(' - ')[0]
         #query = sql_service.agregar_maquina(id_area, combo_tipo.get(), entrada_sucursal.get(), entrada_modelo.get(), entrada_puntos.get(), combo_criticidad.get(), entrada_pendiente_deg.get(), entrada_descripcion.get('1.0', tk.END))
+        
         ventana_nueva_maquina.destroy()
 
     def cancelar():
@@ -239,6 +240,6 @@ def nueva_maquina(root):
     boton_cancelar = tk.Button(botones_frame, text="Cancelar", command=cancelar, bg="#9b9b9b") 
     boton_cancelar.grid(row=0, column=0, padx=5)
 
-    #boton_guardar = tk.Button(botones_frame, text="Guardar", command=guardar_nueva_maquina, bg="#3366CC") 
-    boton_guardar = tk.Button(botones_frame, text="Guardar", command=cancelar, bg="#3366CC")
+    boton_guardar = tk.Button(botones_frame, text="Guardar", command=guardar_nueva_maquina, bg="#3366CC") 
+    #boton_guardar = tk.Button(botones_frame, text="Guardar", command=cancelar, bg="#3366CC")
     boton_guardar.grid(row=0, column=1, padx=5)
