@@ -2,6 +2,8 @@ from functools import partial
 import sql_service
 import tkinter as tk 
 from tkinter import ttk
+import random
+import string
 
 
 global id_empresa 
@@ -24,21 +26,42 @@ def nueva_maquina(root):
         nombre = entrada_modelo.get()
         descripcion = entrada_descripcion.get("1.0", tk.END)
         # Lógica para guardar la nueva máquina en la base de datos
-        id_area = diccionario_areas[combo_area.get()]
-        tipo_maquina = combo_tipo.get()
-        contacto_sucursal = ""
+        id_sucursal = diccionario_sucursales[combo_sucursal_id]
         try:
-            modelo = diccionario_maquinas[combo_maquina.get()]
+            id_area = diccionario_areas[combo_area.get()]
         except:
+            # codigo para crear un area en la sucursal en caso de ser necesario
+            nombre_area = combo_area.get()
+            id_area = sql_service.agregar_area(nombre_area, id_sucursal)
+            diccionario_areas[nombre_area] = id_area
+
+        try:
+            id_maquina = diccionario_maquinas[combo_maquina.get()]
+        except:
+            tipo_maquina = combo_tipo.get()
+            cant_puntos_monitoreo = entrada_puntos.get()
+            criticidad = 2 #combo_criticidad.get()
+            pendiente_degradacion = 1#entrada_pendiente_deg.get()
+            notas = entrada_descripcion.get('1.0', tk.END)
+            contacto_sucursal = ""
             modelo = combo_maquina.get()
-        cant_puntos_monitoreo = 2
-        criticidad = 2
-        pendiente_degradacion = 2
-        notas = entrada_descripcion.get('1.0', tk.END)
+            print((id_area, tipo_maquina, contacto_sucursal, modelo, cant_puntos_monitoreo, criticidad, pendiente_degradacion, notas))
+            query = sql_service.agregar_maquina(id_area, tipo_maquina, contacto_sucursal, modelo, cant_puntos_monitoreo, criticidad, pendiente_degradacion, notas)
         
-        print((id_area, tipo_maquina, contacto_sucursal, modelo, cant_puntos_monitoreo, criticidad, pendiente_degradacion, notas))
+        try:
+            id_zona = diccionario_zonas[combo_zona.get()]
+        except:
         #print(id_area, combo_tipo.get(), combo_sucursal_id.get(), combo_maquina.get())#, entrada_puntos.get(), combo_criticidad.get(), entrada_pendiente_deg.get(), entrada_descripcion.get('1.0', tk.END))
-        #query = sql_service.agregar_maquina(id_area, combo_tipo.get(), entrada_sucursal.get(), entrada_modelo.get(), entrada_puntos.get(), combo_criticidad.get(), entrada_pendiente_deg.get(), entrada_descripcion.get('1.0', tk.END))
+            id_zona = "uu12e" # aca poner una wea random
+            nombre_zona = combo_zona.get()
+            estado_salud = "OK" # investar algo aca
+            cant_sensores = 4 # falta crear una rutina para ver cuantos sensores tiene cada cosa
+            query = sql_service.agregar_zona(id_zona, nombre_zona, id_maquina, estado_salud, cant_sensores)
+
+
+
+            # aca se tiene que que crea una query que cre una maquina (modelo) si es que esta no existe en el area
+        
         
         ventana_nueva_maquina.destroy()
 

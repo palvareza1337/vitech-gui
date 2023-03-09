@@ -103,6 +103,18 @@ def agregar_maquina(id_area, tipo_maquina, contacto_sucursal, modelo, cant_punto
   cursor.execute(f"INSERT INTO maquina VALUES(NULL, '{id_area}', '{tipo_maquina}', '{contacto_sucursal}', '{modelo}', '{cant_puntos_monitoreo}', '{criticidad}', '{pendiente_degradacion}', '{notas}')")
   db.commit()
 
+def agregar_area(nombre_area, id_sucursal):
+  print(f"INSERT INTO area VALUES(NULL, '{id_sucursal}', '{nombre_area}', NULL)")
+  cursor.execute(f"INSERT INTO area VALUES(NULL, '{id_sucursal}', '{nombre_area}', NULL)")
+  db.commit
+
+def agregar_zona(id_zona, nombre_zona, id_maquina, estado_salud, cant_sensores):
+  print(f"INSERT INTO zona_analisis VALUES({id_zona}, '{id_maquina}', '{nombre_zona}', {estado_salud}, {cant_sensores})")
+  cursor.execute(f"INSERT INTO zona_analisis VALUES({id_zona}, '{id_maquina}', '{nombre_zona}', {estado_salud}, {cant_sensores})")
+  db.commit
+
+
+
 end = time.time()
 
 print("conected to db in " + str(end-start) + " seconds")
