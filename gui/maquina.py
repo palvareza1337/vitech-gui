@@ -47,6 +47,9 @@ def nueva_maquina(root):
             modelo = combo_maquina.get()
             print((id_area, tipo_maquina, contacto_sucursal, modelo, cant_puntos_monitoreo, criticidad, pendiente_degradacion, notas))
             query = sql_service.agregar_maquina(id_area, tipo_maquina, contacto_sucursal, modelo, cant_puntos_monitoreo, criticidad, pendiente_degradacion, notas)
+            ########### aca falta edicion pls##############################################################################################################################
+            id_maquina = "1"# aqui poner el id de maquina insertado
+            diccionario_maquinas[combo_maquina.get()] = id_maquina
         
         try:
             id_zona = diccionario_zonas[combo_zona.get()]
@@ -57,6 +60,9 @@ def nueva_maquina(root):
             estado_salud = "OK" # investar algo aca
             cant_sensores = 4 # falta crear una rutina para ver cuantos sensores tiene cada cosa
             query = sql_service.agregar_zona(id_zona, nombre_zona, id_maquina, estado_salud, cant_sensores)
+            ########### aca falta edicion pls##############################################################################################################################
+            id_zona = "1"# aqui poner el id de zona insertado
+            diccionario_zonas[combo_zona.get()] = id_zona
 
 
 
