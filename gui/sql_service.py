@@ -101,9 +101,10 @@ def get_pestana(filename):
 def agregar_maquina(id_area, tipo_maquina, contacto_sucursal, modelo, cant_puntos_monitoreo, criticidad, pendiente_degradacion, notas):
   print(f"INSERT INTO maquina VALUES(NULL, '{id_area}', '{tipo_maquina}', '{contacto_sucursal}', '{modelo}', '{cant_puntos_monitoreo}', '{criticidad}', '{pendiente_degradacion}', '{notas}')")
   cursor.execute(f"INSERT INTO maquina VALUES(NULL, '{id_area}', '{tipo_maquina}', '{contacto_sucursal}', '{modelo}', '{cant_puntos_monitoreo}', '{criticidad}', '{pendiente_degradacion}', '{notas}')")
-  cursor.execute(f"SELECT * FROM maquina ORDR BY id_maquina DESC LIMIT 1")
   db.commit()
-  return id_maquina
+  cursor.execute(f"SELECT id_maquina FROM maquina ORDR BY id_maquina DESC LIMIT 1")
+  result = cursor.fetchone()
+  return result
 
 def agregar_area(nombre_area, id_sucursal):
   print(f"INSERT INTO area VALUES(NULL, '{id_sucursal}', '{nombre_area}', NULL)")
