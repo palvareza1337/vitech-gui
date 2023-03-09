@@ -71,6 +71,33 @@ class CustomToolbar(NavigationToolbar2Tk):
         pdf.cell(40,7,'Fahrenheit',1,0,'C')
         pdf.cell(120,7,'78,40',1,0,'C')
 
+
+        # Cabecera de la tabla
+        pdf.cell(40,7,'Unidad',1,0,'C')
+        pdf.cell(40,7,'Horizontal',1,0,'C')
+        pdf.cell(40,7,'Vertical',1,0,'C')
+        pdf.cell(40,7,'Axial',1,0,'C')
+        pdf.ln(h = '')
+
+        # Datos de la tabla
+        pdf.cell(40,7,'G',1,0,'C')
+        pdf.cell(40,7,'0,12',1,0,'C')
+        pdf.cell(40,7,'0,09',1,0,'C')
+        pdf.cell(40,7,'0,05',1,0,'C')
+        pdf.ln(h = '')
+        pdf.cell(40,7,'GE',1,0,'C')
+        pdf.cell(40,7,'0,07',1,0,'C')
+        pdf.cell(40,7,'0,06',1,0,'C')
+        pdf.cell(40,7,'0,04',1,0,'C')
+        pdf.ln(h = '')
+        pdf.cell(40,7,'in',1,0,'C')
+        pdf.cell(40,7,'0,09',1,0,'C')
+        pdf.cell(40,7,'0,12',1,0,'C')
+        pdf.cell(40,7,'0,06',1,0,'C')
+        pdf.ln(h = '')
+        pdf.cell(40,7,'Fahrenheit',1,0,'C')
+        pdf.cell(120,7,'78,40',1,0,'C')
+
         pdf.output('tuto1.pdf', 'F')
         os.system('tuto1.pdf')
 

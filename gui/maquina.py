@@ -41,14 +41,15 @@ def nueva_maquina(root):
             tipo_maquina = combo_tipo.get()
             cant_puntos_monitoreo = entrada_puntos.get()
             criticidad = 2 #combo_criticidad.get()
-            pendiente_degradacion = 1#entrada_pendiente_deg.get()
+            pendiente_degradacion = 1 #entrada_pendiente_deg.get()
             notas = entrada_descripcion.get('1.0', tk.END)
             contacto_sucursal = ""
             modelo = combo_maquina.get()
             print((id_area, tipo_maquina, contacto_sucursal, modelo, cant_puntos_monitoreo, criticidad, pendiente_degradacion, notas))
             query = sql_service.agregar_maquina(id_area, tipo_maquina, contacto_sucursal, modelo, cant_puntos_monitoreo, criticidad, pendiente_degradacion, notas)
             ########### aca falta edicion pls##############################################################################################################################
-            id_maquina = "1"# aqui poner el id de maquina insertado
+            id_maquina = query # aqui poner el id de maquina insertado
+            print(id_maquina)
             diccionario_maquinas[combo_maquina.get()] = id_maquina
         
         try:
