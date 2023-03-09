@@ -80,7 +80,8 @@ class CustomToolbar(NavigationToolbar2Tk):
         pdf.ln(h = '')
 
         # Datos de la tabla
-        pdf.cell(54,7,'Amarillo',1,0,'C')
+        pdf.set_fill_color(255, 255, 0) # Amarillo
+        pdf.cell(54,7,'Amarillo',1,0,'C', True)
         pdf.cell(54,7,'Anillo interno',1,0,'C')
         pdf.cell(54,7,'Desgaste',1,0,'C')
         pdf.ln(h = '')
