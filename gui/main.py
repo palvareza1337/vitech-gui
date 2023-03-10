@@ -259,10 +259,10 @@ def newtab(filename, name, sample_rate):
     # Plot 2
     ax2.plot(xf, 2/N * np.abs(yf[0:N//2]), color="#294fb8")
 
-    ax1.set_xlabel('Tiempo (s)')
-    ax1.set_ylabel('Amplitud')
-    ax2.set_xlabel('Frecuencia (Hz)')
-    ax2.set_ylabel('Magnitud')
+    ax1.set_xlabel('s')
+    ax1.set_ylabel('G')
+    ax2.set_xlabel('Hz')
+    ax2.set_ylabel('G')
 
 if __name__ == '__main__':
 

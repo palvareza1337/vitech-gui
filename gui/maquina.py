@@ -26,13 +26,14 @@ def nueva_maquina(root):
         nombre = entrada_modelo.get()
         descripcion = entrada_descripcion.get("1.0", tk.END)
         # Lógica para guardar la nueva máquina en la base de datos
-        id_sucursal = diccionario_sucursales[combo_sucursal_id]
+        id_sucursal = diccionario_sucursales[combo_sucursal_id.get()]
         try:
             id_area = diccionario_areas[combo_area.get()]
         except:
             # codigo para crear un area en la sucursal en caso de ser necesario
             nombre_area = combo_area.get()
             id_area = sql_service.agregar_area(nombre_area, id_sucursal)
+            print(id_area)
             diccionario_areas[nombre_area] = id_area
 
         try:
@@ -62,7 +63,8 @@ def nueva_maquina(root):
             cant_sensores = 4 # falta crear una rutina para ver cuantos sensores tiene cada cosa
             query = sql_service.agregar_zona(id_zona, nombre_zona, id_maquina, estado_salud, cant_sensores)
             ########### aca falta edicion pls##############################################################################################################################
-            id_zona = "1"# aqui poner el id de zona insertado
+            id_zona = query # aqui poner el id de zona insertado
+            print(id_zona)
             diccionario_zonas[combo_zona.get()] = id_zona
 
 
