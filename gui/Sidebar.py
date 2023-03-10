@@ -68,6 +68,7 @@ def populate_area(id_sucursal, tree: ttk.Treeview):
  
  
 def populate_sidebar(tree: ttk.Treeview): 
+    tree.delete(*tree.get_children())
     # buscar la empresa y luego busca sus sucursales, áreas, máquinas, zonas y sensores para insertarlos en el Treeview
     empresa = sql_service.buscar_empresa()
     #('17123456', 'lunartech', 'usarmy', 12345678)

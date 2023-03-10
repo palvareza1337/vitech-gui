@@ -53,7 +53,12 @@ root.iconbitmap(icon)
 ribbon = ttk.Notebook(root)
 ribbon.pack(side=tk.TOP, fill=tk.BOTH)
 
-
+# creacion de la barra lateral con la informacion de las areas, maquinas, zonas, puntos y mediciones
+sidebar = tk.Frame(root, bg="blue")
+sidebar.pack(side=tk.LEFT, fill=tk.BOTH, expand=0)
+treeview = ttk.Treeview(sidebar)
+# place the Treeview widget on the root window
+treeview.pack(fill=tk.BOTH, expand=1)
     
 tab1 = tk.Frame(ribbon)
 ribbon.add(tab1, text='Iniciar')
@@ -61,6 +66,7 @@ tk.Button(tab1, text='Iniciar Sesion').pack(side=tk.LEFT)
 tk.Button(tab1, text='Cerrar Sesion', command=partial(sesion.cerrar_sesion, root)).pack(side=tk.LEFT)
 #tk.Button(tab1, text='Nueva Máquina').pack(side=tk.LEFT)
 tk.Button(tab1, text='Nueva Máquina', command=partial(maquina.nueva_maquina, root)).pack(side=tk.LEFT)
+tk.Button(tab1, text='Actualizar Lista', command=partial(Sidebar.populate_sidebar, treeview)).pack(side=tk.LEFT)
 tk.Button(tab1, text='Nuevo Reporte').pack(side=tk.LEFT)
 
 
@@ -87,12 +93,7 @@ tab6 = tk.Frame(ribbon)
 ribbon.add(tab6, text='Tools')
 tk.Button(tab6, text='Boton 6').pack(side=tk.LEFT)
 
-# creacion de la barra lateral con la informacion de las areas, maquinas, zonas, puntos y mediciones
-sidebar = tk.Frame(root, bg="blue")
-sidebar.pack(side=tk.LEFT, fill=tk.BOTH, expand=0)
-treeview = ttk.Treeview(sidebar)
-# place the Treeview widget on the root window
-treeview.pack(fill=tk.BOTH, expand=1)
+
 
 def OnDoubleClick(event):
     filename = treeview.selection()[0]
