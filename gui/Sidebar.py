@@ -55,7 +55,7 @@ def populate_maquina(id_area, tree: ttk.Treeview):
     maquinas = sql_service.buscar_maquinas_por_area(id_area_db)
     # [('j879w1', 'e435y7', 'movil', 12345678, 'liebher', 1, 10, 4, '')]
     for maquina in maquinas:
-        treeParent = tree.insert(id_area, tk.END, text=maquina[4], iid='maquina>:<' + str(maquina[0]), open=False)
+        treeParent = tree.insert(id_area, tk.END, text=maquina[3], iid='maquina>:<' + str(maquina[0]), open=False)
         populate_zonas(treeParent, tree)
 
 

@@ -250,8 +250,6 @@ def newtab(filename, name, sample_rate):
 
     # Plot 
     ax1.plot(t, signal, color="#d2361d")
-
-    
     
     #FFT
     yf= fft(signal)
@@ -264,6 +262,7 @@ def newtab(filename, name, sample_rate):
     ax1.set_ylabel('G')
     ax2.set_xlabel('Hz')
     ax2.set_ylabel('G')
+
 
 if __name__ == '__main__':
 

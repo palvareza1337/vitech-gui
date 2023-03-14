@@ -98,9 +98,10 @@ def get_pestana(filename):
   print(result)
   return result
 
-def agregar_maquina(id_area, tipo_maquina, contacto_sucursal, modelo, cant_puntos_monitoreo, criticidad, pendiente_degradacion, notas):
-  print(f"INSERT INTO maquina VALUES(NULL, '{id_area}', '{tipo_maquina}', '{contacto_sucursal}', '{modelo}', '{cant_puntos_monitoreo}', '{criticidad}', '{pendiente_degradacion}', '{notas}')")
-  cursor.execute(f"INSERT INTO maquina VALUES(NULL, '{id_area}', '{tipo_maquina}', '{contacto_sucursal}', '{modelo}', '{cant_puntos_monitoreo}', '{criticidad}', '{pendiente_degradacion}', '{notas}')")
+def agregar_maquina(id_area, tipo_maquina, modelo, cant_puntos_monitoreo, criticidad, pendiente_degradacion, notas):
+  print(f"INSERT INTO maquina VALUES(NULL, '{id_area}', '{tipo_maquina}', '{modelo}', '{cant_puntos_monitoreo}', '{criticidad}', '{pendiente_degradacion}', '{notas}')")
+  #TODO:
+  cursor.execute(f"INSERT INTO maquina VALUES(NULL, '{id_area}', '{tipo_maquina}', '{modelo}', '{cant_puntos_monitoreo}', '{criticidad}', '{pendiente_degradacion}', '{notas}')")
   db.commit()
   cursor.execute(f"SELECT id_maquina FROM maquina ORDER BY id_maquina DESC LIMIT 1")
   result = cursor.fetchone()
@@ -121,7 +122,7 @@ def agregar_zona(id_zona, nombre_zona, id_maquina, estado_salud, cant_sensores):
   db.commit()
   cursor.execute(f"SELECT id_zona_analisis FROM zona_analisis ORDER BY id_zona_analisis DESC LIMIT 1")
   result = cursor.fetchone()
-  return result[0]
+  return result[0]  
 
 
 
