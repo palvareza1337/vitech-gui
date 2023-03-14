@@ -74,14 +74,14 @@ def nueva_maquina(root):
 
     ventana_nueva_maquina = tk.Toplevel(root)
     ventana_nueva_maquina.title("Nueva Máquina")
-    ventana_nueva_maquina.geometry("500x550")
+    ventana_nueva_maquina.geometry("850x550")
     ventana_nueva_maquina.resizable(False, False)
     ventana_nueva_maquina.attributes('-topmost', 'true')
     ventana_nueva_maquina.focus_force()
 
     # Crear frame para la información previa
     frame_info_previa = tk.LabelFrame(ventana_nueva_maquina, text="Información Previa")
-    frame_info_previa.pack(padx=10, pady=10)
+    frame_info_previa.pack(padx=10, pady=10, anchor="w")
     
 
     def actualizar_areas_cmbx(cmbx: ttk.Combobox, event):
@@ -105,10 +105,6 @@ def nueva_maquina(root):
     combo_sucursal_id = ttk.Combobox(frame_info_previa, values=opciones_sucursal_id, state="readonly") 
     combo_sucursal_id.grid(row=0, column=2, padx=5, pady=5)
 
-
-    # Agregar botón a la izquierda de etiqueta_area
-    #boton_area = tk.Button(frame_info_previa, text="+")
-    #boton_area.grid(row=1, column=0, padx=5, pady=5, sticky="w")
 
     def actualizar_maquinas_cmbx(cmbx: ttk.Combobox, event):
         area_selected = event.widget.get()
@@ -168,7 +164,7 @@ def nueva_maquina(root):
 
     # Crear frame para la información básica
     frame_info_basica = tk.LabelFrame(ventana_nueva_maquina, text="Información básica")
-    frame_info_basica.pack(padx=10, pady=10)
+    frame_info_basica.pack(padx=10, pady=10, anchor="w")
 
     etiqueta_tipo = tk.Label(frame_info_basica, text="Tipo:")
     etiqueta_tipo.grid(row=0, column=0, sticky="w")
@@ -184,16 +180,16 @@ def nueva_maquina(root):
 
     # Crear frame para la información avanzada
     frame_info_avanzada = tk.LabelFrame(ventana_nueva_maquina, text="Información avanzada")
-    frame_info_avanzada.pack(padx=10, pady=10)
+    frame_info_avanzada.pack(padx=10, pady=10, anchor="w")
     
     
     # Crear etiqueta para el Spinbox
     etiqueta_spinbox = tk.Label(ventana_nueva_maquina, text="Cant. Puntos de monitoreo:")
-    etiqueta_spinbox.pack(padx=10, pady=10)
+    etiqueta_spinbox.pack(padx=10, pady=10, anchor="w")
 
 
     spinbox_cant_monitoreo = tk.Spinbox(ventana_nueva_maquina, from_=0, to=10)
-    spinbox_cant_monitoreo.pack()
+    spinbox_cant_monitoreo.pack(padx=10, pady=10, anchor="w")
 
 
     etiqueta_descripcion = tk.Label(ventana_nueva_maquina, text="Descripción:")
