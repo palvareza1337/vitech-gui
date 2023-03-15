@@ -79,8 +79,70 @@ def nueva_maquina(root):
     ventana_nueva_maquina.attributes('-topmost', 'true')
     ventana_nueva_maquina.focus_force()
 
+
+    # Crear los cuatro frames
+    frame1 = tk.Frame(ventana_nueva_maquina)
+    
+    
+    frame2 = tk.Frame(ventana_nueva_maquina)
+    # Crear Treeview
+    table = ttk.Treeview(frame2)
+
+    # Definir columnas
+    table['columns'] = ("Nombre", "Edad", "País")
+
+    # Definir etiquetas de cabecera
+    table.heading("Nombre", text="Nombre")
+    table.heading("Edad", text="Edad")
+    table.heading("País", text="País")
+
+    # Agregar datos a la tabla
+    table.insert(parent="", index=0, iid=0, text="", values=("Juan", 25, "México"))
+    table.insert(parent="", index=1, iid=1, text="", values=("María", 30, "Argentina"))
+    table.insert(parent="", index=2, iid=2, text="", values=("Pedro", 40, "España"))
+
+    # Empaquetar la tabla dentro del frame
+    table.pack()
+
+    frame3 = tk.Frame(ventana_nueva_maquina)
+    # Crear frame para la información básica
+    frame_info_basica = tk.LabelFrame(frame3, text="Información básica")
+    frame_info_basica.pack(padx=10, pady=10, anchor="w")
+
+    etiqueta_tipo = tk.Label(frame_info_basica, text="Tipo:")
+    etiqueta_tipo.grid(row=0, column=0, sticky="w")
+    opciones_tipo = ["Fija", "Movil"]
+    combo_tipo = ttk.Combobox(frame_info_basica, values=opciones_tipo, state="readonly") 
+    combo_tipo.grid(row=0, column=1, padx=5, pady=5)
+
+    etiqueta_modelo = tk.Label(frame_info_basica, text="Modelo:")
+    etiqueta_modelo.grid(row=1, column=0, sticky="w")
+    entrada_modelo = tk.Entry(frame_info_basica)
+    entrada_modelo.grid(row=1, column=1, padx=5, pady=5)
+
+    # Crear etiqueta para el Spinbox
+    etiqueta_spinbox = tk.Label(frame_info_basica, text="Cant. Puntos de monitoreo:")
+    etiqueta_spinbox.grid(row=2, column=0, sticky="w")
+    spinbox_cant_monitoreo = tk.Spinbox(frame_info_basica, from_=0, to=10)
+    spinbox_cant_monitoreo.grid(row=2, column=1, padx=5, pady=5)
+    
+    #frame4 = tk.Frame(ventana_nueva_maquina, bg='yellow')
+
+    frame5 = tk.Frame(ventana_nueva_maquina)
+
+    frame6 = tk.Frame(ventana_nueva_maquina)
+
+    # Posicionar los frames utilizando grid
+    frame1.grid(row=0, column=0)
+    frame2.grid(row=0, column=1, rowspan=2)
+    frame3.grid(row=1, column=0)
+    #frame4.grid(row=1, column=1)
+    frame5.grid(row=2, column=0)
+    frame6.grid(row=2, column=1)
+
+
     # Crear frame para la información previa
-    frame_info_previa = tk.LabelFrame(ventana_nueva_maquina, text="Información Previa")
+    frame_info_previa = tk.LabelFrame(frame1, text="Información Previa")
     frame_info_previa.pack(padx=10, pady=10, anchor="w")
     
 
@@ -159,44 +221,24 @@ def nueva_maquina(root):
 
     actualizar_zonas_cmbx_partial = partial(actualizar_zonas_cmbx, combo_zona)
     combo_maquina.bind("<<ComboboxSelected>>", actualizar_zonas_cmbx_partial)
-
-
-
-    # Crear frame para la información básica
-    frame_info_basica = tk.LabelFrame(ventana_nueva_maquina, text="Información básica")
-    frame_info_basica.pack(padx=10, pady=10, anchor="w")
-
-    etiqueta_tipo = tk.Label(frame_info_basica, text="Tipo:")
-    etiqueta_tipo.grid(row=0, column=0, sticky="w")
-    opciones_tipo = ["Fija", "Movil"]
-    combo_tipo = ttk.Combobox(frame_info_basica, values=opciones_tipo, state="readonly") 
-    combo_tipo.grid(row=0, column=1, padx=5, pady=5)
-
-    etiqueta_modelo = tk.Label(frame_info_basica, text="Modelo:")
-    etiqueta_modelo.grid(row=1, column=0, sticky="w")
-    entrada_modelo = tk.Entry(frame_info_basica)
-    entrada_modelo.grid(row=1, column=1, padx=5, pady=5)
     
 
     # Crear frame para la información avanzada
-    frame_info_avanzada = tk.LabelFrame(ventana_nueva_maquina, text="Información avanzada")
-    frame_info_avanzada.pack(padx=10, pady=10, anchor="w")
+    #frame_info_avanzada = tk.LabelFrame(frame4, text="Cant. Puntos de monitoreo:")
+    #frame_info_avanzada.pack(padx=10, pady=10, anchor="w")
     
     
-    # Crear etiqueta para el Spinbox
-    etiqueta_spinbox = tk.Label(ventana_nueva_maquina, text="Cant. Puntos de monitoreo:")
-    etiqueta_spinbox.pack(padx=10, pady=10, anchor="w")
+    
 
 
-    spinbox_cant_monitoreo = tk.Spinbox(ventana_nueva_maquina, from_=0, to=10)
-    spinbox_cant_monitoreo.pack(padx=10, pady=10, anchor="w")
+    
 
 
-    etiqueta_descripcion = tk.Label(ventana_nueva_maquina, text="Descripción:")
+    etiqueta_descripcion = tk.Label(frame5, text="Descripción:")
     etiqueta_descripcion.pack()
 
     # Creamos el widget "Text"
-    entrada_descripcion = tk.Text(ventana_nueva_maquina, height=4)
+    entrada_descripcion = tk.Text(frame5, height=4, width=50)
     entrada_descripcion.pack()
 
     botones_frame = tk.Frame(ventana_nueva_maquina)
