@@ -23,8 +23,6 @@ def nueva_maquina(root):
 
 
     def guardar_nueva_maquina():
-        nombre = entrada_modelo.get()
-        descripcion = entrada_descripcion.get("1.0", tk.END)
         # Lógica para guardar la nueva máquina en la base de datos
         id_sucursal = diccionario_sucursales[combo_sucursal_id.get()]
         try:
@@ -44,7 +42,6 @@ def nueva_maquina(root):
             criticidad = 2 #combo_criticidad.get()
             pendiente_degradacion = 1 #entrada_pendiente_deg.get()
             notas = entrada_descripcion.get('1.0', tk.END)
-            contacto_sucursal = ""
             modelo = combo_maquina.get()
             print((id_area, tipo_maquina, modelo, cant_puntos_monitoreo, criticidad, pendiente_degradacion, notas))
             query = sql_service.agregar_maquina(id_area, tipo_maquina, modelo, cant_puntos_monitoreo, criticidad, pendiente_degradacion, notas)
@@ -86,7 +83,7 @@ def nueva_maquina(root):
     
     frame2 = tk.Frame(ventana_nueva_maquina)
     # Crear Treeview
-    table = ttk.Treeview(frame2)
+    table = ttk.Treeview(frame2, show='headings')
 
     # Definir columnas
     table['columns'] = ("Nombre", "Edad", "País")
@@ -97,12 +94,12 @@ def nueva_maquina(root):
     table.heading("País", text="País")
 
     # Agregar datos a la tabla
-    table.insert(parent="", index=0, iid=0, text="", values=("Juan", 25, "México"))
-    table.insert(parent="", index=1, iid=1, text="", values=("María", 30, "Argentina"))
-    table.insert(parent="", index=2, iid=2, text="", values=("Pedro", 40, "España"))
+    table.insert(parent="", index=0, iid=0,  values=("Juan", 25, "México"))
+    table.insert(parent="", index=1, iid=1,  values=("María", 30, "Argentina"))
+    table.insert(parent="", index=2, iid=2,  values=("Pedro", 40, "España"))
 
     # Empaquetar la tabla dentro del frame
-    table.pack()
+    table.pack()#expand=1, fill=tk.BOTH)
 
     frame3 = tk.Frame(ventana_nueva_maquina)
     # Crear frame para la información básica
@@ -134,7 +131,7 @@ def nueva_maquina(root):
 
     # Posicionar los frames utilizando grid
     frame1.grid(row=0, column=0)
-    frame2.grid(row=0, column=1, rowspan=2)
+    frame2.grid(row=0, column=1, columnspan=2)
     frame3.grid(row=1, column=0)
     #frame4.grid(row=1, column=1)
     frame5.grid(row=2, column=0)
@@ -241,7 +238,7 @@ def nueva_maquina(root):
     entrada_descripcion = tk.Text(frame5, height=4, width=50)
     entrada_descripcion.pack()
 
-    botones_frame = tk.Frame(ventana_nueva_maquina)
+    botones_frame = tk.Frame(frame6)
     botones_frame.pack(pady=10)
 
     boton_cancelar = tk.Button(botones_frame, text="Cancelar", command=cancelar, bg="#9b9b9b") 
