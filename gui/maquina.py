@@ -70,8 +70,8 @@ def nueva_maquina(root):
         ventana_nueva_maquina.destroy()
 
     ventana_nueva_maquina = tk.Toplevel(root)
-    ventana_nueva_maquina.title("Nueva Máquina")
-    ventana_nueva_maquina.geometry("850x550")
+    ventana_nueva_maquina.title("Configurar Máquina")
+    ventana_nueva_maquina.geometry("1000x450")
     ventana_nueva_maquina.resizable(False, False)
     ventana_nueva_maquina.attributes('-topmost', 'true')
     ventana_nueva_maquina.focus_force()
@@ -86,17 +86,32 @@ def nueva_maquina(root):
     table = ttk.Treeview(frame2, show='headings')
 
     # Definir columnas
-    table['columns'] = ("Nombre", "Edad", "País")
+    table['columns'] = ("Nombre", "RPM", "Ejes", "Alarmas", "Extras", "Rodamientos", "Agregar")
+    table.column("#0", width=0, stretch=tk.FALSE)
+    #table.column("#1", width=100, stretch=tk.FALSE)
+
 
     # Definir etiquetas de cabecera
     table.heading("Nombre", text="Nombre")
-    table.heading("Edad", text="Edad")
-    table.heading("País", text="País")
+    table.heading("RPM", text="RPM")
+    table.heading("Ejes", text="Ejes")
+    table.heading("Alarmas", text="Alarmas")
+    table.heading("Extras", text="Extras")
+    table.heading("Rodamientos", text="Rodamientos")
+    table.heading("Agregar", text="Agregar")
+
+    table.column("Nombre", width=50)
+    table.column("RPM", width=50)
+    table.column("Ejes", width=50)
+    table.column("Alarmas", width=50)
+    table.column("Extras", width=50)
+    table.column("Rodamientos", width=50)
+    table.column("Agregar", width=50)
+
 
     # Agregar datos a la tabla
-    table.insert(parent="", index=0, iid=0,  values=("Juan", 25, "México"))
-    table.insert(parent="", index=1, iid=1,  values=("María", 30, "Argentina"))
-    table.insert(parent="", index=2, iid=2,  values=("Pedro", 40, "España"))
+    table.insert(parent="", index=0, iid=0, values=("LD", "80,180", "H,V,A", "V,AE", "Acelerati..", "", "Agregar"))
+    table.insert(parent="", index=1, iid=1, values=("LI", "80,180", "H,V,A", "V,AE", "Acelerati..", "", "Agregar"))
 
     # Empaquetar la tabla dentro del frame
     table.pack()#expand=1, fill=tk.BOTH)
@@ -129,13 +144,17 @@ def nueva_maquina(root):
 
     frame6 = tk.Frame(ventana_nueva_maquina)
 
+    frame7 = tk.Frame(ventana_nueva_maquina)
+
     # Posicionar los frames utilizando grid
     frame1.grid(row=0, column=0)
-    frame2.grid(row=0, column=1, columnspan=2)
+    frame2.grid(row=0, column=1, rowspan=3)
     frame3.grid(row=1, column=0)
     #frame4.grid(row=1, column=1)
     frame5.grid(row=2, column=0)
     frame6.grid(row=2, column=1)
+    #frame7.grid(row=3, column=0, columnspan=2)
+    frame7.grid(row=3, column=0)
 
 
     # Crear frame para la información previa
@@ -145,12 +164,10 @@ def nueva_maquina(root):
 
     def actualizar_areas_cmbx(cmbx: ttk.Combobox, event):
         sucursal_selected = event.widget.get()
-        #sucursal_selected_id = sucursal_selected.split(" - ")[0]
         sucursal_selected_id = diccionario_sucursales[sucursal_selected]
         query_areas = sql_service.buscar_areas_por_sucursal(sucursal_selected_id)
         global diccionario_areas
         diccionario_areas = {area[2]: area[0] for area in query_areas}
-        #opciones_area = [x[0] + " - " + x[2] for x in query_areas]
         opciones_area = list(diccionario_areas.keys())
         cmbx['values'] = opciones_area
 
@@ -159,7 +176,6 @@ def nueva_maquina(root):
     query_sucursales = sql_service.buscar_sucursales_por_empresa(id_empresa)
     diccionario_sucursales = {sucursal[2]: sucursal[0] for sucursal in query_sucursales}
     print(list(diccionario_sucursales.keys()))
-    #opciones_sucursal_id = [x[0] + " - " + x[2] for x in query_sucursales]
     opciones_sucursal_id = list(diccionario_sucursales.keys())
     combo_sucursal_id = ttk.Combobox(frame_info_previa, values=opciones_sucursal_id, state="readonly") 
     combo_sucursal_id.grid(row=0, column=2, padx=5, pady=5)
@@ -167,12 +183,10 @@ def nueva_maquina(root):
 
     def actualizar_maquinas_cmbx(cmbx: ttk.Combobox, event):
         area_selected = event.widget.get()
-        #sucursal_selected_id = sucursal_selected.split(" - ")[0]
         area_selected_id = diccionario_areas[area_selected]
         query_maquinas = sql_service.buscar_maquinas_por_area(area_selected_id)
         global diccionario_maquinas
         diccionario_maquinas = {maquina[3]: maquina[0] for maquina in query_maquinas}
-        #opciones_area = [x[0] + " - " + x[2] for x in query_areas]
         opciones_maquina = list(diccionario_maquinas.keys())
         cmbx['values'] = opciones_maquina
     
@@ -186,13 +200,11 @@ def nueva_maquina(root):
 
     def actualizar_zonas_cmbx(cmbx: ttk.Combobox, event):
         maquina_selected = event.widget.get()
-        #sucursal_selected_id = sucursal_selected.split(" - ")[0]
         maquina_selected_id = diccionario_maquinas[maquina_selected]
         query_zonas = sql_service.buscar_zona_analisis_por_maquina(maquina_selected_id)
         global diccionario_zonas
         print(query_zonas)
         diccionario_zonas = {zona[2]: zona[0] for zona in query_zonas}
-        #opciones_area = [x[0] + " - " + x[2] for x in query_areas]
         opciones_zonas = list(diccionario_zonas.keys())
         cmbx['values'] = opciones_zonas
 
@@ -218,18 +230,6 @@ def nueva_maquina(root):
 
     actualizar_zonas_cmbx_partial = partial(actualizar_zonas_cmbx, combo_zona)
     combo_maquina.bind("<<ComboboxSelected>>", actualizar_zonas_cmbx_partial)
-    
-
-    # Crear frame para la información avanzada
-    #frame_info_avanzada = tk.LabelFrame(frame4, text="Cant. Puntos de monitoreo:")
-    #frame_info_avanzada.pack(padx=10, pady=10, anchor="w")
-    
-    
-    
-
-
-    
-
 
     etiqueta_descripcion = tk.Label(frame5, text="Descripción:")
     etiqueta_descripcion.pack()
@@ -238,12 +238,11 @@ def nueva_maquina(root):
     entrada_descripcion = tk.Text(frame5, height=4, width=50)
     entrada_descripcion.pack()
 
-    botones_frame = tk.Frame(frame6)
+    botones_frame = tk.Frame(frame7)
     botones_frame.pack(pady=10)
 
     boton_cancelar = tk.Button(botones_frame, text="Cancelar", command=cancelar, bg="#9b9b9b") 
     boton_cancelar.grid(row=0, column=0, padx=5)
 
     boton_guardar = tk.Button(botones_frame, text="Guardar", command=guardar_nueva_maquina, bg="#3366CC") 
-    #boton_guardar = tk.Button(botones_frame, text="Guardar", command=cancelar, bg="#3366CC")
     boton_guardar.grid(row=0, column=1, padx=5)
