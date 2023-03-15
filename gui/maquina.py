@@ -73,7 +73,7 @@ def nueva_maquina(root):
         ventana_nueva_maquina.destroy()
 
     ventana_nueva_maquina = tk.Toplevel(root)
-    ventana_nueva_maquina.title("Nueva Máquina")
+    ventana_nueva_maquina.title("Configurar Máquina")
     ventana_nueva_maquina.geometry("1000x450")
     ventana_nueva_maquina.resizable(False, False)
     ventana_nueva_maquina.attributes('-topmost', 'true')
@@ -89,17 +89,32 @@ def nueva_maquina(root):
     table = ttk.Treeview(frame2)
 
     # Definir columnas
-    table['columns'] = ("Nombre", "Edad", "País")
+    table['columns'] = ("Nombre", "RPM", "Ejes", "Alarmas", "Extras", "Rodamientos", "Agregar")
+    table.column("#0", width=0, stretch=tk.FALSE)
+    #table.column("#1", width=100, stretch=tk.FALSE)
+
 
     # Definir etiquetas de cabecera
     table.heading("Nombre", text="Nombre")
-    table.heading("Edad", text="Edad")
-    table.heading("País", text="País")
+    table.heading("RPM", text="RPM")
+    table.heading("Ejes", text="Ejes")
+    table.heading("Alarmas", text="Alarmas")
+    table.heading("Extras", text="Extras")
+    table.heading("Rodamientos", text="Rodamientos")
+    table.heading("Agregar", text="Agregar")
+
+    table.column("Nombre", width=50)
+    table.column("RPM", width=50)
+    table.column("Ejes", width=50)
+    table.column("Alarmas", width=50)
+    table.column("Extras", width=50)
+    table.column("Rodamientos", width=50)
+    table.column("Agregar", width=50)
+
 
     # Agregar datos a la tabla
-    table.insert(parent="", index=0, iid=0, text="", values=("Juan", 25, "México"))
-    table.insert(parent="", index=1, iid=1, text="", values=("María", 30, "Argentina"))
-    table.insert(parent="", index=2, iid=2, text="", values=("Pedro", 40, "España"))
+    table.insert(parent="", index=0, iid=0, values=("LD", "80,180", "H,V,A", "V,AE", "Acelerati..", "", "Agregar"))
+    table.insert(parent="", index=1, iid=1, values=("LI", "80,180", "H,V,A", "V,AE", "Acelerati..", "", "Agregar"))
 
     # Empaquetar la tabla dentro del frame
     table.pack()
@@ -141,6 +156,7 @@ def nueva_maquina(root):
     #frame4.grid(row=1, column=1)
     frame5.grid(row=2, column=0)
     frame6.grid(row=2, column=1)
+    #frame7.grid(row=3, column=0, columnspan=2)
     frame7.grid(row=3, column=0)
 
 
