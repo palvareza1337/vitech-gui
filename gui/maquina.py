@@ -6,6 +6,7 @@ import random
 import string
 
 
+
 global id_empresa 
 id_empresa = 17123456
 
@@ -53,12 +54,10 @@ def nueva_maquina(root):
             id_zona = diccionario_zonas[combo_zona.get()]
         except:
         #print(id_area, combo_tipo.get(), combo_sucursal_id.get(), combo_maquina.get())#, entrada_puntos.get(), combo_criticidad.get(), entrada_pendiente_deg.get(), entrada_descripcion.get('1.0', tk.END))
-            #TODO:
-            id_zona = "uu12e" # aca poner una wea random
             nombre_zona = combo_zona.get()
             estado_salud = "OK" # investar algo aca
             cant_sensores = 4 # falta crear una rutina para ver cuantos sensores tiene cada cosa
-            query = sql_service.agregar_zona(id_zona, nombre_zona, id_maquina, estado_salud, cant_sensores)
+            query = sql_service.agregar_zona(nombre_zona, id_maquina, estado_salud, cant_sensores)
             id_zona = query 
             print(id_zona)
             diccionario_zonas[combo_zona.get()] = id_zona
