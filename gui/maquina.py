@@ -23,8 +23,6 @@ def nueva_maquina(root):
 
 
     def guardar_nueva_maquina():
-        nombre = entrada_modelo.get()
-        descripcion = entrada_descripcion.get("1.0", tk.END)
         # Lógica para guardar la nueva máquina en la base de datos
         id_sucursal = diccionario_sucursales[combo_sucursal_id.get()]
         try:
@@ -44,7 +42,6 @@ def nueva_maquina(root):
             criticidad = 2 #combo_criticidad.get()
             pendiente_degradacion = 1 #entrada_pendiente_deg.get()
             notas = entrada_descripcion.get('1.0', tk.END)
-            contacto_sucursal = ""
             modelo = combo_maquina.get()
             print((id_area, tipo_maquina, modelo, cant_puntos_monitoreo, criticidad, pendiente_degradacion, notas))
             query = sql_service.agregar_maquina(id_area, tipo_maquina, modelo, cant_puntos_monitoreo, criticidad, pendiente_degradacion, notas)
@@ -86,7 +83,7 @@ def nueva_maquina(root):
     
     frame2 = tk.Frame(ventana_nueva_maquina)
     # Crear Treeview
-    table = ttk.Treeview(frame2)
+    table = ttk.Treeview(frame2, show='headings', selectmode="browse")
 
 
     def abrir_ventana_nueva(event):
@@ -135,7 +132,7 @@ def nueva_maquina(root):
     table.insert(parent="", index=1, iid=1, values=("LI", "80,180", "H,V,A", "V,AE", "Acelerati..", "", "Agregar"))
 
     # Empaquetar la tabla dentro del frame
-    table.pack()
+    table.pack()#expand=1, fill=tk.BOTH)
 
     table.bind("<Double-1>", abrir_ventana_nueva)
 

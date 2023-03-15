@@ -56,7 +56,7 @@ ribbon.pack(side=tk.TOP, fill=tk.BOTH)
 # creacion de la barra lateral con la informacion de las areas, maquinas, zonas, puntos y mediciones
 sidebar = tk.Frame(root, bg="blue")
 sidebar.pack(side=tk.LEFT, fill=tk.BOTH, expand=0)
-treeview = ttk.Treeview(sidebar)
+treeview = ttk.Treeview(sidebar, selectmode="browse")
 # place the Treeview widget on the root window
 treeview.pack(fill=tk.BOTH, expand=1)
     
