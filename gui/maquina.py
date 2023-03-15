@@ -83,7 +83,7 @@ def nueva_maquina(root):
     
     frame2 = tk.Frame(ventana_nueva_maquina)
     # Crear Treeview
-    table = ttk.Treeview(frame2, show='headings')
+    table = ttk.Treeview(frame2, show='headings', selectmode="browse")
 
     # Definir columnas
     table['columns'] = ("Nombre", "RPM", "Ejes", "Alarmas", "Extras", "Rodamientos", "Agregar")
