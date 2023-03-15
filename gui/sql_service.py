@@ -116,8 +116,7 @@ def agregar_area(nombre_area, id_sucursal):
   result = cursor.fetchone()
   return result[0]
 
-def agregar_zona(id_zona, nombre_zona, id_maquina, estado_salud, cant_sensores):
-  print(f"INSERT INTO zona_analisis VALUES({id_zona}, '{id_maquina}', '{nombre_zona}', {estado_salud}, {cant_sensores})")
+def agregar_zona(nombre_zona, id_maquina, estado_salud, cant_sensores):
   cursor.execute(f"INSERT INTO zona_analisis VALUES(NULL, '{id_maquina}', '{nombre_zona}', '{estado_salud}', {cant_sensores})")
   db.commit()
   cursor.execute(f"SELECT id_zona_analisis FROM zona_analisis ORDER BY id_zona_analisis DESC LIMIT 1")
