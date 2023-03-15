@@ -76,7 +76,7 @@ def nueva_maquina(root):
     ventana_nueva_maquina.title("Configurar Máquina")
     ventana_nueva_maquina.geometry("1000x450")
     ventana_nueva_maquina.resizable(False, False)
-    ventana_nueva_maquina.attributes('-topmost', 'true')
+    #ventana_nueva_maquina.attributes('-topmost', 'true')
     ventana_nueva_maquina.focus_force()
 
 
@@ -88,10 +88,28 @@ def nueva_maquina(root):
     # Crear Treeview
     table = ttk.Treeview(frame2)
 
+
+    def abrir_ventana_nueva(event):
+        item = table.selection()[0]
+        values = table.item(item, "values")
+
+        # Aquí empieza el código para la nueva ventana de tkinter
+        nueva_ventana = tk.Toplevel()
+        #nueva_ventana.lift()
+        nueva_ventana.title("Nueva Ventana")
+        nueva_ventana.geometry("200x200")
+        nueva_ventana.focus_set()
+
+        # Agregar widgets a la nueva ventana de tkinter
+        etiqueta = tk.Label(nueva_ventana, text="Esta es una nueva ventana")
+        etiqueta.pack()
+    
+    
+
+
     # Definir columnas
     table['columns'] = ("Nombre", "RPM", "Ejes", "Alarmas", "Extras", "Rodamientos", "Agregar")
-    table.column("#0", width=0, stretch=tk.FALSE)
-    #table.column("#1", width=100, stretch=tk.FALSE)
+    #table.column("#0", width=0, stretch=tk.FALSE)
 
 
     # Definir etiquetas de cabecera
@@ -118,6 +136,9 @@ def nueva_maquina(root):
 
     # Empaquetar la tabla dentro del frame
     table.pack()
+
+    table.bind("<Double-1>", abrir_ventana_nueva)
+
 
     frame3 = tk.Frame(ventana_nueva_maquina)
     # Crear frame para la información básica
@@ -151,7 +172,7 @@ def nueva_maquina(root):
 
     # Posicionar los frames utilizando grid
     frame1.grid(row=0, column=0)
-    frame2.grid(row=0, column=1, rowspan=3)
+    frame2.grid(row=0, column=1, rowspan=3, sticky="N")
     frame3.grid(row=1, column=0)
     #frame4.grid(row=1, column=1)
     frame5.grid(row=2, column=0)
