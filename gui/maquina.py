@@ -93,15 +93,64 @@ def nueva_maquina(root):
         # Aquí empieza el código para la nueva ventana de tkinter
         nueva_ventana = tk.Toplevel()
         #nueva_ventana.lift()
-        nueva_ventana.title("Nueva Ventana")
-        nueva_ventana.geometry("200x200")
+        nueva_ventana.title("Configuración de puntos")
+        nueva_ventana.geometry("400x300")
         nueva_ventana.focus_set()
 
-        # Agregar widgets a la nueva ventana de tkinter
-        etiqueta = tk.Label(nueva_ventana, text="Esta es una nueva ventana")
-        etiqueta.pack()
-    
-    
+        # Crear un nuevo frame
+        frame_nombre_punto = tk.Frame(nueva_ventana)
+        frame_nombre_punto.pack()
+        # Crear un nuevo widget de etiqueta dentro del frame
+        etiqueta_nombre_punto = tk.Label(frame_nombre_punto, text="Nombre del punto:")
+        etiqueta_nombre_punto.pack(side="left")
+        # Crear un nuevo widget de entrada dentro del frame
+        entrada_nombre_punto = tk.Entry(frame_nombre_punto)
+        entrada_nombre_punto.pack(side="left")
+
+        # Crear un nuevo frame
+        frame_rpm = tk.LabelFrame(nueva_ventana, text="RPM")
+        frame_rpm.pack()
+        # Crear etiqueta para el Spinbox
+        etiqueta_min = tk.Label(frame_rpm, text="Min")
+        etiqueta_min.grid(row=1, column=0, sticky="w")
+        # Crear un nuevo widget de entrada dentro del frame
+        spinbox_min = tk.Spinbox(frame_rpm, from_=0, to=10)
+        spinbox_min.grid(row=1, column=1, padx=5, pady=5)
+        # Crear etiqueta para el Spinbox
+        etiqueta_max = tk.Label(frame_rpm, text="Max")
+        etiqueta_max.grid(row=1, column=2, sticky="w")
+        # Crear un nuevo widget de entrada dentro del frame
+        spinbox_max = tk.Spinbox(frame_rpm, from_=0, to=10)
+        spinbox_max.grid(row=1, column=3, padx=5, pady=5)
+
+        # Crear un nuevo frame
+        frame_rodamiento = tk.LabelFrame(nueva_ventana, text="Rodamiento")
+        frame_rodamiento.pack()
+        boton_agregar_rodamiento = tk.Button(frame_rodamiento, text="Agregar", command=cancelar, bg="#9b9b9b") 
+        boton_agregar_rodamiento.grid(row=0, column=1, padx=5)
+
+        boton_borrar_rodamiento = tk.Button(frame_rodamiento, text="Eliminar", command=cancelar, bg="#ff4040") 
+        boton_borrar_rodamiento.grid(row=0, column=2, padx=5)
+
+        # Crear un nuevo frame
+        frame_caja_engranes = tk.LabelFrame(nueva_ventana, text="Caja de engranes")
+        frame_caja_engranes.pack()
+        boton_agregar_caja_engranes = tk.Button(frame_caja_engranes, text="Agregar", command=cancelar, bg="#9b9b9b") 
+        boton_agregar_caja_engranes.grid(row=0, column=1, padx=5)
+
+        boton_borrar_caja_engranes = tk.Button(frame_caja_engranes, text="Eliminar", command=cancelar, bg="#ff4040") 
+        boton_borrar_caja_engranes.grid(row=0, column=2, padx=5)
+
+        # Crear un nuevo frame
+        frame_phantom = tk.LabelFrame(nueva_ventana, text="Phantom")
+        frame_phantom.pack()
+        boton_agregar_phantom = tk.Button(frame_phantom, text="Agregar", command=cancelar, bg="#9b9b9b") 
+        boton_agregar_phantom.grid(row=0, column=1, padx=5)
+
+        boton_borrar_phantom = tk.Button(frame_phantom, text="Eliminar", command=cancelar, bg="#ff4040") 
+        boton_borrar_phantom.grid(row=0, column=2, padx=5)
+
+
 
 
     # Definir columnas
