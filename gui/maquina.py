@@ -84,8 +84,18 @@ def nueva_maquina(root):
     # Crear Treeview
     table = ttk.Treeview(frame2, show='headings', selectmode="browse")
 
+    
 
-    def abrir_ventana_nueva(event):
+    def configurar_punto(event):
+
+        def buscar_rodamiento():
+            # Aquí empieza el código para la nueva ventana de tkinter
+            ventana_buscar_rodamiento = tk.Toplevel()
+            #nueva_ventana.lift()
+            ventana_buscar_rodamiento.title("Buscar rodamiento")
+            ventana_buscar_rodamiento.geometry("300x600")
+            ventana_buscar_rodamiento.focus_set()
+
         item = table.selection()[0]
         values = table.item(item, "values")
 
@@ -130,7 +140,7 @@ def nueva_maquina(root):
         entrada_rodamiento_cargado.grid(row=0, column=0, padx=5)
         entrada_rodamiento_cargado.configure(state="disabled")
 
-        boton_agregar_rodamiento = tk.Button(frame_rodamiento, text="Agregar", command=cancelar, bg="#9b9b9b") 
+        boton_agregar_rodamiento = tk.Button(frame_rodamiento, text="Agregar", command=buscar_rodamiento, bg="#9b9b9b") 
         boton_agregar_rodamiento.grid(row=0, column=1, padx=5)
 
         boton_borrar_rodamiento = tk.Button(frame_rodamiento, text="Eliminar", command=cancelar, bg="#ff4040") 
@@ -207,7 +217,7 @@ def nueva_maquina(root):
     # Empaquetar la tabla dentro del frame
     table.pack()#expand=1, fill=tk.BOTH)
 
-    table.bind("<Double-1>", abrir_ventana_nueva)
+    table.bind("<Double-1>", configurar_punto)
 
 
     frame3 = tk.Frame(ventana_nueva_maquina)
