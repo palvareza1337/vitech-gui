@@ -5,6 +5,8 @@ from tkinter import ttk
 import random
 import string
 
+import pandas as pd
+from pandastable import Table
 
 
 global id_empresa 
@@ -95,6 +97,25 @@ def nueva_maquina(root):
             ventana_buscar_rodamiento.title("Buscador de rodamientos")
             ventana_buscar_rodamiento.geometry("300x600")
             ventana_buscar_rodamiento.focus_set()
+
+            # Leer el archivo de Excel con Pandas
+            df = pd.read_excel('C:\\Users\\Pablo\\Downloads\\titanic.xlsx')
+
+            # Crear una instancia de la clase Frame de Tkinter y asignarla a una variable
+            frame = tk.Frame(ventana_buscar_rodamiento)
+
+            # Crear una instancia de la clase Table del módulo pandastable
+            table = Table(frame, dataframe=df)
+
+            # Empaquetar el Frame y la tabla dentro del Tk()
+            frame.pack(fill='both', expand=True)
+            table.pack(fill='both', expand=True)
+            table.show()
+
+            
+
+
+
 
         item = table.selection()[0]
         values = table.item(item, "values")
