@@ -125,6 +125,11 @@ def nueva_maquina(root):
         # Crear un nuevo frame
         frame_rodamiento = tk.LabelFrame(nueva_ventana, text="Rodamiento")
         frame_rodamiento.pack()
+
+        entrada_rodamiento_cargado = tk.Text(frame_rodamiento, height=4, width=20)
+        entrada_rodamiento_cargado.grid(row=0, column=0, padx=5)
+        entrada_rodamiento_cargado.configure(state="disabled")
+
         boton_agregar_rodamiento = tk.Button(frame_rodamiento, text="Agregar", command=cancelar, bg="#9b9b9b") 
         boton_agregar_rodamiento.grid(row=0, column=1, padx=5)
 
@@ -134,6 +139,11 @@ def nueva_maquina(root):
         # Crear un nuevo frame
         frame_caja_engranes = tk.LabelFrame(nueva_ventana, text="Caja de engranes")
         frame_caja_engranes.pack()
+
+        entrada_caja_cargada = tk.Text(frame_caja_engranes, height=4, width=20)
+        entrada_caja_cargada.grid(row=0, column=0, padx=5)
+        entrada_caja_cargada.configure(state="disabled")
+
         boton_agregar_caja_engranes = tk.Button(frame_caja_engranes, text="Agregar", command=cancelar, bg="#9b9b9b") 
         boton_agregar_caja_engranes.grid(row=0, column=1, padx=5)
 
@@ -143,6 +153,11 @@ def nueva_maquina(root):
         # Crear un nuevo frame
         frame_phantom = tk.LabelFrame(nueva_ventana, text="Phantom")
         frame_phantom.pack()
+
+        entrada_phantom_cargado = tk.Text(frame_phantom, height=4, width=20)
+        entrada_phantom_cargado.grid(row=0, column=0, padx=5)
+        entrada_phantom_cargado.configure(state="disabled")
+
         boton_agregar_phantom = tk.Button(frame_phantom, text="Agregar", command=cancelar, bg="#9b9b9b") 
         boton_agregar_phantom.grid(row=0, column=1, padx=5)
 
