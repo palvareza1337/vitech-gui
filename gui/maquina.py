@@ -125,10 +125,20 @@ def nueva_maquina(root):
     table.column("Rodamientos", width=50)
     table.column("Agregar", width=50)
 
-
-    # Agregar datos a la tabla
-    table.insert(parent="", index=0, iid=0, values=("LD", "80,180", "H,V,A", "V,AE", "Acelerati..", "", "Agregar"))
-    table.insert(parent="", index=1, iid=1, values=("LI", "80,180", "H,V,A", "V,AE", "Acelerati..", "", "Agregar"))
+    def add_to_table(event):
+        print("aiuda")
+        print(table.get_children())
+        try:
+            new_index = int(max(table.get_children())) + 1
+        except:
+            new_index = 0
+        table.insert(parent="", index=new_index, iid=new_index, values=("LD", "80,180", "H,V,A", "V,AE", "Acelerati..", "", "Agregar"))
+    
+    def del_from_table(event):
+        print("porfa")
+        print(table.get_children())
+        del_index = max(table.get_children())
+        table.delete(del_index)
 
     # Empaquetar la tabla dentro del frame
     table.pack()#expand=1, fill=tk.BOTH)
@@ -155,8 +165,11 @@ def nueva_maquina(root):
     # Crear etiqueta para el Spinbox
     etiqueta_spinbox = tk.Label(frame_info_basica, text="Cant. Puntos de monitoreo:")
     etiqueta_spinbox.grid(row=2, column=0, sticky="w")
-    spinbox_cant_monitoreo = tk.Spinbox(frame_info_basica, from_=0, to=10)
+    spinbox_cant_monitoreo = ttk.Spinbox(frame_info_basica, from_=0, to=10)
     spinbox_cant_monitoreo.grid(row=2, column=1, padx=5, pady=5)
+    print("ta bueno el bind")
+    spinbox_cant_monitoreo.bind("<<Increment>>", add_to_table)
+    spinbox_cant_monitoreo.bind("<<Decrement>>", del_from_table)
     
     #frame4 = tk.Frame(ventana_nueva_maquina, bg='yellow')
 
