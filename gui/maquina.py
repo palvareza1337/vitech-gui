@@ -70,7 +70,7 @@ def nueva_maquina(root):
 
     ventana_nueva_maquina = tk.Toplevel(root)
     ventana_nueva_maquina.title("Configurar Máquina")
-    ventana_nueva_maquina.geometry("1000x450")
+    ventana_nueva_maquina.geometry("800x450")
     ventana_nueva_maquina.resizable(False, False)
     #ventana_nueva_maquina.attributes('-topmost', 'true')
     ventana_nueva_maquina.focus_force()
@@ -93,7 +93,7 @@ def nueva_maquina(root):
         nueva_ventana = tk.Toplevel()
         #nueva_ventana.lift()
         nueva_ventana.title("Configuración de puntos")
-        nueva_ventana.geometry("400x300")
+        nueva_ventana.geometry("400x350")
         nueva_ventana.focus_set()
 
         # Crear un nuevo frame
