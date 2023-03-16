@@ -92,7 +92,7 @@ def nueva_maquina(root):
             # Aquí empieza el código para la nueva ventana de tkinter
             ventana_buscar_rodamiento = tk.Toplevel()
             #nueva_ventana.lift()
-            ventana_buscar_rodamiento.title("Buscar rodamiento")
+            ventana_buscar_rodamiento.title("Buscador de rodamientos")
             ventana_buscar_rodamiento.geometry("300x600")
             ventana_buscar_rodamiento.focus_set()
 
