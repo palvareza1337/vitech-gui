@@ -97,30 +97,36 @@ def nueva_maquina(root):
             ventana_buscar_rodamiento.title("Buscador de rodamientos")
             ventana_buscar_rodamiento.geometry("300x600")
             ventana_buscar_rodamiento.focus_set()
-
+            
+            
             # Leer el archivo de Excel con Pandas
             df = pd.read_excel('C:\\Users\\Pablo\\Downloads\\titanic.xlsx')
-
             # Crear una instancia de la clase Frame de Tkinter y asignarla a una variable
             frame = tk.Frame(ventana_buscar_rodamiento, height=4, width=20)
-
             # Crear una instancia de la clase Table del módulo pandastable
             table = Table(frame, dataframe=df[['Nombre','Sexo']])
-
             # Empaquetar el Frame y la tabla dentro del Tk()
             frame.pack()
-            table.pack(fill='both', expand=True)
+            #table.pack(fill='both', expand=True)
+            table.pack()
             table.editable = False
             table.show()
-
+            
+            
+            frame_descripcion = tk.Frame(ventana_buscar_rodamiento)
+            frame_descripcion.pack()
+            
+            entrada_descripcion = tk.Text(frame_descripcion, height=5, width=50)
+            entrada_descripcion.pack()
+            
             botones_frame = tk.Frame(ventana_buscar_rodamiento)
             botones_frame.pack(pady=10)
 
-            boton_aceptar = tk.Button(botones_frame, text="Aceptar", command=cancelar, bg="#9b9b9b") 
-            boton_aceptar.grid(row=0, column=1, padx=5)
+            boton_cancelar = tk.Button(botones_frame, text="Cancelar", command=cancelar, bg="#9b9b9b") 
+            boton_cancelar.grid(row=0, column=0, padx=5)
 
-            boton_cancelar = tk.Button(botones_frame, text="Cancelar", command=cancelar, bg="#ff4040") 
-            boton_cancelar.grid(row=0, column=2, padx=5)
+            boton_guardar = tk.Button(botones_frame, text="Guardar", command=cancelar, bg="#3366CC") 
+            boton_guardar.grid(row=0, column=1, padx=5)
 
             
 
