@@ -315,6 +315,13 @@ def nueva_maquina(root):
         diccionario_zonas = {zona[2]: zona[0] for zona in query_zonas}
         opciones_zonas = list(diccionario_zonas.keys())
         cmbx['values'] = opciones_zonas
+    
+    def actualizar_puntos_cmbx(cmbx: ttk.Combobox, event):
+        zona_selected = event.widget.get()
+        zona_selected_id = diccionario_zonas[zona_selected]
+        query_zonas = sql_service.buscar_zona_analisis_por_id(zona_selected_id)
+        spinbox_cant_monitoreo.set(query_zonas[4])
+        
 
     etiqueta_maquina = tk.Label(frame_info_previa, text="Máquina:")
     etiqueta_maquina.grid(row=2, column=1, sticky="w")
@@ -338,6 +345,10 @@ def nueva_maquina(root):
 
     actualizar_zonas_cmbx_partial = partial(actualizar_zonas_cmbx, combo_zona)
     combo_maquina.bind("<<ComboboxSelected>>", actualizar_zonas_cmbx_partial)
+
+    actualizar_puntos_cmbx_partial = partial(actualizar_puntos_cmbx, combo_zona)
+    combo_zona.bind("<<ComboboxSelected>>", actualizar_puntos_cmbx_partial)
+
 
     etiqueta_descripcion = tk.Label(frame5, text="Descripción:")
     etiqueta_descripcion.pack()
