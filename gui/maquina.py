@@ -70,7 +70,7 @@ def nueva_maquina(root):
 
     ventana_nueva_maquina = tk.Toplevel(root)
     ventana_nueva_maquina.title("Configurar Máquina")
-    ventana_nueva_maquina.geometry("1000x450")
+    ventana_nueva_maquina.geometry("800x450")
     ventana_nueva_maquina.resizable(False, False)
     #ventana_nueva_maquina.attributes('-topmost', 'true')
     ventana_nueva_maquina.focus_force()
@@ -84,8 +84,18 @@ def nueva_maquina(root):
     # Crear Treeview
     table = ttk.Treeview(frame2, show='headings', selectmode="browse")
 
+    
 
-    def abrir_ventana_nueva(event):
+    def configurar_punto(event):
+
+        def buscar_rodamiento():
+            # Aquí empieza el código para la nueva ventana de tkinter
+            ventana_buscar_rodamiento = tk.Toplevel()
+            #nueva_ventana.lift()
+            ventana_buscar_rodamiento.title("Buscador de rodamientos")
+            ventana_buscar_rodamiento.geometry("300x600")
+            ventana_buscar_rodamiento.focus_set()
+
         item = table.selection()[0]
         values = table.item(item, "values")
 
@@ -93,7 +103,7 @@ def nueva_maquina(root):
         nueva_ventana = tk.Toplevel()
         #nueva_ventana.lift()
         nueva_ventana.title("Configuración de puntos")
-        nueva_ventana.geometry("400x300")
+        nueva_ventana.geometry("400x350")
         nueva_ventana.focus_set()
 
         # Crear un nuevo frame
@@ -125,7 +135,12 @@ def nueva_maquina(root):
         # Crear un nuevo frame
         frame_rodamiento = tk.LabelFrame(nueva_ventana, text="Rodamiento")
         frame_rodamiento.pack()
-        boton_agregar_rodamiento = tk.Button(frame_rodamiento, text="Agregar", command=cancelar, bg="#9b9b9b") 
+
+        entrada_rodamiento_cargado = tk.Text(frame_rodamiento, height=4, width=20)
+        entrada_rodamiento_cargado.grid(row=0, column=0, padx=5)
+        entrada_rodamiento_cargado.configure(state="disabled")
+
+        boton_agregar_rodamiento = tk.Button(frame_rodamiento, text="Agregar", command=buscar_rodamiento, bg="#9b9b9b") 
         boton_agregar_rodamiento.grid(row=0, column=1, padx=5)
 
         boton_borrar_rodamiento = tk.Button(frame_rodamiento, text="Eliminar", command=cancelar, bg="#ff4040") 
@@ -134,6 +149,11 @@ def nueva_maquina(root):
         # Crear un nuevo frame
         frame_caja_engranes = tk.LabelFrame(nueva_ventana, text="Caja de engranes")
         frame_caja_engranes.pack()
+
+        entrada_caja_cargada = tk.Text(frame_caja_engranes, height=4, width=20)
+        entrada_caja_cargada.grid(row=0, column=0, padx=5)
+        entrada_caja_cargada.configure(state="disabled")
+
         boton_agregar_caja_engranes = tk.Button(frame_caja_engranes, text="Agregar", command=cancelar, bg="#9b9b9b") 
         boton_agregar_caja_engranes.grid(row=0, column=1, padx=5)
 
@@ -143,6 +163,11 @@ def nueva_maquina(root):
         # Crear un nuevo frame
         frame_phantom = tk.LabelFrame(nueva_ventana, text="Phantom")
         frame_phantom.pack()
+
+        entrada_phantom_cargado = tk.Text(frame_phantom, height=4, width=20)
+        entrada_phantom_cargado.grid(row=0, column=0, padx=5)
+        entrada_phantom_cargado.configure(state="disabled")
+
         boton_agregar_phantom = tk.Button(frame_phantom, text="Agregar", command=cancelar, bg="#9b9b9b") 
         boton_agregar_phantom.grid(row=0, column=1, padx=5)
 
@@ -193,7 +218,7 @@ def nueva_maquina(root):
     # Empaquetar la tabla dentro del frame
     table.pack()#expand=1, fill=tk.BOTH)
 
-    table.bind("<Double-1>", abrir_ventana_nueva)
+    table.bind("<Double-1>", configurar_punto)
 
 
     frame3 = tk.Frame(ventana_nueva_maquina)
