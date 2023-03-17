@@ -61,6 +61,11 @@ def buscar_zona_analisis_por_maquina(id_maquina):
   result = cursor.fetchall()
   return result
 
+def buscar_zona_analisis_por_id(id_zona):
+  cursor.execute(f"SELECT * FROM zona_analisis WHERE id_zona_analisis='{id_zona}'")
+  result = cursor.fetchone()
+  return result
+
 def buscar_sensor_por_zona(zona_analisis):
   cursor.execute(f"SELECT * FROM sensor WHERE id_zona_analisis='{zona_analisis}'")
   result = cursor.fetchall()
