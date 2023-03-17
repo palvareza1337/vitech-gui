@@ -102,14 +102,15 @@ def nueva_maquina(root):
             df = pd.read_excel('C:\\Users\\Pablo\\Downloads\\titanic.xlsx')
 
             # Crear una instancia de la clase Frame de Tkinter y asignarla a una variable
-            frame = tk.Frame(ventana_buscar_rodamiento)
+            frame = tk.Frame(ventana_buscar_rodamiento, height=4, width=20)
 
             # Crear una instancia de la clase Table del módulo pandastable
             table = Table(frame, dataframe=df[['Nombre','Sexo']])
 
             # Empaquetar el Frame y la tabla dentro del Tk()
-            frame.pack(fill='both', expand=True)
+            frame.pack()
             table.pack(fill='both', expand=True)
+            table.editable = False
             table.show()
 
             botones_frame = tk.Frame(ventana_buscar_rodamiento)
