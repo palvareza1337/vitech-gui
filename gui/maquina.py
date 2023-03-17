@@ -105,12 +105,21 @@ def nueva_maquina(root):
             frame = tk.Frame(ventana_buscar_rodamiento)
 
             # Crear una instancia de la clase Table del módulo pandastable
-            table = Table(frame, dataframe=df)
+            table = Table(frame, dataframe=df[['Nombre','Sexo']])
 
             # Empaquetar el Frame y la tabla dentro del Tk()
             frame.pack(fill='both', expand=True)
             table.pack(fill='both', expand=True)
             table.show()
+
+            botones_frame = tk.Frame(ventana_buscar_rodamiento)
+            botones_frame.pack(pady=10)
+
+            boton_aceptar = tk.Button(botones_frame, text="Aceptar", command=cancelar, bg="#9b9b9b") 
+            boton_aceptar.grid(row=0, column=1, padx=5)
+
+            boton_cancelar = tk.Button(botones_frame, text="Cancelar", command=cancelar, bg="#ff4040") 
+            boton_cancelar.grid(row=0, column=2, padx=5)
 
             
 
