@@ -110,7 +110,7 @@ def nueva_maquina(root):
             # Crear un Frame para el cuadro de texto y colocarlo en él
             frame_descripcion = tk.Frame(ventana_buscar_rodamiento)
             frame_descripcion.pack(side="top")
-            entrada_descripcion = tk.Text(frame_descripcion, height=10, width=30)
+            entrada_descripcion = tk.Text(frame_descripcion, height=5, width=30)
             entrada_descripcion.pack()
 
             # Crear un Frame para los botones y colocarlos en él
