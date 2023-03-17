@@ -186,7 +186,8 @@ def nueva_maquina(root):
     def del_from_table(event):
         print("porfa")
         print(table.get_children())
-        del_index = max(table.get_children())
+        print(table.selection_get())
+        del_index = max(table.selection_get())
         table.delete(del_index)
 
     # Empaquetar la tabla dentro del frame
