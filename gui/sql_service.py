@@ -22,12 +22,12 @@ cursor = db.cursor()
 
 # busqueda de lecturas por id de sensor, 
 def buscar_lecturas_por_sensor(id_sensor):
-    cursor.execute(f"SELECT * FROM lectura WHERE id_sensor={id_sensor}")
+    cursor.execute(f"SELECT id_sensor, date_time, sample_rate, temperatura, ruta_canal1, ruta_canal2, ruta_canal3 FROM lectura WHERE id_sensor={id_sensor}")
     options = cursor.fetchall()
     return options
 
 def recuperar_lectura_por_id(id_lectura):
-    cursor.execute(f"SELECT * FROM lectura WHERE id_lectura={id_lectura}")
+    cursor.execute(f"SELECT id_sensor, date_time, sample_rate, temperatura, ruta_canal1, ruta_canal2, ruta_canal3 FROM lectura WHERE id_lectura={id_lectura}")
     result = cursor.fetchone()
     return result
 
@@ -37,42 +37,42 @@ def login(username, password):
   return id_usuario
 
 def buscar_empresa(id_empresa = 17123456):
-  cursor.execute(f"SELECT * FROM empresa WHERE id_empresa={id_empresa}")
+  cursor.execute(f"SELECT id_empresa, nombre_empresa, nombre_cliente, contacto_cliente FROM empresa WHERE id_empresa={id_empresa}")
   result = cursor.fetchone()
   return result
 
 def buscar_sucursales_por_empresa(id_empresa):
-  cursor.execute(f"SELECT * FROM sucursal WHERE id_empresa={id_empresa}")
+  cursor.execute(f"SELECT id_sucursal, id_empresa, nombre_sucursal, direccion, contacto_sucursal FROM sucursal WHERE id_empresa={id_empresa}")
   result = cursor.fetchall()
   return result
 
 def buscar_areas_por_sucursal(id_sucursal):
-  cursor.execute(f"SELECT * FROM area WHERE id_sucursal={id_sucursal}")
+  cursor.execute(f"SELECT id_area, id_sucursal, nom_area, numero_de_maquinas FROM area WHERE id_sucursal={id_sucursal}")
   result = cursor.fetchall()
   return result
 
 def buscar_maquinas_por_area(id_area):
-  cursor.execute(f"SELECT * FROM maquina WHERE id_area='{id_area}'")
+  cursor.execute(f"SELECT id_maquina, id_area, tipo_maquina, modelo, cant_puntos_monitoreo, criticidad, pendiente_degradacion, notas FROM maquina WHERE id_area='{id_area}'")
   result = cursor.fetchall()
   return result
 
 def buscar_zona_analisis_por_maquina(id_maquina):
-  cursor.execute(f"SELECT * FROM zona_analisis WHERE id_maquina='{id_maquina}'")
+  cursor.execute(f"SELECT id_zona_analisis, id_maquina, nombre_zona, estado_salud, cant_sensores FROM zona_analisis WHERE id_maquina='{id_maquina}'")
   result = cursor.fetchall()
   return result
 
 def buscar_zona_analisis_por_id(id_zona):
-  cursor.execute(f"SELECT * FROM zona_analisis WHERE id_zona_analisis='{id_zona}'")
+  cursor.execute(f"SELECT id_zona_analisis, id_maquina, nombre_zona, estado_salud, cant_sensores FROM zona_analisis WHERE id_zona_analisis='{id_zona}'")
   result = cursor.fetchone()
   return result
 
 def buscar_sensor_por_zona(zona_analisis):
-  cursor.execute(f"SELECT * FROM sensor WHERE id_zona_analisis='{zona_analisis}'")
+  cursor.execute(f"SELECT id_sensor, id_zona_analisis, nombre_punto, tipo_sensor, nivel_batera FROM sensor WHERE id_zona_analisis='{zona_analisis}'")
   result = cursor.fetchall()
   return result
 
 def buscar_lectura_por_sensor(id_sensor):
-  cursor.execute(f"SELECT * FROM lectura WHERE id_sensor={id_sensor}")
+  cursor.execute(f"SELECT id_sensor, date_time, sample_rate, temperatura, ruta_canal1, ruta_canal2, ruta_canal3 FROM lectura WHERE id_sensor={id_sensor}")
   result = cursor.fetchall()
   return result
 
@@ -84,7 +84,7 @@ def buscar_nombre_punto_por_id_sensor(id_sensor):
   return result
 
 def ultima_lectura():
-  cursor.execute(f"SELECT * FROM lectura WHERE date_time = (SELECT MAX(date_time) from lectura);")
+  cursor.execute(f"SELECT id_sensor, date_time, sample_rate, temperatura, ruta_canal1, ruta_canal2, ruta_canal3 FROM lectura WHERE date_time = (SELECT MAX(date_time) from lectura);")
   result = cursor.fetchone()
   return result
 
