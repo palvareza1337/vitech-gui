@@ -148,7 +148,7 @@ def change_table(event):
             table.heading('N° puntos', text='N° puntos')
             results = sql_service.buscar_maquinas_por_area(id)
             for result in results:
-                table.insert("", tk.END, values=(result[4], result[5]))
+                table.insert("", tk.END, values=(result["modelo"], result["cant_puntos_monitoreo"]))
 
         case "maquina":
             table['columns'] = ('Zona', 'Punto', 'Ejes', 'Fecha')

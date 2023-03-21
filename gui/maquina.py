@@ -369,7 +369,7 @@ def nueva_maquina(root):
         area_selected_id = diccionario_areas[area_selected]
         query_maquinas = sql_service.buscar_maquinas_por_area(area_selected_id)
         global diccionario_maquinas
-        diccionario_maquinas = {maquina[3]: maquina[0] for maquina in query_maquinas}
+        diccionario_maquinas = {maquina["nombre_maquina"]: maquina["id_maquina"] for maquina in query_maquinas}
         opciones_maquina = list(diccionario_maquinas.keys())
         cmbx['values'] = opciones_maquina
     
