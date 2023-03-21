@@ -97,12 +97,36 @@ def nueva_maquina(root):
             ventana_buscar_rodamiento.geometry("600x500")
             ventana_buscar_rodamiento.focus_set()
 
+            def buscar(df):
+                valor = entrada_busqueda.get()
+                new_dataframe = df.loc[df['Nombre'].str.contains(valor, case=False)]
+                print(df)
+                global table
+                table = Table(frame_tabla, dataframe=new_dataframe[['Nombre','Sexo']])
+                table.editable = False
+                table.show()
+                
+
+            # Crear un Frame para el cuadro de texto y colocarlo en él
+            frame_busqueda = tk.Frame(ventana_buscar_rodamiento)
+            frame_busqueda.pack(side="top", fill=tk.X)
+
+            # Crear una entrada de texto para la búsqueda
+            entrada_busqueda = tk.Entry(frame_busqueda, width=30)
+            entrada_busqueda.pack(side=tk.LEFT, padx=5, pady=5)
+
             # Leer el archivo de Excel con Pandas
             df = pd.read_excel('C:\\Users\\Pablo\\Downloads\\titanic.xlsx')
+
+            # Crear un botón para iniciar la búsqueda
+            busqueda = partial(buscar, df)
+            boton_busqueda = tk.Button(frame_busqueda, text="Buscar", command=busqueda)
+            boton_busqueda.pack(side=tk.LEFT, padx=5, pady=5)
 
             # Crear un Frame para la tabla y colocarla en él
             frame_tabla = tk.Frame(ventana_buscar_rodamiento)
             frame_tabla.pack(side="top")
+            global table
             table = Table(frame_tabla, dataframe=df[['Nombre','Sexo']])
             table.editable = False
             table.show()
