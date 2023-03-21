@@ -28,6 +28,7 @@ def nueva_maquina(root):
     def guardar_nueva_maquina():
         # Lógica para guardar la nueva máquina en la base de datos
         id_sucursal = diccionario_sucursales[combo_sucursal_id.get()]
+        # verificar la existencia del area donde ingresar la maquina
         try:
             id_area = diccionario_areas[combo_area.get()]
         except:
@@ -37,6 +38,7 @@ def nueva_maquina(root):
             print(id_area)
             diccionario_areas[nombre_area] = id_area
 
+        # seleccion o creacion de nueva maquina con los valores entregados
         try:
             id_maquina = diccionario_maquinas[combo_maquina.get()]
         except:
@@ -45,9 +47,9 @@ def nueva_maquina(root):
             criticidad = 2 #combo_criticidad.get()
             pendiente_degradacion = 1 #entrada_pendiente_deg.get()
             notas = entrada_descripcion.get('1.0', tk.END)
-            modelo = combo_maquina.get()
-            print((id_area, tipo_maquina, modelo, cant_puntos_monitoreo, criticidad, pendiente_degradacion, notas))
-            query = sql_service.agregar_maquina(id_area, tipo_maquina, modelo, cant_puntos_monitoreo, criticidad, pendiente_degradacion, notas)
+            nombre = combo_maquina.get()
+            modelo = entrada_modelo.get()
+            query = sql_service.agregar_maquina(id_area, tipo_maquina, modelo, cant_puntos_monitoreo, criticidad, nombre)
             id_maquina = query 
             print(id_maquina)
             diccionario_maquinas[combo_maquina.get()] = id_maquina
@@ -355,7 +357,7 @@ def nueva_maquina(root):
     etiqueta_sucursal_id = tk.Label(frame_info_previa, text="Sucursal:")
     etiqueta_sucursal_id.grid(row=0, column=1, sticky="w")
     query_sucursales = sql_service.buscar_sucursales_por_empresa(id_empresa)
-    diccionario_sucursales = {sucursal[2]: sucursal[0] for sucursal in query_sucursales}
+    diccionario_sucursales = {sucursal["nombre_sucursal"]: sucursal["id_sucursal"] for sucursal in query_sucursales}
     print(list(diccionario_sucursales.keys()))
     opciones_sucursal_id = list(diccionario_sucursales.keys())
     combo_sucursal_id = ttk.Combobox(frame_info_previa, values=opciones_sucursal_id, state="readonly") 

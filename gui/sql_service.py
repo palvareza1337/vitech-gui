@@ -20,17 +20,6 @@ db = mysql.connector.connect(
 # el cursor de la base de datos, mantiene las querys cno las respuestas
 cursor = db.cursor()
 
-# busqueda de lecturas por id de sensor, 
-def buscar_lecturas_por_sensor(id_sensor):
-    cursor.execute(f"SELECT id_sensor, date_time, sample_rate, temperatura, ruta_canal1, ruta_canal2, ruta_canal3 FROM lectura WHERE id_sensor={id_sensor}")
-    options = cursor.fetchall()
-    return options
-
-def recuperar_lectura_por_id(id_lectura):
-    cursor.execute(f"SELECT id_sensor, date_time, sample_rate, temperatura, ruta_canal1, ruta_canal2, ruta_canal3 FROM lectura WHERE id_lectura={id_lectura}")
-    result = cursor.fetchone()
-    return result
-
 # literalmente es un placeholder a un eventual login
 def login(username, password):
   id_usuario = 1
@@ -39,20 +28,42 @@ def login(username, password):
 def buscar_empresa(id_empresa = 17123456):
   cursor.execute(f"SELECT id_empresa, nombre_empresa, nombre_cliente, contacto_cliente FROM empresa WHERE id_empresa={id_empresa}")
   result = cursor.fetchone()
+  result = dict()
+  result["id_empresa"] = result[0]
+  result["nombre_empresa"] = result[1]
+  result["nombre_cliente"] = result[2]
+  result["contacto_cliente"] =  result[3]
   return result
 
 def buscar_sucursales_por_empresa(id_empresa):
   cursor.execute(f"SELECT id_sucursal, id_empresa, nombre_sucursal, direccion, contacto_sucursal FROM sucursal WHERE id_empresa={id_empresa}")
-  result = cursor.fetchall()
-  return result
+  results = cursor.fetchall()
+  out = []
+  for result in results:
+    temp = dict()
+    temp["id_sucursal"] = result[0]
+    temp["id_empresa"] = result[1]
+    temp["nombre_sucursal"] = result[2]
+    temp["direccion"] = result[3]
+    temp["contacto_sucursal"] = result[4]
+    out.append(temp)
+  return out
 
 def buscar_areas_por_sucursal(id_sucursal):
   cursor.execute(f"SELECT id_area, id_sucursal, numero_maquinas, nombre_area FROM area WHERE id_sucursal={id_sucursal}")
-  result = cursor.fetchall()
-  return result
+  results = cursor.fetchall()
+  out = []
+  for result in results:
+    temp = dict()
+    temp["id_area"] = result[0]
+    temp["id_sucursal"] = result[1]
+    temp["numero_maquinas"] = result[2]
+    temp["nombre_area"] = result[3]
+    out.append(temp)
+  return out
 
 def buscar_maquinas_por_area(id_area):
-  cursor.execute(f"SELECT id_maquina, id_area, tipo_maquina, modelo, cant_puntos_monitoreo, criticidad, pendiente_degradacion, notas FROM maquina WHERE id_area='{id_area}'")
+  cursor.execute(f"SELECT id_maquina, id_area, tipo_maquina, modelo, cant_puntos_monitoreo, criticidad FROM maquina WHERE id_area='{id_area}'")
   result = cursor.fetchall()
   return result
 
@@ -103,10 +114,10 @@ def get_pestana(filename):
   print(result)
   return result
 
-def agregar_maquina(id_area, tipo_maquina, modelo, cant_puntos_monitoreo, criticidad, pendiente_degradacion, notas):
-  print(f"INSERT INTO maquina VALUES(NULL, '{id_area}', '{tipo_maquina}', '{modelo}', '{cant_puntos_monitoreo}', '{criticidad}', '{pendiente_degradacion}', '{notas}')")
+def agregar_maquina(id_area, tipo_maquina, modelo, cant_puntos_monitoreo, criticidad, nombre_maquina):
   #TODO:
-  cursor.execute(f"INSERT INTO maquina VALUES(NULL, '{id_area}', '{tipo_maquina}', '{modelo}', '{cant_puntos_monitoreo}', '{criticidad}', '{pendiente_degradacion}', '{notas}')")
+  cursor.execute(f"INSERT INTO maquina(`id_maquina`, `id_area`, `nombre_maquina`, `tipo_maquina`, `modelo`, `cant_puntos_monitoreo`, `criticidad`)\
+                  VALUES(NULL, '{id_area}', '{nombre_maquina}', '{tipo_maquina}','{modelo}', '{cant_puntos_monitoreo}', '{criticidad}')")
   db.commit()
   cursor.execute(f"SELECT id_maquina FROM maquina ORDER BY id_maquina DESC LIMIT 1")
   result = cursor.fetchone()
@@ -114,7 +125,7 @@ def agregar_maquina(id_area, tipo_maquina, modelo, cant_puntos_monitoreo, critic
 
 def agregar_area(nombre_area, id_sucursal):
   print(f"INSERT INTO area VALUES(NULL, '{id_sucursal}', '{nombre_area}', NULL)")
-  cursor.execute(f"INSERT INTO area VALUES(NULL, '{id_sucursal}', '{nombre_area}', 1)")
+  cursor.execute(f"INSERT INTO area(`id_area`, `id_sucursal`, `numero_maquinas`, `nombre_area`) VALUES(NULL, '{id_sucursal}', 1,'{nombre_area}')")
   #cursor.execute(f"SELECT area VALUES(NULL, '{id_sucursal}', '{nombre_area}', NULL)")
   db.commit()
   cursor.execute(f"SELECT id_area FROM area ORDER BY id_area DESC LIMIT 1")
@@ -122,7 +133,8 @@ def agregar_area(nombre_area, id_sucursal):
   return result[0]
 
 def agregar_zona(nombre_zona, id_maquina, estado_salud, cant_sensores):
-  cursor.execute(f"INSERT INTO zona_analisis VALUES(NULL, '{id_maquina}', '{nombre_zona}', '{estado_salud}', {cant_sensores})")
+  cursor.execute(f"INSERT INTO zona_analisis(`id_zona_analisis`, `id_maquina`, `nombre_zona`, `estado_salud`, `cant_sensores`)\
+                  VALUES(NULL, '{id_maquina}', '{nombre_zona}', '{estado_salud}', {cant_sensores})")
   db.commit()
   cursor.execute(f"SELECT id_zona_analisis FROM zona_analisis ORDER BY id_zona_analisis DESC LIMIT 1")
   result = cursor.fetchone()
