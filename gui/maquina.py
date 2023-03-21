@@ -96,12 +96,13 @@ def nueva_maquina(root):
             ventana_buscar_rodamiento.title("Buscador de rodamientos")
             ventana_buscar_rodamiento.geometry("600x500")
             ventana_buscar_rodamiento.focus_set()
+            global new_dataframe
 
             def buscar(df):
+                global table, new_dataframe
                 valor = entrada_busqueda.get()
                 new_dataframe = df.loc[df['Nombre'].str.contains(valor, case=False)]
                 print(df)
-                global table
                 table = Table(frame_tabla, dataframe=new_dataframe[['Nombre','Sexo']])
                 table.editable = False
                 table.show()
@@ -123,18 +124,34 @@ def nueva_maquina(root):
             boton_busqueda = tk.Button(frame_busqueda, text="Buscar", command=busqueda)
             boton_busqueda.pack(side=tk.LEFT, padx=5, pady=5)
 
+            # Funcion para mostrar datos de rodamiento
+            def cargar_data(event):
+                global entrada_descripcion, table, new_dataframe
+                entrada_descripcion.configure(state="normal")
+                try:
+                    entrada_descripcion.insert(tk.INSERT, new_dataframe.iloc[int(table.getSelectedRow())])
+                except:
+                    entrada_descripcion.insert(tk.INSERT, df.iloc[int(table.getSelectedRow())])
+                
+                entrada_descripcion.configure(state="disabled")
+                print(table.getSelectedRow())
+                
+
             # Crear un Frame para la tabla y colocarla en él
             frame_tabla = tk.Frame(ventana_buscar_rodamiento)
             frame_tabla.pack(side="top")
             global table
             table = Table(frame_tabla, dataframe=df[['Nombre','Sexo']])
             table.editable = False
+            table.bind("<Double-Button-1>", cargar_data)
             table.show()
 
             # Crear un Frame para el cuadro de texto y colocarlo en él
             frame_descripcion = tk.Frame(ventana_buscar_rodamiento)
             frame_descripcion.pack(side="top")
+            global entrada_descripcion
             entrada_descripcion = tk.Text(frame_descripcion, height=5, width=30)
+            entrada_descripcion.configure(state="disabled")
             entrada_descripcion.pack()
 
             # Crear un Frame para los botones y colocarlos en él
