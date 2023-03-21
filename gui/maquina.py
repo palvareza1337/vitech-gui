@@ -398,7 +398,7 @@ def nueva_maquina(root):
 
     etiqueta_maquina = tk.Label(frame_info_previa, text="Máquina:")
     etiqueta_maquina.grid(row=2, column=1, sticky="w")
-    opciones_maquina = ["Fija", "Movil"]
+    opciones_maquina = []#["Fija", "Movil"]
     combo_maquina = ttk.Combobox(frame_info_previa, values=opciones_maquina, state="normal") 
     combo_maquina.grid(row=2, column=2, padx=5, pady=5)
     
