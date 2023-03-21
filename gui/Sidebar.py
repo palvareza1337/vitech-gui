@@ -63,7 +63,7 @@ def populate_area(id_sucursal, tree: ttk.Treeview):
     areas = sql_service.buscar_areas_por_sucursal(id_sucursal)
     # [('e435y7', '85296374', 'Apilado', 1)]
     for area in areas:
-        treeParent = tree.insert(id_sucursal, tk.END, text=area[2], iid='area>:<' + str(area[0]), open=False)
+        treeParent = tree.insert(id_sucursal, tk.END, text=area["nombre_area"], iid='area>:<' + str(area["id_area"]), open=False)
         populate_maquina(treeParent, tree)
  
  

@@ -350,7 +350,7 @@ def nueva_maquina(root):
         sucursal_selected_id = diccionario_sucursales[sucursal_selected]
         query_areas = sql_service.buscar_areas_por_sucursal(sucursal_selected_id)
         global diccionario_areas
-        diccionario_areas = {area[2]: area[0] for area in query_areas}
+        diccionario_areas = {area["nombre_area"]: area["id_area"] for area in query_areas}
         opciones_area = list(diccionario_areas.keys())
         cmbx['values'] = opciones_area
 
