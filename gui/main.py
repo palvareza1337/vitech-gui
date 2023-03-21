@@ -158,7 +158,7 @@ def change_table(event):
             table.heading('Fecha', text='Fecha')
             results = sql_service.buscar_zona_analisis_por_maquina(id)
             for result in results:
-                zona = result[0]
+                zona = result["id_zona"]
                 results2 = sql_service.buscar_sensor_por_zona(zona)
                 for result2 in results2:
                     lectura = sql_service.buscar_lectura_por_sensor(result2[0])

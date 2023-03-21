@@ -387,7 +387,7 @@ def nueva_maquina(root):
         query_zonas = sql_service.buscar_zona_analisis_por_maquina(maquina_selected_id)
         global diccionario_zonas
         print(query_zonas)
-        diccionario_zonas = {zona[2]: zona[0] for zona in query_zonas}
+        diccionario_zonas = {zona["nombre_zona"]: zona["id_zona_analisis"] for zona in query_zonas}
         opciones_zonas = list(diccionario_zonas.keys())
         cmbx['values'] = opciones_zonas
     
