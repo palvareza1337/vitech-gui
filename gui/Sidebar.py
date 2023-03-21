@@ -46,7 +46,7 @@ def populate_zonas(id_maquina, tree: ttk.Treeview):
     zonas = sql_service.buscar_zona_analisis_por_maquina(id_maquina_db)
     # [('qwerty21', 'j879w1', 'sistema de transmision', '', 1)]
     for zona in zonas:
-        treeParent = tree.insert(id_maquina, tk.END, text=zona[2], iid='zona>:<' + str(zona[0]), open=False)
+        treeParent = tree.insert(id_maquina, tk.END, text=zona["nombre_zona"], iid='zona>:<' + str(zona["id_zona_analisis"]), open=False)
         populate_sensor(treeParent, tree)
 
 
