@@ -395,7 +395,7 @@ def nueva_maquina(root):
         zona_selected = event.widget.get()
         zona_selected_id = diccionario_zonas[zona_selected]
         query_zonas = sql_service.buscar_zona_analisis_por_id(zona_selected_id)
-        spinbox_cant_monitoreo.set(query_zonas[4])
+        spinbox_cant_monitoreo.set(query_zonas["cant_sensores"])
         
 
     etiqueta_maquina = tk.Label(frame_info_previa, text="Máquina:")
