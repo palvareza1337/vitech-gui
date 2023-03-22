@@ -13,6 +13,7 @@ def populate_lectura(id_punto, tree: ttk.Treeview): # tabname_stack es una lista
     lecturas = sql_service.buscar_lectura_por_punto(id_punto_db)
     # [('189276403', datetime.datetime(2023, 1, 18, 18, 15, 48), 25980, 0.0, 'C:\\Ruta\\X - 1892764031-18-2023 6,15,48 PM.csv', 
     # 'C:\\Ruta\\Y - 1892764031-18-2023 6,15,48 PM.csv', 'C:\\Ruta\\Z - 1892764031-18-2023 6,15,48 PM.csv')]
+    print(lecturas[-1])
     try:
         tree.insert(id_punto, tk.END, text="Horizontal", iid=lecturas[-1]["ruta_canal_1"], open=False)
         if (lecturas[-1]["ruta_canal_2"] != None):
