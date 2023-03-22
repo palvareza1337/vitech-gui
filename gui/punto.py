@@ -80,6 +80,9 @@ def configurar_punto(event):
         botones_frame = tk.Frame(ventana_buscar_rodamiento)
         botones_frame.pack(side="top", pady=10)
 
+        def cancelar():
+            ventana_buscar_rodamiento.destroy()
+
         boton_cancelar = tk.Button(botones_frame, text="Cancelar", command=cancelar, bg="#9b9b9b") 
         boton_cancelar.pack(side=tk.LEFT, padx=5)
 
@@ -161,6 +164,9 @@ def configurar_punto(event):
         botones_frame = tk.Frame(ventana_buscar_engrane)
         botones_frame.pack(side="top", pady=10)
 
+        def cancelar():
+            ventana_buscar_engrane.destroy()
+
         boton_cancelar = tk.Button(botones_frame, text="Cancelar", command=cancelar, bg="#9b9b9b") 
         boton_cancelar.pack(side=tk.LEFT, padx=5)
 
@@ -241,6 +247,9 @@ def configurar_punto(event):
         # Crear un Frame para los botones y colocarlos en él
         botones_frame = tk.Frame(ventana_buscar_phantom)
         botones_frame.pack(side="top", pady=10)
+
+        def cancelar():
+            ventana_buscar_phantom.destroy()
 
         boton_cancelar = tk.Button(botones_frame, text="Cancelar", command=cancelar, bg="#9b9b9b") 
         boton_cancelar.pack(side=tk.LEFT, padx=5)
@@ -337,6 +346,9 @@ def configurar_punto(event):
     # Crear un nuevo frame
     botones_frame = tk.Frame(nueva_ventana)
     botones_frame.pack(pady=10)
+
+    def cancelar():
+        nueva_ventana.destroy()
 
     boton_cancelar = tk.Button(botones_frame, text="Cancelar", command=cancelar, bg="#9b9b9b") 
     boton_cancelar.grid(row=0, column=0, padx=5)
