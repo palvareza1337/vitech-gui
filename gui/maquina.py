@@ -116,6 +116,8 @@ def nueva_maquina(root):
     def add_to_table(event):
         print("aiuda")
         print(table.get_children())
+        if(len(table.get_children()) > 9):
+            return
         try:
             new_index = int(max(table.get_children())) + 1
         except:
@@ -126,8 +128,14 @@ def nueva_maquina(root):
         print("porfa")
         print(table.get_children())
         print(table.selection_get())
-        del_index = max(table.selection_get())
-        table.delete(del_index)
+        if(len(table.get_children()) < 2):
+            return
+        try:
+            del_index = table.selection_get()
+            table.delete(del_index)
+        except:
+            del_index = max(table.get_children())
+            table.delete(del_index)
 
     # Empaquetar la tabla dentro del frame
     table.pack()#expand=1, fill=tk.BOTH)
@@ -154,7 +162,7 @@ def nueva_maquina(root):
     # Crear etiqueta para el Spinbox
     etiqueta_spinbox = tk.Label(frame_info_basica, text="Cant. Puntos de monitoreo:")
     etiqueta_spinbox.grid(row=2, column=0, sticky="w")
-    spinbox_cant_monitoreo = ttk.Spinbox(frame_info_basica, from_=0, to=10)
+    spinbox_cant_monitoreo = ttk.Spinbox(frame_info_basica, from_=1, to=10)
     spinbox_cant_monitoreo.grid(row=2, column=1, padx=5, pady=5)
     print("ta bueno el bind")
     spinbox_cant_monitoreo.bind("<<Increment>>", add_to_table)
