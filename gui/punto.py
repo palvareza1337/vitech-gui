@@ -16,6 +16,7 @@ def configurar_punto(event):
         ventana_buscar_rodamiento = tk.Toplevel()
         ventana_buscar_rodamiento.title("Buscador de rodamientos")
         ventana_buscar_rodamiento.geometry("600x500")
+        ventana_buscar_rodamiento.resizable(False, False)
         ventana_buscar_rodamiento.focus_set()
         global new_dataframe
 
@@ -94,6 +95,7 @@ def configurar_punto(event):
     #nueva_ventana.lift()
     nueva_ventana.title("Configuración de puntos")
     nueva_ventana.geometry("400x350")
+    nueva_ventana.resizable(False, False)
     nueva_ventana.focus_set()
 
     # Crear un nuevo frame
