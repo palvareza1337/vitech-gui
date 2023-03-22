@@ -120,6 +120,24 @@ def buscar_punto_por_zona(zona_analisis):
     out.append(temp)
   return out
 
+def buscar_punto_por_id(id_punto):
+  cursor.execute(f"SELECT id_punto, id_zona_analisis, nombre_punto, tipo_sensor, codigo_sensor, rpm_min, rpm_max, ejes \
+                 FROM punto\
+                 WHERE id_punto='{id_punto}'")
+
+  result = cursor.fetchone()
+  temp = dict()
+  temp["id_punto"] = result[0]
+  temp["id_zona_analisis"] = result[1]
+  temp["nombre_punto"] = result[2]
+  temp["tipo_sensor"] = result[3]
+  temp["codigo_sensor"] = result[4]
+  temp["rpm_min"] = result[5]
+  temp["rpm_max"] = result[6]
+  temp["ejes"] = result[7]
+
+  return temp
+
 def buscar_lectura_por_punto(id_punto):
   cursor.execute(f"SELECT codigo_sensor, date_time, id_punto, sample_rate, temperatura, ruta_canal_1, ruta_canal_2, ruta_canal_3 FROM lectura WHERE id_punto={id_punto}")
   results = cursor.fetchall()
@@ -131,14 +149,14 @@ def buscar_lectura_por_punto(id_punto):
     temp["id_punto"] = result[2]
     temp["sample_rate"] = result[3]
     temp["temperatura"] = result[4]
-    temp["ruta_canal1"] = result[5]
-    temp["ruta_canal2"] = result[6]
-    temp["ruta_canal3"] = result[7]
+    temp["ruta_canal_1"] = result[5]
+    temp["ruta_canal_2"] = result[6]
+    temp["ruta_canal_3"] = result[7]
     out.append(temp)
   return out
 
 def ultima_lectura():
-  cursor.execute(f"SELECT codigo_sensor, date_time, id_punto, sample_rate, temperatura, ruta_canal1, ruta_canal2, ruta_canal3 FROM lectura WHERE date_time = (SELECT MAX(date_time) from lectura);")
+  cursor.execute(f"SELECT codigo_sensor, date_time, id_punto, sample_rate, temperatura, ruta_canal_1, ruta_canal_2, ruta_canal_3 FROM lectura WHERE date_time = (SELECT MAX(date_time) from lectura);")
   result = cursor.fetchone()
   temp = dict()
   temp["codigo_sensor"] = result[0]
@@ -146,9 +164,9 @@ def ultima_lectura():
   temp["id_punto"] = result[2]
   temp["sample_rate"] = result[3]
   temp["temperatura"] = result[4]
-  temp["ruta_canal1"] = result[5]
-  temp["ruta_canal2"] = result[6]
-  temp["ruta_canal3"] = result[7]
+  temp["ruta_canal_1"] = result[5]
+  temp["ruta_canal_2"] = result[6]
+  temp["ruta_canal_3"] = result[7]
   return temp
 
 def get_pestana(filename):

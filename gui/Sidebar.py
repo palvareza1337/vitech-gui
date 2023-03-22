@@ -37,7 +37,7 @@ def populate_punto(id_zona, tree: ttk.Treeview):
     puntos = sql_service.buscar_punto_por_zona(id_zona_db)
     # [('189276403', 'qwerty21', 'Rodamiento 1', 'B', '100%')]
     for punto in puntos:
-        treeParent = tree.insert(id_zona, tk.END, text=punto["nombre_punto"], iid='sensor>:<' + str(punto["id_punto"]), open=False)
+        treeParent = tree.insert(id_zona, tk.END, text=punto["nombre_punto"], iid='punto>:<' + str(punto["id_punto"]), open=False)
         populate_lectura(treeParent, tree)
 
 

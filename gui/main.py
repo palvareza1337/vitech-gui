@@ -158,15 +158,15 @@ def change_table(event):
             table.heading('Fecha', text='Fecha')
             results = sql_service.buscar_zona_analisis_por_maquina(id)
             for result in results:
-                zona = result["id_zona"]
-                results2 = sql_service.buscar_sensor_por_zona(zona)
+                zona = result["id_zona_analisis"]
+                results2 = sql_service.buscar_punto_por_zona(zona)
                 for result2 in results2:
-                    lectura = sql_service.buscar_lectura_por_sensor(result2[0])
-                    if lectura[0][-2] != None:
+                    lectura = sql_service.buscar_lectura_por_punto(result2["id_punto"])
+                    if lectura[0]["ruta_canal_2"] != None:
                         count = 3
                     else:
                         count = 1
-                    table.insert("", tk.END, values=(result[2], result2[2], count, lectura[0][1]))
+                    table.insert("", tk.END, values=(result["nombre_zona"], result2["nombre_punto"], count, lectura[0]["date_time"]))
 
         case "zona":
             table['columns'] = ('Punto', 'Ejes', 'Fecha')
@@ -175,24 +175,25 @@ def change_table(event):
             table.heading('Fecha', text='Fecha')
             results = sql_service.buscar_punto_por_zona(id)
             for result in results:
-                lectura = sql_service.buscar_lectura_por_punto(result["id_punto"])
-                if lectura[2] != None:
+                # siempre se busca la ultima lectura
+                lectura = sql_service.buscar_lectura_por_punto(result["id_punto"])[-1]
+                if lectura["ruta_canal_2"] != None:
                     count = 3
                 else:
                     count = 1
-                table.insert("", tk.END, values=(result[2], count, lectura[0][1]))
+                table.insert("", tk.END, values=(result["nombre_punto"], count, lectura["date_time"]))
 
-        case "sensor":
+        case "punto":
             table['columns'] = ('punto', 'Eje', 'Fecha')# lecturas
             table.heading('punto', text='Punto')
             table.heading('Eje', text='Eje')
             table.heading('Fecha', text='Fecha')
-            results = sql_service.buscar_lecturas_por_punto(id)
-            zona = sql_service.buscar_nombre_punto_por_id_sensor(results[0][0])[0]
+            results = sql_service.buscar_lectura_por_punto(id)
+            nombre_punto = sql_service.buscar_punto_por_id(results[0]["id_punto"])["nombre_punto"]
             for result in results:
-                table.insert("", tk.END, iid=result[4], values=(zona, 'Horizontal', result[1]))
-                table.insert("", tk.END, iid=result[5], values=(zona, 'Vertical', result[1]))
-                table.insert("", tk.END, iid=result[6], values=(zona, 'Axial', result[1]))
+                table.insert("", tk.END, iid=result["ruta_canal_1"], values=(nombre_punto, 'Horizontal', result["date_time"]))
+                table.insert("", tk.END, iid=result["ruta_canal_2"], values=(nombre_punto, 'Vertical', result["date_time"]))
+                table.insert("", tk.END, iid=result["ruta_canal_3"], values=(nombre_punto, 'Axial', result["date_time"]))
 
 
 table.bind("<Double-1>", OnDoubleClickhistorico)
