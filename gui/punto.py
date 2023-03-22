@@ -94,7 +94,7 @@ def configurar_punto(event):
     nueva_ventana = tk.Toplevel()
     #nueva_ventana.lift()
     nueva_ventana.title("Configuración de puntos")
-    nueva_ventana.geometry("400x350")
+    nueva_ventana.geometry("400x400")
     nueva_ventana.resizable(False, False)
     nueva_ventana.focus_set()
 
@@ -165,3 +165,13 @@ def configurar_punto(event):
 
     boton_borrar_phantom = tk.Button(frame_phantom, text="Eliminar", command=cancelar, bg="#ff4040") 
     boton_borrar_phantom.grid(row=0, column=2, padx=5)
+
+    # Crear un nuevo frame
+    botones_frame = tk.Frame(nueva_ventana)
+    botones_frame.pack(pady=10)
+
+    boton_cancelar = tk.Button(botones_frame, text="Cancelar", command=cancelar, bg="#9b9b9b") 
+    boton_cancelar.grid(row=0, column=0, padx=5)
+
+    boton_guardar = tk.Button(botones_frame, text="Guardar", command=cancelar, bg="#3366CC") 
+    boton_guardar.grid(row=0, column=1, padx=5)
