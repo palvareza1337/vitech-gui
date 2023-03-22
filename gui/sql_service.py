@@ -103,41 +103,70 @@ def buscar_zona_analisis_por_id(id_zona):
   temp["cant_sensores"] = result[4]
   return temp
 
-def buscar_sensor_por_zona(zona_analisis):
-  cursor.execute(f"SELECT id_sensor, id_zona_analisis, nombre_punto, tipo_sensor, nivel_batera FROM sensor WHERE id_zona_analisis='{zona_analisis}'")
-  result = cursor.fetchall()
-  return result
+def buscar_punto_por_zona(zona_analisis):
+  cursor.execute(f"SELECT id_punto, id_zona_analisis, nombre_punto, tipo_sensor, codigo_sensor, rpm_min, rpm_max, ejes FROM punto WHERE id_zona_analisis='{zona_analisis}'")
+  results = cursor.fetchall()
+  out = []
+  for result in results:
+    temp = dict()
+    temp["id_punto"] = result[0]
+    temp["id_zona_analisis"] = result[1]
+    temp["nombre_punto"] = result[2]
+    temp["tipo_sensor"] = result[3]
+    temp["codigo_sensor"] = result[4]
+    temp["rpm_min"] = result[5]
+    temp["rpm_max"] = result[6]
+    temp["ejes"] = result[7]
+    out.append(temp)
+  return out
 
-def buscar_lectura_por_sensor(id_sensor):
-  cursor.execute(f"SELECT id_sensor, date_time, sample_rate, temperatura, ruta_canal1, ruta_canal2, ruta_canal3 FROM lectura WHERE id_sensor={id_sensor}")
-  result = cursor.fetchall()
-  return result
-
-def buscar_nombre_punto_por_id_sensor(id_sensor):
-  cursor.execute(f"SELECT nombre_punto\
-                 FROM sensor\
-                 WHERE id_sensor={id_sensor}")
-  result = cursor.fetchone()
-  return result
+def buscar_lectura_por_punto(id_punto):
+  cursor.execute(f"SELECT codigo_sensor, date_time, id_sensor, sample_rate, temperatura, ruta_canal1, ruta_canal2, ruta_canal3 FROM lectura WHERE id_punto={id_punto}")
+  results = cursor.fetchall()
+  out = []
+  for result in results:
+    temp = dict()
+    temp["codigo_sensor"] = result[0]
+    temp["date_time"] = result[1]
+    temp["id_sensor"] = result[2]
+    temp["sample_rate"] = result[3]
+    temp["temperatura"] = result[4]
+    temp["ruta_canal1"] = result[5]
+    temp["ruta_canal2"] = result[6]
+    temp["ruta_canal3"] = result[7]
+    out.append(temp)
+  return out
 
 def ultima_lectura():
-  cursor.execute(f"SELECT id_sensor, date_time, sample_rate, temperatura, ruta_canal1, ruta_canal2, ruta_canal3 FROM lectura WHERE date_time = (SELECT MAX(date_time) from lectura);")
+  cursor.execute(f"SELECT codigo_sensor, date_time, id_sensor, sample_rate, temperatura, ruta_canal1, ruta_canal2, ruta_canal3 FROM lectura WHERE date_time = (SELECT MAX(date_time) from lectura);")
   result = cursor.fetchone()
-  return result
+  temp = dict()
+  temp["codigo_sensor"] = result[0]
+  temp["date_time"] = result[1]
+  temp["id_sensor"] = result[2]
+  temp["sample_rate"] = result[3]
+  temp["temperatura"] = result[4]
+  temp["ruta_canal1"] = result[5]
+  temp["ruta_canal2"] = result[6]
+  temp["ruta_canal3"] = result[7]
+  return temp
 
 def get_pestana(filename):
-  cursor.execute(f"SELECT lectura.sample_rate, area.nom_area, maquina.modelo, zona_analisis.nombre_zona, sensor.nombre_punto\
+  cursor.execute(f"SELECT lectura.sample_rate, area.nom_area, maquina.modelo, zona_analisis.nombre_zona, punto.nombre_punto\
                   FROM lectura\
-                  INNER JOIN sensor ON sensor.id_sensor=lectura.id_sensor\
+                  INNER JOIN punto ON punto.id_punto=lectura.id_punto\
                   INNER JOIN zona_analisis ON zona_analisis.id_zona_analisis=sensor.id_zona_analisis\
                   INNER JOIN maquina ON maquina.id_maquina=zona_analisis.id_maquina\
                   INNER JOIN area ON area.id_area=maquina.id_area\
                   WHERE ruta_canal1 = '{filename}' OR ruta_canal2 = '{filename}' OR ruta_canal3 = '{filename}';")
-
-  print(filename)
                   
   result = cursor.fetchone()
-  print(result)
+  temp = dict()
+  temp["sample_rate"] = result[0]
+  temp["nom_area"] = result[1]
+  temp["modelo"] = result[2]
+  temp["nombre_zona"] = result[3]
+  temp["nombre_punto"] = result[4]
   return result
 
 def agregar_maquina(id_area, tipo_maquina, modelo, cant_puntos_monitoreo, criticidad, nombre_maquina):

@@ -173,9 +173,9 @@ def change_table(event):
             table.heading('Punto', text='Punto')
             table.heading('Ejes', text='Cantidad de ejes')
             table.heading('Fecha', text='Fecha')
-            results = sql_service.buscar_sensor_por_zona(id)
+            results = sql_service.buscar_punto_por_zona(id)
             for result in results:
-                lectura = sql_service.buscar_lectura_por_sensor(result[0])
+                lectura = sql_service.buscar_lectura_por_punto(result["id_punto"])
                 if lectura[2] != None:
                     count = 3
                 else:

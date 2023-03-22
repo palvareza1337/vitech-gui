@@ -8,17 +8,16 @@ Este código es un conjunto de funciones que se utilizan para poblar un widget T
 """
 
 
-def populate_lectura(id_sensor, tree: ttk.Treeview): # tabname_stack es una lista que se utiliza para crear las rutas de los elementos en el Treeview
-    tipo, id_sensor_db = id_sensor.split('>:<')
-    print(id_sensor)
-    lecturas = sql_service.buscar_lectura_por_sensor(id_sensor_db)
+def populate_lectura(id_punto, tree: ttk.Treeview): # tabname_stack es una lista que se utiliza para crear las rutas de los elementos en el Treeview
+    tipo, id_punto_db = id_punto.split('>:<')
+    lecturas = sql_service.buscar_lectura_por_sensor(id_punto_db)
     # [('189276403', datetime.datetime(2023, 1, 18, 18, 15, 48), 25980, 0.0, 'C:\\Ruta\\X - 1892764031-18-2023 6,15,48 PM.csv', 
     # 'C:\\Ruta\\Y - 1892764031-18-2023 6,15,48 PM.csv', 'C:\\Ruta\\Z - 1892764031-18-2023 6,15,48 PM.csv')]
     try:
-        tree.insert(id_sensor, tk.END, text="Horizontal", iid=lecturas[-1][-3], open=False)
-        if (lecturas[-1] != None):
-            tree.insert(id_sensor, tk.END, text="Vertical", iid=lecturas[-1][-2], open=False)
-            tree.insert(id_sensor, tk.END, text="Axial", iid=lecturas[-1][-1], open=False)
+        tree.insert(id_punto, tk.END, text="Horizontal", iid=lecturas[-1]["ruta_canal_1"], open=False)
+        if (lecturas[-1]["ruta_canal_2"] != None):
+            tree.insert(id_punto, tk.END, text="Vertical", iid=lecturas[-1]["ruta_canal_2"], open=False)
+            tree.insert(id_punto, tk.END, text="Axial", iid=lecturas[-1]["ruta_canal_3"], open=False)
     except:
         return
 
@@ -32,12 +31,12 @@ y luego llamar a populate_lectura para agregar las lecturas del sensor al Treevi
 
 
 
-def populate_sensor(id_zona, tree: ttk.Treeview):
+def populate_punto(id_zona, tree: ttk.Treeview):
     tipo, id_zona_db = id_zona.split('>:<')
-    sensores = sql_service.buscar_sensor_por_zona(id_zona_db)
+    puntos = sql_service.buscar_punto_por_zona(id_zona_db)
     # [('189276403', 'qwerty21', 'Rodamiento 1', 'B', '100%')]
-    for sensor in sensores:
-        treeParent = tree.insert(id_zona, tk.END, text=sensor[2], iid='sensor>:<' + sensor[0], open=False)
+    for punto in puntos:
+        treeParent = tree.insert(id_zona, tk.END, text=punto["nombre_punto"], iid='sensor>:<' + punto["id_punto"], open=False)
         populate_lectura(treeParent, tree)
 
 
@@ -47,7 +46,7 @@ def populate_zonas(id_maquina, tree: ttk.Treeview):
     # [('qwerty21', 'j879w1', 'sistema de transmision', '', 1)]
     for zona in zonas:
         treeParent = tree.insert(id_maquina, tk.END, text=zona["nombre_zona"], iid='zona>:<' + str(zona["id_zona_analisis"]), open=False)
-        populate_sensor(treeParent, tree)
+        populate_punto(treeParent, tree)
 
 
 def populate_maquina(id_area, tree: ttk.Treeview):
