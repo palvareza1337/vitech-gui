@@ -10,7 +10,7 @@ Este código es un conjunto de funciones que se utilizan para poblar un widget T
 
 def populate_lectura(id_punto, tree: ttk.Treeview): # tabname_stack es una lista que se utiliza para crear las rutas de los elementos en el Treeview
     tipo, id_punto_db = id_punto.split('>:<')
-    lecturas = sql_service.buscar_lectura_por_sensor(id_punto_db)
+    lecturas = sql_service.buscar_lectura_por_punto(id_punto_db)
     # [('189276403', datetime.datetime(2023, 1, 18, 18, 15, 48), 25980, 0.0, 'C:\\Ruta\\X - 1892764031-18-2023 6,15,48 PM.csv', 
     # 'C:\\Ruta\\Y - 1892764031-18-2023 6,15,48 PM.csv', 'C:\\Ruta\\Z - 1892764031-18-2023 6,15,48 PM.csv')]
     try:
@@ -36,7 +36,7 @@ def populate_punto(id_zona, tree: ttk.Treeview):
     puntos = sql_service.buscar_punto_por_zona(id_zona_db)
     # [('189276403', 'qwerty21', 'Rodamiento 1', 'B', '100%')]
     for punto in puntos:
-        treeParent = tree.insert(id_zona, tk.END, text=punto["nombre_punto"], iid='sensor>:<' + punto["id_punto"], open=False)
+        treeParent = tree.insert(id_zona, tk.END, text=punto["nombre_punto"], iid='sensor>:<' + str(punto["id_punto"]), open=False)
         populate_lectura(treeParent, tree)
 
 

@@ -121,14 +121,14 @@ def buscar_punto_por_zona(zona_analisis):
   return out
 
 def buscar_lectura_por_punto(id_punto):
-  cursor.execute(f"SELECT codigo_sensor, date_time, id_sensor, sample_rate, temperatura, ruta_canal1, ruta_canal2, ruta_canal3 FROM lectura WHERE id_punto={id_punto}")
+  cursor.execute(f"SELECT codigo_sensor, date_time, id_punto, sample_rate, temperatura, ruta_canal_1, ruta_canal_2, ruta_canal_3 FROM lectura WHERE id_punto={id_punto}")
   results = cursor.fetchall()
   out = []
   for result in results:
     temp = dict()
     temp["codigo_sensor"] = result[0]
     temp["date_time"] = result[1]
-    temp["id_sensor"] = result[2]
+    temp["id_punto"] = result[2]
     temp["sample_rate"] = result[3]
     temp["temperatura"] = result[4]
     temp["ruta_canal1"] = result[5]
@@ -138,12 +138,12 @@ def buscar_lectura_por_punto(id_punto):
   return out
 
 def ultima_lectura():
-  cursor.execute(f"SELECT codigo_sensor, date_time, id_sensor, sample_rate, temperatura, ruta_canal1, ruta_canal2, ruta_canal3 FROM lectura WHERE date_time = (SELECT MAX(date_time) from lectura);")
+  cursor.execute(f"SELECT codigo_sensor, date_time, id_punto, sample_rate, temperatura, ruta_canal1, ruta_canal2, ruta_canal3 FROM lectura WHERE date_time = (SELECT MAX(date_time) from lectura);")
   result = cursor.fetchone()
   temp = dict()
   temp["codigo_sensor"] = result[0]
   temp["date_time"] = result[1]
-  temp["id_sensor"] = result[2]
+  temp["id_punto"] = result[2]
   temp["sample_rate"] = result[3]
   temp["temperatura"] = result[4]
   temp["ruta_canal1"] = result[5]
@@ -152,13 +152,13 @@ def ultima_lectura():
   return temp
 
 def get_pestana(filename):
-  cursor.execute(f"SELECT lectura.sample_rate, area.nom_area, maquina.modelo, zona_analisis.nombre_zona, punto.nombre_punto\
+  cursor.execute(f"SELECT lectura.sample_rate, area.nombre_area, maquina.modelo, zona_analisis.nombre_zona, punto.nombre_punto\
                   FROM lectura\
                   INNER JOIN punto ON punto.id_punto=lectura.id_punto\
-                  INNER JOIN zona_analisis ON zona_analisis.id_zona_analisis=sensor.id_zona_analisis\
+                  INNER JOIN zona_analisis ON zona_analisis.id_zona_analisis=punto.id_zona_analisis\
                   INNER JOIN maquina ON maquina.id_maquina=zona_analisis.id_maquina\
                   INNER JOIN area ON area.id_area=maquina.id_area\
-                  WHERE ruta_canal1 = '{filename}' OR ruta_canal2 = '{filename}' OR ruta_canal3 = '{filename}';")
+                  WHERE ruta_canal_1 = '{filename}' OR ruta_canal_2 = '{filename}' OR ruta_canal_3 = '{filename}';")
                   
   result = cursor.fetchone()
   temp = dict()
