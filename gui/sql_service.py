@@ -28,12 +28,12 @@ def login(username, password):
 def buscar_empresa(id_empresa = 17123456):
   cursor.execute(f"SELECT id_empresa, nombre_empresa, nombre_cliente, contacto_cliente FROM empresa WHERE id_empresa={id_empresa}")
   result = cursor.fetchone()
-  result = dict()
-  result["id_empresa"] = result[0]
-  result["nombre_empresa"] = result[1]
-  result["nombre_cliente"] = result[2]
-  result["contacto_cliente"] =  result[3]
-  return result
+  temp = dict()
+  temp["id_empresa"] = result[0]
+  temp["nombre_empresa"] = result[1]
+  temp["nombre_cliente"] = result[2]
+  temp["contacto_cliente"] =  result[3]
+  return temp
 
 def buscar_sucursales_por_empresa(id_empresa):
   cursor.execute(f"SELECT id_sucursal, id_empresa, nombre_sucursal, direccion, contacto_sucursal FROM sucursal WHERE id_empresa={id_empresa}")
