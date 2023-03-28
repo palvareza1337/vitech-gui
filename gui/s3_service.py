@@ -20,7 +20,7 @@ if not os.path.exists("cache"):
 # funcion que descarga un archivo de s3 a partir de su nombre
 def download_reading(reading_key):
     print("downloading " + reading_key)
-    s3.download_file('vitech-staging', reading_key,  os.path.join("cache", reading_key))
+    s3.download_file(os.environ['AWS_BUCKET_NAME'], reading_key,  os.path.join("cache", reading_key))
 
 # funcion para buscar un archivo en el cache, previo intento de descarga desde s3
 def get_reading(reading_key):
