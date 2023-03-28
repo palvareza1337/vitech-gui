@@ -1,65 +1,88 @@
-import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, tk
+import sql_service, s3_service
 
-root = tk.Tk()
-root.geometry("400x300")
-root.title("Menú Treeview con Estructura de Carpetas")
+mapping_ejes = {'X': 'Horizontal', 'Y': 'Vertical', 'Z': 'Axial'}
 
-# Crear el menú Treeview
-tree = ttk.Treeview(root, columns=("size", "modified"), show="tree")
-tree.heading("#0", text="Nombre de Archivo", anchor="w")
-tree.heading("size", text="Tamaño", anchor="w")
-tree.heading("modified", text="Modificado", anchor="w")
+class mediciones_historicas:
 
-# Agregar elementos al menú Treeview
-folder1_iid = tree.insert("", "end", text="Carpeta 1")
-folder2_iid = tree.insert("", "end", text="Carpeta 2")
-file1_iid = tree.insert(folder1_iid, "end", text="Archivo 1", values=("1 MB", "12/2/2022"))
-file2_iid = tree.insert(folder2_iid, "end", text="Archivo 2", values=("500 KB", "13/2/2022"))
-
-# Configurar el tamaño y la ubicación del menú Treeview
-tree.place(relx=0, rely=0, relheight=1, relwidth=0.25)
-
-# Crear una tabla de ejemplo con cuatro columnas y cinco registros
-table = ttk.Treeview(root, columns=("column1", "column2", "column3", "column4"), show="headings")
-table.column("column1", width=100, anchor="center")
-table.column("column2", width=100, anchor="center")
-table.column("column3", width=100, anchor="center")
-table.column("column4", width=100, anchor="center")
-table.heading("column1", text="Columna 1")
-table.heading("column2", text="Columna 2")
-table.heading("column3", text="Columna 3")
-table.heading("column4", text="Columna 4")
-
-#table.focus_set()
+    def __init__(self, *args, **kwargs):
+        
+        self.table = ttk.Treeview.__init__(self, *args, **kwargs)
+        self._active = None
+        self.table.bind("<Double-1>", self.OnDoubleClickhistorico)
 
 
-for i in range(5):
-    table.insert("", "end", text=f"Fila {i+1}", values=(f"{i+1}A", f"{i+1}B", f"{i+1}C", f"{i+1}D"))
+    def change_table(self, event):
+        
+        selected_item = event.widget.selection()
+        try:
+            tipo, id = selected_item[0].split(">:<")
+        except:
+            return 
+        
+        for item in self.table.get_children():
+            self.table.delete(item)
+        print(tipo)
+        match tipo:
+            case "area":
+                self.table['columns'] = ('modelo', 'N° puntos')
+                self.table.heading('modelo', text='modelo')
+                self.table.heading('N° puntos', text='N° puntos')
+                results = sql_service.buscar_maquinas_por_area(id)
+                for result in results:
+                    self.table.insert("", tk.END, values=(result["modelo"], result["cant_puntos_monitoreo"]))
 
-# Ubicar la tabla en la parte libre de la ventana
-table.place(relx=0.3, rely=0.1, relheight=0.8, relwidth=0.6)
+            case "maquina":
+                self.table['columns'] = ('Zona', 'Punto', 'Ejes', 'Fecha')
+                self.table.heading('Zona', text='Zona')
+                self.table.heading('Punto', text='Punto')
+                self.table.heading('Ejes', text='Ejes')
+                self.table.heading('Fecha', text='Fecha')
+                results = sql_service.buscar_zona_analisis_por_maquina(id)
+                for result in results:
+                    zona = result["id_zona_analisis"]
+                    results2 = sql_service.buscar_punto_por_zona(zona)
+                    for result2 in results2:
+                        lectura = sql_service.buscar_lectura_por_punto(result2["id_punto"])
+                        if lectura[0]["ruta_canal_2"] != None:
+                            count = 3
+                        else:
+                            count = 1
+                        self.table.insert("", tk.END, values=(result["nombre_zona"], result2["nombre_punto"], count, lectura[0]["date_time"]))
 
-# Función para cambiar la tabla en la parte libre de la ventana
-def change_table(event):
-    selected_items = tree.selection()
-    if selected_items:
-        selected_item = selected_items[0]
-        item_text = tree.item(selected_item)["text"]
-        if item_text == "Carpeta 1":
-            for i in range(5):
-                values = [(f"{i+1}A", f"{i+1}B", f"{i+1}C", f"{i+1}D"),(f"{i+1}z", f"{i+1}y", f"{i+1}x", f"{i+1}v")]
-                table['columns'] = ('column1', 'column2', 'column3', 'column4', 'column4')
-                print(table['columns'])
-                table.item(table.get_children()[i], values=values)
-        elif item_text == "Carpeta 2":
-            for i in range(5):
-                values = (f"{i+1}E", f"{i+1}F", f"{i+1}G", f"{i+1}H")
-                table.item(table.get_children()[i], values=values)
+            case "zona":
+                self.table['columns'] = ('Punto', 'Ejes', 'Fecha')
+                self.table.heading('Punto', text='Punto')
+                self.table.heading('Ejes', text='Cantidad de ejes')
+                self.table.heading('Fecha', text='Fecha')
+                results = sql_service.buscar_punto_por_zona(id)
+                for result in results:
+                    # siempre se busca la ultima lectura
+                    lectura = sql_service.buscar_lectura_por_punto(result["id_punto"])[-1]
+                    if lectura["ruta_canal_2"] != None:
+                        count = 3
+                    else:
+                        count = 1
+                    self.table.insert("", tk.END, values=(result["nombre_punto"], count, lectura["date_time"]))
+
+            case "punto":
+                self.table['columns'] = ('punto', 'Eje', 'Fecha')# lecturas
+                self.table.heading('punto', text='Punto')
+                self.table.heading('Eje', text='Eje')
+                self.table.heading('Fecha', text='Fecha')
+                results = sql_service.buscar_lectura_por_punto(id)
+                nombre_punto = sql_service.buscar_punto_por_id(results[0]["id_punto"])["nombre_punto"]
+                for result in results:
+                    self.table.insert("", tk.END, iid=result["ruta_canal_1"], values=(nombre_punto, 'Horizontal', result["date_time"]))
+                    self.table.insert("", tk.END, iid=result["ruta_canal_2"], values=(nombre_punto, 'Vertical', result["date_time"]))
+                    self.table.insert("", tk.END, iid=result["ruta_canal_3"], values=(nombre_punto, 'Axial', result["date_time"]))
+    
+    def OnDoubleClickhistorico(self, event):
+        filename = event.widget.selection()[0]
+        query = sql_service.get_pestana(filename)
+        sample_rate = query[0]
+        name = '/'.join(query[1:]) + '/' + mapping_ejes[filename[0]]
+        filename = s3_service.get_reading(filename)
+        #newtab(filename, name, sample_rate)
 
 
-# Asociar la función de cambio de tabla al evento de selección de elemento en el menú Treeview
-tree.bind("<<TreeviewSelect>>", change_table)
-
-
-root.mainloop()
