@@ -39,7 +39,7 @@ def configurar_punto(event):
         entrada_busqueda.pack(side=tk.LEFT, padx=5, pady=5)
 
         # Leer el archivo de Excel con Pandas
-        df = pd.read_excel('C:\\Users\\Pablo\\Downloads\\titanic.xlsx')
+        df = pd.read_excel('titanic.xlsx')
 
         # Crear un botón para iniciar la búsqueda
         busqueda = partial(buscar, df)
@@ -123,7 +123,7 @@ def configurar_punto(event):
         entrada_busqueda.pack(side=tk.LEFT, padx=5, pady=5)
 
         # Leer el archivo de Excel con Pandas
-        df = pd.read_excel('C:\\Users\\Pablo\\Downloads\\titanic.xlsx')
+        df = pd.read_excel('titanic.xlsx')
 
         # Crear un botón para iniciar la búsqueda
         busqueda = partial(buscar, df)
@@ -207,7 +207,7 @@ def configurar_punto(event):
         entrada_busqueda.pack(side=tk.LEFT, padx=5, pady=5)
 
         # Leer el archivo de Excel con Pandas
-        df = pd.read_excel('C:\\Users\\Pablo\\Downloads\\titanic.xlsx')
+        df = pd.read_excel('titanic.xlsx')
 
         # Crear un botón para iniciar la búsqueda
         busqueda = partial(buscar, df)
