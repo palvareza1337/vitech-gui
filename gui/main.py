@@ -30,6 +30,7 @@ import s3_service
 import Sidebar
 from CustomNotebook import CustomNotebook
 from CustomToolbar import CustomToolbar
+from MedicionesHistoricas import MedicionesHistoricas
 import maquina
 
 
@@ -128,76 +129,13 @@ tabControl.pack(fill=tk.BOTH, expand=1)
 
 mediciones_historicas = tk.Canvas(tabControl)
 
-table = ttk.Treeview(mediciones_historicas, columns=('#0'), show="headings")
+#table = ttk.Treeview(mediciones_historicas, columns=('#0'), show="headings")
+table = MedicionesHistoricas(mediciones_historicas, columns=('#0'), show="headings")
+
 table.pack(fill=tk.BOTH, side=tk.LEFT, expand=1)
 
-def change_table(event):
-    selected_item = treeview.selection()
-    try:
-        tipo, id = selected_item[0].split(">:<")
-    except:
-        return 
-    
-    for item in table.get_children():
-        table.delete(item)
-    print(tipo)
-    match tipo:
-        case "area":
-            table['columns'] = ('modelo', 'N° puntos')
-            table.heading('modelo', text='modelo')
-            table.heading('N° puntos', text='N° puntos')
-            results = sql_service.buscar_maquinas_por_area(id)
-            for result in results:
-                table.insert("", tk.END, values=(result["modelo"], result["cant_puntos_monitoreo"]))
-
-        case "maquina":
-            table['columns'] = ('Zona', 'Punto', 'Ejes', 'Fecha')
-            table.heading('Zona', text='Zona')
-            table.heading('Punto', text='Punto')
-            table.heading('Ejes', text='Ejes')
-            table.heading('Fecha', text='Fecha')
-            results = sql_service.buscar_zona_analisis_por_maquina(id)
-            for result in results:
-                zona = result["id_zona_analisis"]
-                results2 = sql_service.buscar_punto_por_zona(zona)
-                for result2 in results2:
-                    lectura = sql_service.buscar_lectura_por_punto(result2["id_punto"])
-                    if lectura[0]["ruta_canal_2"] != None:
-                        count = 3
-                    else:
-                        count = 1
-                    table.insert("", tk.END, values=(result["nombre_zona"], result2["nombre_punto"], count, lectura[0]["date_time"]))
-
-        case "zona":
-            table['columns'] = ('Punto', 'Ejes', 'Fecha')
-            table.heading('Punto', text='Punto')
-            table.heading('Ejes', text='Cantidad de ejes')
-            table.heading('Fecha', text='Fecha')
-            results = sql_service.buscar_punto_por_zona(id)
-            for result in results:
-                # siempre se busca la ultima lectura
-                lectura = sql_service.buscar_lectura_por_punto(result["id_punto"])[-1]
-                if lectura["ruta_canal_2"] != None:
-                    count = 3
-                else:
-                    count = 1
-                table.insert("", tk.END, values=(result["nombre_punto"], count, lectura["date_time"]))
-
-        case "punto":
-            table['columns'] = ('punto', 'Eje', 'Fecha')# lecturas
-            table.heading('punto', text='Punto')
-            table.heading('Eje', text='Eje')
-            table.heading('Fecha', text='Fecha')
-            results = sql_service.buscar_lectura_por_punto(id)
-            nombre_punto = sql_service.buscar_punto_por_id(results[0]["id_punto"])["nombre_punto"]
-            for result in results:
-                table.insert("", tk.END, iid=result["ruta_canal_1"], values=(nombre_punto, 'Horizontal', result["date_time"]))
-                table.insert("", tk.END, iid=result["ruta_canal_2"], values=(nombre_punto, 'Vertical', result["date_time"]))
-                table.insert("", tk.END, iid=result["ruta_canal_3"], values=(nombre_punto, 'Axial', result["date_time"]))
-
-
 table.bind("<Double-1>", OnDoubleClickhistorico)
-treeview.bind("<<TreeviewSelect>>", change_table)
+treeview.bind("<<TreeviewSelect>>", table.change_table)
 
 
 def listar_mediciones():
