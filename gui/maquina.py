@@ -113,6 +113,10 @@ def nueva_maquina(root):
     table.column("Rodamientos", width=50)
     table.column("Agregar", width=50)
 
+    def clear_table():
+        for child in table.get_children():
+            table.delete(child)
+
     def add_to_table_from_db(id_punto, nombre, rpm_min, rpm_max, axiales, alarmas, extras, rodamiento):
         rpmString = str(rpm_min) + ', ' + str(rpm_max)
         table.insert(parent="", index=int(id_punto), iid=id_punto, values=(nombre, rpmString, axiales, "V,AE", "Acelerati..", "", "Agregar"))
@@ -254,11 +258,13 @@ def nueva_maquina(root):
         cmbx['values'] = opciones_zonas
     
     def actualizar_puntos_cmbx(cmbx: ttk.Combobox, event):
+        clear_table()
         zona_selected = event.widget.get()
         zona_selected_id = diccionario_zonas[zona_selected]
         query_zonas = sql_service.buscar_zona_analisis_por_id(zona_selected_id)
         spinbox_cant_monitoreo.set(query_zonas["cant_sensores"])
         query_puntos = sql_service.buscar_punto_por_zona(zona_selected_id)
+        spinbox_cant_monitoreo.set(len(query_puntos))
         for punto in query_puntos:
             add_to_table_from_db(punto["id_punto"], punto["nombre_punto"], punto["rpm_min"],
                                  punto["rpm_max"], punto["axiales"], "", "", "")
