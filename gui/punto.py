@@ -25,7 +25,7 @@ def configurar_punto(event):
             valor = entrada_busqueda.get()
             new_dataframe = df.loc[df['Nombre'].str.contains(valor, case=False)]
             print(df)
-            table = Table(frame_tabla, dataframe=new_dataframe[['Nombre','Sexo']])
+            table = Table(frame_tabla, dataframe=new_dataframe[['Marca','Modelo']])
             table.editable = False
             table.show()
             
@@ -39,7 +39,7 @@ def configurar_punto(event):
         entrada_busqueda.pack(side=tk.LEFT, padx=5, pady=5)
 
         # Leer el archivo de Excel con Pandas
-        df = pd.read_excel('titanic.xlsx')
+        df = pd.read_csv('rodamientos.csv')
 
         # Crear un botón para iniciar la búsqueda
         busqueda = partial(buscar, df)
@@ -71,7 +71,7 @@ def configurar_punto(event):
         frame_tabla = tk.Frame(ventana_buscar_rodamiento)
         frame_tabla.pack(side="top")
         global table
-        table = Table(frame_tabla, dataframe=df[['Nombre','Sexo']])
+        table = Table(frame_tabla, dataframe=df[['Marca','Modelo']])
         table.editable = False
         table.bind("<Double-Button-1>", cargar_data)
         table.show()
