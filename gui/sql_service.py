@@ -104,7 +104,7 @@ def buscar_zona_analisis_por_id(id_zona):
   return temp
 
 def buscar_punto_por_zona(zona_analisis):
-  cursor.execute(f"SELECT id_punto, id_zona_analisis, nombre_punto, tipo_sensor, codigo_sensor, rpm_min, rpm_max, ejes FROM punto WHERE id_zona_analisis='{zona_analisis}'")
+  cursor.execute(f"SELECT id_punto, id_zona_analisis, nombre_punto, tipo_sensor, codigo_sensor, rpm_min, rpm_max, axiales FROM punto WHERE id_zona_analisis='{zona_analisis}'")
   results = cursor.fetchall()
   out = []
   for result in results:
@@ -116,7 +116,7 @@ def buscar_punto_por_zona(zona_analisis):
     temp["codigo_sensor"] = result[4]
     temp["rpm_min"] = result[5]
     temp["rpm_max"] = result[6]
-    temp["ejes"] = result[7]
+    temp["axiales"] = result[7]
     out.append(temp)
   return out
 
@@ -187,6 +187,15 @@ def get_pestana(filename):
   temp["nombre_punto"] = result[4]
   return result
 
+
+
+def agregar_rotores(id_punto, largo, diametro, masa, rigidez, fabricante, modelo):
+  cursor.execute(f"INSERT INTO `rotor` (`id_rotor`, `id_punto`, `largo`, `diametro`, `masa`, `rigidez`, `fabricante`, `modelo`)\
+                   VALUES ('', '{id_punto}', '{largo}', '{diametro}', '{masa}', '{rigidez}', '{fabricante}', '{modelo}')")
+  db.commit()
+  cursor.execute(f"SELECT rotor FROM id_rotor ORDER BY id_rotor DESC LIMIT 1")
+  result = cursor.fetchone()
+  return result[0]
 
 
 def agregar_engrane(id_punto, diametro_total, manzana_diametro, hueco_estandar_diametro, numero_dientes, grosor_total_pinon, largo_manzana_solo, rigidez, masa, tipo):
