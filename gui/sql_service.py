@@ -121,7 +121,7 @@ def buscar_punto_por_zona(zona_analisis):
   return out
 
 def buscar_punto_por_id(id_punto):
-  cursor.execute(f"SELECT id_punto, id_zona_analisis, nombre_punto, tipo_sensor, codigo_sensor, rpm_min, rpm_max, ejes \
+  cursor.execute(f"SELECT id_punto, id_zona_analisis, nombre_punto, tipo_sensor, codigo_sensor, rpm_min, rpm_max, axiales \
                  FROM punto\
                  WHERE id_punto='{id_punto}'")
 
@@ -134,7 +134,7 @@ def buscar_punto_por_id(id_punto):
   temp["codigo_sensor"] = result[4]
   temp["rpm_min"] = result[5]
   temp["rpm_max"] = result[6]
-  temp["ejes"] = result[7]
+  temp["axiales"] = result[7]
 
   return temp
 
