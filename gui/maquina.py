@@ -113,6 +113,11 @@ def nueva_maquina(root):
     table.column("Rodamientos", width=50)
     table.column("Agregar", width=50)
 
+    def add_to_table_from_db(id_punto, nombre, rpm_min, rpm_max, axiales, alarmas, extras, rodamiento):
+        rpmString = str(rpm_min) + ', ' + str(rpm_max)
+        table.insert(parent="", index=int(id_punto), iid=id_punto, values=(nombre, rpmString, axiales, "V,AE", "Acelerati..", "", "Agregar"))
+
+
     def add_to_table(event):
         print("aiuda")
         print(table.get_children())
@@ -155,11 +160,12 @@ def nueva_maquina(root):
     etiqueta_tipo = tk.Label(frame_info_basica, text="Tipo:")
     etiqueta_tipo.grid(row=0, column=0, sticky="w")
     opciones_tipo = ["Fija", "Movil"]
+    global combo_tipo
     combo_tipo = ttk.Combobox(frame_info_basica, values=opciones_tipo, state="readonly") 
     combo_tipo.grid(row=0, column=1, padx=5, pady=5)
-
     etiqueta_modelo = tk.Label(frame_info_basica, text="Modelo:")
     etiqueta_modelo.grid(row=1, column=0, sticky="w")
+    global entrada_modelo
     entrada_modelo = tk.Entry(frame_info_basica)
     entrada_modelo.grid(row=1, column=1, padx=5, pady=5)
 
@@ -236,9 +242,14 @@ def nueva_maquina(root):
         maquina_selected = event.widget.get()
         maquina_selected_id = diccionario_maquinas[maquina_selected]
         query_zonas = sql_service.buscar_zona_analisis_por_maquina(maquina_selected_id)
-        global diccionario_zonas
+        query_maquina = sql_service.buscar_maquina_por_id(maquina_selected_id)
+        global diccionario_zonas, combo_tipo, entrada_modelo
+        combo_tipo.set(query_maquina["tipo_maquina"])
+        entrada_modelo.delete('0',tk.END)
+        entrada_modelo.insert('0', query_maquina["modelo"])
         print(query_zonas)
         diccionario_zonas = {zona["nombre_zona"]: zona["id_zona_analisis"] for zona in query_zonas}
+
         opciones_zonas = list(diccionario_zonas.keys())
         cmbx['values'] = opciones_zonas
     
@@ -247,6 +258,11 @@ def nueva_maquina(root):
         zona_selected_id = diccionario_zonas[zona_selected]
         query_zonas = sql_service.buscar_zona_analisis_por_id(zona_selected_id)
         spinbox_cant_monitoreo.set(query_zonas["cant_sensores"])
+        query_puntos = sql_service.buscar_punto_por_zona(zona_selected_id)
+        for punto in query_puntos:
+            add_to_table_from_db(punto["id_punto"], punto["nombre_punto"], punto["rpm_min"],
+                                 punto["rpm_max"], punto["axiales"], "", "", "")
+
         
 
     etiqueta_maquina = tk.Label(frame_info_previa, text="Máquina:")

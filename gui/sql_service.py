@@ -76,7 +76,20 @@ def buscar_maquinas_por_area(id_area):
     temp["cant_puntos_monitoreo"] = result[5]
     temp["criticidad"] = result[6]
     out.append(temp)
-  return out 
+  return out
+
+def buscar_maquina_por_id(id_maquina):
+  cursor.execute(f"SELECT id_maquina, id_area, nombre_maquina, tipo_maquina, modelo, cant_puntos_monitoreo, criticidad FROM maquina WHERE id_maquina='{id_maquina}'")
+  result = cursor.fetchone()
+  temp = dict()
+  temp["id_maquina"] = result[0]
+  temp["id_area"] = result[1]
+  temp["nombre_maquina"] = result[2]
+  temp["tipo_maquina"] = result[3]
+  temp["modelo"] = result[4]
+  temp["cant_puntos_monitoreo"] = result[5]
+  temp["criticidad"] = result[6]
+  return temp
 
 def buscar_zona_analisis_por_maquina(id_maquina):
   cursor.execute(f"SELECT id_zona_analisis, id_maquina, nombre_zona, estado_salud, cant_sensores FROM zona_analisis WHERE id_maquina='{id_maquina}'")
