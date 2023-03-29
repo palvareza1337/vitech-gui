@@ -48,13 +48,21 @@ def configurar_punto(event):
 
         # Funcion para mostrar datos de rodamiento
         def cargar_data(event):
-            global entrada_descripcion, table, new_dataframe
+            global entrada_descripcion, table, new_dataframe, entrada_rodamiento_cargado
             entrada_descripcion.configure(state="normal")
+            entrada_rodamiento_cargado.configure(state="normal")
+            entrada_descripcion.delete('1.0',tk.END)
+            entrada_rodamiento_cargado.delete('1.0',tk.END)
+
             try:
                 entrada_descripcion.insert(tk.INSERT, new_dataframe.iloc[int(table.getSelectedRow())])
+                entrada_rodamiento_cargado.insert(tk.INSERT, new_dataframe.iloc[int(table.getSelectedRow())])
+
             except:
                 entrada_descripcion.insert(tk.INSERT, df.iloc[int(table.getSelectedRow())])
-            
+                entrada_rodamiento_cargado.insert(tk.INSERT, df.iloc[int(table.getSelectedRow())])
+
+            entrada_rodamiento_cargado.configure(state="disabled")
             entrada_descripcion.configure(state="disabled")
             print(table.getSelectedRow())
             
@@ -132,14 +140,24 @@ def configurar_punto(event):
 
         # Funcion para mostrar datos de rodamiento
         def cargar_data(event):
-            global entrada_descripcion, table, new_dataframe
+            global entrada_descripcion, table, new_dataframe, entrada_caja_cargada
             entrada_descripcion.configure(state="normal")
+            entrada_caja_cargada.configure(state="normal")
+            entrada_descripcion.delete('1.0',tk.END)
+            entrada_caja_cargada.delete('1.0',tk.END)
+
+
             try:
                 entrada_descripcion.insert(tk.INSERT, new_dataframe.iloc[int(table.getSelectedRow())])
+                entrada_caja_cargada.insert(tk.INSERT, new_dataframe.iloc[int(table.getSelectedRow())])
+
             except:
                 entrada_descripcion.insert(tk.INSERT, df.iloc[int(table.getSelectedRow())])
+                entrada_caja_cargada.insert(tk.INSERT, df.iloc[int(table.getSelectedRow())])
             
             entrada_descripcion.configure(state="disabled")
+            entrada_caja_cargada.configure(state="disabled")
+
             print(table.getSelectedRow())
             
 
@@ -216,13 +234,20 @@ def configurar_punto(event):
 
         # Funcion para mostrar datos de rodamiento
         def cargar_data(event):
-            global entrada_descripcion, table, new_dataframe
+            global entrada_descripcion, table, new_dataframe, entrada_phantom_cargado
             entrada_descripcion.configure(state="normal")
+            entrada_phantom_cargado.configure(state="normal")
+            entrada_descripcion.delete('1.0',tk.END)
+            entrada_phantom_cargado.delete('1.0',tk.END)
+
             try:
                 entrada_descripcion.insert(tk.INSERT, new_dataframe.iloc[int(table.getSelectedRow())])
+                entrada_phantom_cargado.insert(tk.INSERT, new_dataframe.iloc[int(table.getSelectedRow())])
             except:
                 entrada_descripcion.insert(tk.INSERT, df.iloc[int(table.getSelectedRow())])
+                entrada_phantom_cargado.insert(tk.INSERT, df.iloc[int(table.getSelectedRow())])
             
+            entrada_phantom_cargado.configure(state="disabled")
             entrada_descripcion.configure(state="disabled")
             print(table.getSelectedRow())
             
@@ -304,7 +329,8 @@ def configurar_punto(event):
     # Crear un nuevo frame
     frame_rodamiento = tk.LabelFrame(nueva_ventana, text="Rodamiento")
     frame_rodamiento.pack()
-
+    
+    global entrada_rodamiento_cargado
     entrada_rodamiento_cargado = tk.Text(frame_rodamiento, height=4, width=20)
     entrada_rodamiento_cargado.grid(row=0, column=0, padx=5)
     entrada_rodamiento_cargado.configure(state="disabled")
@@ -319,6 +345,7 @@ def configurar_punto(event):
     frame_caja_engranes = tk.LabelFrame(nueva_ventana, text="Caja de engranes")
     frame_caja_engranes.pack()
 
+    global entrada_caja_cargada
     entrada_caja_cargada = tk.Text(frame_caja_engranes, height=4, width=20)
     entrada_caja_cargada.grid(row=0, column=0, padx=5)
     entrada_caja_cargada.configure(state="disabled")
@@ -333,6 +360,7 @@ def configurar_punto(event):
     frame_phantom = tk.LabelFrame(nueva_ventana, text="Phantom")
     frame_phantom.pack()
 
+    global entrada_phantom_cargado
     entrada_phantom_cargado = tk.Text(frame_phantom, height=4, width=20)
     entrada_phantom_cargado.grid(row=0, column=0, padx=5)
     entrada_phantom_cargado.configure(state="disabled")
