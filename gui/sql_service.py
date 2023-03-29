@@ -189,6 +189,26 @@ def get_pestana(filename):
 
 
 
+def agregar_engrane(id_punto, diametro_total, manzana_diametro, hueco_estandar_diametro, numero_dientes, grosor_total_pinon, largo_manzana_solo, rigidez, masa, tipo):
+  cursor.execute(f"INSERT INTO `engrane` (`id_engrane`, `id_punto`, `diametro_total`, `manzana_diametro`, `hueco_estandar_diametro`, `numero_dientes`, `grosor_total_pinon`, `largo_manzana_solo`, `rigidez`, `masa`, `tipo`)\
+                   VALUES ('', '{id_punto}', '{diametro_total}', '{manzana_diametro}', '{hueco_estandar_diametro}', '{numero_dientes}', '{grosor_total_pinon}', '{largo_manzana_solo}', '{rigidez}', '{masa}', '{tipo}')")
+  db.commit()
+  cursor.execute(f"SELECT engrane FROM id_engrane ORDER BY id_engrane DESC LIMIT 1")
+  result = cursor.fetchone()
+  return result[0]
+
+
+
+def agregar_eje(id_punto, largo, diametro, masa, rigidez, fabricante):
+  cursor.execute(f"INSERT INTO `eje` (`id_eje`, `id_punto`, `largo`, `diametro`, `masa`, `rigidez`, `fabricante`)\
+                   VALUES ('', '{id_punto}', '{largo}', '{diametro}', '{masa}', '{rigidez}', '{fabricante}')")
+  db.commit()
+  cursor.execute(f"SELECT eje FROM id_eje ORDER BY id_eje DESC LIMIT 1")
+  result = cursor.fetchone()
+  return result[0]
+
+
+
 def agregar_punto(id_zona_analisis, nombre_punto, tipo_sensor, codigo_sensor, rpm_min, rpm_max, axiales):
   cursor.execute(f"INSERT INTO punto (`id_punto`, `id_zona_analisis`, `nombre_punto`, `tipo_sensor`, `codigo_sensor`, `rpm_min`, `rpm_max`, `Axiales`)\
                   VALUES (NULL, '{id_zona_analisis}', '{nombre_punto}', '{tipo_sensor}', '{codigo_sensor}', '{rpm_min}', '{rpm_max}', '{axiales}')")
@@ -196,6 +216,7 @@ def agregar_punto(id_zona_analisis, nombre_punto, tipo_sensor, codigo_sensor, rp
   cursor.execute(f"SELECT punto FROM id_punto ORDER BY id_punto DESC LIMIT 1")
   result = cursor.fetchone()
   return result[0]
+
 
 
 def agregar_maquina(id_area, tipo_maquina, modelo, cant_puntos_monitoreo, criticidad, nombre_maquina):
