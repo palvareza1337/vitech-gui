@@ -1,38 +1,35 @@
-﻿ID,Marca,Fabricante,Modelo
-1,SKF,SKF Group,6205-2RS1/C3
-2,FAG,Schaeffler Group,6306-2Z
-3,NTN,NTN Corporation,6203LLU
-4,NSK,NSK Ltd.,6204ZZ
-5,Timken,Timken Company,30206M
-6,Koyo,JTEKT Corporation,6005-2RS
-7,INA,Schaeffler Group,RNAO40X50X17
-8,Nachi,Nachi-Fujikoshi Corp.,6207-2NSE
-9,ZKL,ZKL Group,22220EKW33J
-10,RHP,RHP Bearings Ltd.,MJT2.1/4
-11,SNR,NTN Corporation,6008EE
-12,URB,URB Group,22224CCW33
-13,JAF,Fujikoshi Steel Industry Co. Ltd.,6203-2RS
-14,GPZ,GPZ Bearings Ltd.,22222K
-15,FLT,FLT Polska Sp. z o.o.,NJ2310
-16,NMB,MinebeaMitsumi Inc.,R-1350ZZ
-17,DKF,DKF GmbH,7308B/DB
-18,KYK,KYK Corporation,5207-2RS
-19,NACHI,Nachi-Fujikoshi Corp.,6204NSE
-20,TORRINGTON,Timken Company,BH-2216
-21,FAFNIR,Timken Company,203PP
-22,ZVL,ZVL SLOVAKIA a.s.,32210A
-23,MRC,SKF Group,5205CZZ
-24,STEYR,Steyr-Walzlager GmbH,6205-2Z
-25,GAMET,Gamet Bearings,110055/110100C
-26,MPZ,MPZ Bearings,22318 ACMAW33
-27,MGM,MGM Bearings Ltd.,6203-2RSR
-28,SNFA,SKF Group,E207CE1DDL
-29,TSUBAKI,Tsubakimoto Chain Co.,C2040H
-30,EZO,EZO Bearings,681XZZ
-31,JIB,Jinan Kelunte Bearing Co. Ltd.,UC204
-32,CX,CX Bearings,6206-2RS
-33,HRB,Harbin Bearing Manufacturing Co. Ltd.,6310-2RS
-34,GPZ-INA,GPZ Bearings Ltd.,6204-2RS
-35,DPI,DPI Bearings Pvt. Ltd.,6202ZZ
-36,NB,Nippon Bearing Co. Ltd.,SM35GUU
-37,JNS,JNS Co. Ltd.,NK32/20
+ID,Marca,Fabricante,Modelo
+1,Boston Gear,Altra Industrial Motion,L1210
+2,Martin Sprocket & Gear,Martin Sprocket & Gear Inc.,SH 3-3/16
+3,Browning,Regal Beloit Corporation,H50Q16
+4,Dodge,Baldor Electric Company,116134
+5,Falk,Rexnord Corporation,1040T31
+6,Rexnord,Rexnord Corporation,301021
+7,Hub City,Regal Beloit Corporation,0220-62735
+8,Morse,Regal Beloit Corporation,40B17
+9,Sumitomo Drive Technologies,Sumitomo Heavy Industries Ltd.,CNF210-25
+10,SEW-Eurodrive,SEW-Eurodrive GmbH & Co. KG,KA127/T
+11,David Brown,David Brown Engineering Limited,105361-13
+12,Bauer Gear Motor,Bauer Gear Motor GmbH,BG55-63/D04LA4-S
+13,Cone Drive,Timken Company,H050C-2
+14,Bonfiglioli,Bonfiglioli Riduttori S.p.A.,VF 44 P1 80B5
+15,Nord,Getriebebau Nord GmbH & Co. KG,SK 63L/4
+16,Renold,Renold plc,PM7-35/2
+17,Stober,Stober Antriebstechnik GmbH & Co. KG,K202VG0240MR180
+18,Wittenstein,Wittenstein AG,SP 080
+19,Tandler,Tandler Precision GmbH,SF180-30-0-2
+20,KTR,KTR Systems GmbH,RADEX-N
+21,Zero-Max,Zero-Max Inc.,6M31-A-0
+22,Mädler,Mädler GmbH,10928-050
+23,GKN,GKN plc,132D2112-2
+24,Varvel,Varvel SpA,SRT050
+25,Siemens,Siemens AG,SF20-T-63L-4
+26,Harmonic Drive,Harmonic Drive LLC,CSF-17-100-2A-GR-SP
+27,Apex Dynamics,Apex Dynamics Inc.,AD052-S2-P2
+28,Bonitron,Bonitron Inc.,M3975-01
+29,Nabtesco,Nabtesco Corporation,RV-40E
+30,Nabtesco Motion Control,Nabtesco Motion Control Inc.,RH-20C
+31,Harmonic Drive Systems,Harmonic Drive Systems Inc.,CSG-14-50-2UH
+32,SIT,SIT S.p.A.,AS043
+33,Alpha,Alpha Gear Drives Inc.,SP 075-MF1-20-171-000
+34,Framo Morat,Framo Morat GmbH & Co. KG,1020672

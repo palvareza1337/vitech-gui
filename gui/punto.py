@@ -25,7 +25,7 @@ def configurar_punto(event):
             valor = entrada_busqueda.get()
             new_dataframe = df.loc[df['Nombre'].str.contains(valor, case=False)]
             print(df)
-            table = Table(frame_tabla, dataframe=new_dataframe[['Marca','Modelo']])
+            table = Table(frame_tabla, dataframe=new_dataframe[['Marca','Fabricante','Modelo']])
             table.editable = False
             table.show()
             
@@ -71,7 +71,7 @@ def configurar_punto(event):
         frame_tabla = tk.Frame(ventana_buscar_rodamiento)
         frame_tabla.pack(side="top")
         global table
-        table = Table(frame_tabla, dataframe=df[['Marca','Modelo']])
+        table = Table(frame_tabla, dataframe=df[['Marca','Fabricante','Modelo']])
         table.editable = False
         table.bind("<Double-Button-1>", cargar_data)
         table.show()
@@ -117,7 +117,7 @@ def configurar_punto(event):
             valor = entrada_busqueda.get()
             new_dataframe = df.loc[df['Nombre'].str.contains(valor, case=False)]
             print(df)
-            table = Table(frame_tabla, dataframe=new_dataframe[['Nombre','Sexo']])
+            table = Table(frame_tabla, dataframe=new_dataframe[['Marca','Fabricante','Modelo']])
             table.editable = False
             table.show()
             
@@ -131,7 +131,7 @@ def configurar_punto(event):
         entrada_busqueda.pack(side=tk.LEFT, padx=5, pady=5)
 
         # Leer el archivo de Excel con Pandas
-        df = pd.read_excel('titanic.xlsx')
+        df = pd.read_csv('engranes.csv')
 
         # Crear un botón para iniciar la búsqueda
         busqueda = partial(buscar, df)
@@ -165,7 +165,7 @@ def configurar_punto(event):
         frame_tabla = tk.Frame(ventana_buscar_engrane)
         frame_tabla.pack(side="top")
         global table
-        table = Table(frame_tabla, dataframe=df[['Nombre','Sexo']])
+        table = Table(frame_tabla, dataframe=df[['Marca','Fabricante','Modelo']])
         table.editable = False
         table.bind("<Double-Button-1>", cargar_data)
         table.show()
@@ -196,14 +196,13 @@ def configurar_punto(event):
         values = table.item(item, "values")
 
 
-
-    def buscar_phantom():
+    def buscar_ejes():
         # Crear una nueva ventana de tkinter
-        ventana_buscar_phantom = tk.Toplevel()
-        ventana_buscar_phantom.title("Buscador de sensores")
-        ventana_buscar_phantom.geometry("600x500")
-        ventana_buscar_phantom.resizable(False, False)
-        ventana_buscar_phantom.focus_set()
+        ventana_buscar_ejes = tk.Toplevel()
+        ventana_buscar_ejes.title("Buscador de sensores")
+        ventana_buscar_ejes.geometry("600x500")
+        ventana_buscar_ejes.resizable(False, False)
+        ventana_buscar_ejes.focus_set()
         global new_dataframe
 
         def buscar(df):
@@ -211,13 +210,13 @@ def configurar_punto(event):
             valor = entrada_busqueda.get()
             new_dataframe = df.loc[df['Nombre'].str.contains(valor, case=False)]
             print(df)
-            table = Table(frame_tabla, dataframe=new_dataframe[['Nombre','Sexo']])
+            table = Table(frame_tabla, dataframe=new_dataframe[['Marca','Fabricante','Modelo']])
             table.editable = False
             table.show()
             
 
         # Crear un Frame para el cuadro de texto y colocarlo en él
-        frame_busqueda = tk.Frame(ventana_buscar_phantom)
+        frame_busqueda = tk.Frame(ventana_buscar_ejes)
         frame_busqueda.pack(side="top", fill=tk.X)
 
         # Crear una entrada de texto para la búsqueda
@@ -225,7 +224,7 @@ def configurar_punto(event):
         entrada_busqueda.pack(side=tk.LEFT, padx=5, pady=5)
 
         # Leer el archivo de Excel con Pandas
-        df = pd.read_excel('titanic.xlsx')
+        df = pd.read_csv('ejes.csv')
 
         # Crear un botón para iniciar la búsqueda
         busqueda = partial(buscar, df)
@@ -234,35 +233,35 @@ def configurar_punto(event):
 
         # Funcion para mostrar datos de rodamiento
         def cargar_data(event):
-            global entrada_descripcion, table, new_dataframe, entrada_phantom_cargado
+            global entrada_descripcion, table, new_dataframe, entrada_ejes_cargada
             entrada_descripcion.configure(state="normal")
-            entrada_phantom_cargado.configure(state="normal")
+            entrada_ejes_cargada.configure(state="normal")
             entrada_descripcion.delete('1.0',tk.END)
-            entrada_phantom_cargado.delete('1.0',tk.END)
+            entrada_ejes_cargada.delete('1.0',tk.END)
 
             try:
                 entrada_descripcion.insert(tk.INSERT, new_dataframe.iloc[int(table.getSelectedRow())])
-                entrada_phantom_cargado.insert(tk.INSERT, new_dataframe.iloc[int(table.getSelectedRow())])
+                entrada_ejes_cargada.insert(tk.INSERT, new_dataframe.iloc[int(table.getSelectedRow())])
             except:
                 entrada_descripcion.insert(tk.INSERT, df.iloc[int(table.getSelectedRow())])
-                entrada_phantom_cargado.insert(tk.INSERT, df.iloc[int(table.getSelectedRow())])
+                entrada_ejes_cargada.insert(tk.INSERT, df.iloc[int(table.getSelectedRow())])
             
-            entrada_phantom_cargado.configure(state="disabled")
+            entrada_ejes_cargada.configure(state="disabled")
             entrada_descripcion.configure(state="disabled")
             print(table.getSelectedRow())
             
 
         # Crear un Frame para la tabla y colocarla en él
-        frame_tabla = tk.Frame(ventana_buscar_phantom)
+        frame_tabla = tk.Frame(ventana_buscar_ejes)
         frame_tabla.pack(side="top")
         global table
-        table = Table(frame_tabla, dataframe=df[['Nombre','Sexo']])
+        table = Table(frame_tabla, dataframe=df[['Marca','Fabricante','Modelo']])
         table.editable = False
         table.bind("<Double-Button-1>", cargar_data)
         table.show()
 
         # Crear un Frame para el cuadro de texto y colocarlo en él
-        frame_descripcion = tk.Frame(ventana_buscar_phantom)
+        frame_descripcion = tk.Frame(ventana_buscar_ejes)
         frame_descripcion.pack(side="top")
         global entrada_descripcion
         entrada_descripcion = tk.Text(frame_descripcion, height=5, width=30)
@@ -270,11 +269,101 @@ def configurar_punto(event):
         entrada_descripcion.pack()
 
         # Crear un Frame para los botones y colocarlos en él
-        botones_frame = tk.Frame(ventana_buscar_phantom)
+        botones_frame = tk.Frame(ventana_buscar_ejes)
         botones_frame.pack(side="top", pady=10)
 
         def cancelar():
-            ventana_buscar_phantom.destroy()
+            ventana_buscar_ejes.destroy()
+
+        boton_cancelar = tk.Button(botones_frame, text="Cancelar", command=cancelar, bg="#9b9b9b") 
+        boton_cancelar.pack(side=tk.LEFT, padx=5)
+
+        boton_guardar = tk.Button(botones_frame, text="Guardar", command=cancelar, bg="#3366CC") 
+        boton_guardar.pack(side=tk.LEFT, padx=5)
+
+
+        item = table.selection()[0]
+        values = table.item(item, "values")
+
+
+    def buscar_rotor():
+        # Crear una nueva ventana de tkinter
+        ventana_buscar_rotor = tk.Toplevel()
+        ventana_buscar_rotor.title("Buscador de sensores")
+        ventana_buscar_rotor.geometry("600x500")
+        ventana_buscar_rotor.resizable(False, False)
+        ventana_buscar_rotor.focus_set()
+        global new_dataframe
+
+        def buscar(df):
+            global table, new_dataframe
+            valor = entrada_busqueda.get()
+            new_dataframe = df.loc[df['Nombre'].str.contains(valor, case=False)]
+            print(df)
+            table = Table(frame_tabla, dataframe=new_dataframe[['Marca','Fabricante','Modelo']])
+            table.editable = False
+            table.show()
+            
+
+        # Crear un Frame para el cuadro de texto y colocarlo en él
+        frame_busqueda = tk.Frame(ventana_buscar_rotor)
+        frame_busqueda.pack(side="top", fill=tk.X)
+
+        # Crear una entrada de texto para la búsqueda
+        entrada_busqueda = tk.Entry(frame_busqueda, width=30)
+        entrada_busqueda.pack(side=tk.LEFT, padx=5, pady=5)
+
+        # Leer el archivo de Excel con Pandas
+        df = pd.read_csv('rotores.csv')
+
+        # Crear un botón para iniciar la búsqueda
+        busqueda = partial(buscar, df)
+        boton_busqueda = tk.Button(frame_busqueda, text="Buscar", command=busqueda)
+        boton_busqueda.pack(side=tk.LEFT, padx=5, pady=5)
+
+        # Funcion para mostrar datos de rodamiento
+        def cargar_data(event):
+            global entrada_descripcion, table, new_dataframe, entrada_rotor_cargada
+            entrada_descripcion.configure(state="normal")
+            entrada_rotor_cargada.configure(state="normal")
+            entrada_descripcion.delete('1.0',tk.END)
+            entrada_rotor_cargada.delete('1.0',tk.END)
+
+            try:
+                entrada_descripcion.insert(tk.INSERT, new_dataframe.iloc[int(table.getSelectedRow())])
+                entrada_rotor_cargada.insert(tk.INSERT, new_dataframe.iloc[int(table.getSelectedRow())])
+            except:
+                entrada_descripcion.insert(tk.INSERT, df.iloc[int(table.getSelectedRow())])
+                entrada_rotor_cargada.insert(tk.INSERT, df.iloc[int(table.getSelectedRow())])
+            
+            entrada_rotor_cargada.configure(state="disabled")
+            entrada_descripcion.configure(state="disabled")
+            print(table.getSelectedRow())
+            
+
+        # Crear un Frame para la tabla y colocarla en él
+        frame_tabla = tk.Frame(ventana_buscar_rotor)
+        frame_tabla.pack(side="top")
+        global table
+        table = Table(frame_tabla, dataframe=df[['Marca','Fabricante','Modelo']])
+        table.editable = False
+        table.bind("<Double-Button-1>", cargar_data)
+        table.show()
+
+        # Crear un Frame para el cuadro de texto y colocarlo en él
+        frame_descripcion = tk.Frame(ventana_buscar_rotor)
+        frame_descripcion.pack(side="top")
+        global entrada_descripcion
+        entrada_descripcion = tk.Text(frame_descripcion, height=5, width=30)
+        entrada_descripcion.configure(state="disabled")
+        entrada_descripcion.pack()
+
+        # Crear un Frame para los botones y colocarlos en él
+        botones_frame = tk.Frame(ventana_buscar_rotor)
+        botones_frame.pack(side="top", pady=10)
+
+        def cancelar():
+            ventana_buscar_rotor.destroy()
 
         boton_cancelar = tk.Button(botones_frame, text="Cancelar", command=cancelar, bg="#9b9b9b") 
         boton_cancelar.pack(side=tk.LEFT, padx=5)
@@ -291,12 +380,11 @@ def configurar_punto(event):
 
 
 
-
     # Aquí empieza el código para la nueva ventana de tkinter
     nueva_ventana = tk.Toplevel()
     #nueva_ventana.lift()
     nueva_ventana.title("Configuración de puntos")
-    nueva_ventana.geometry("400x400")
+    nueva_ventana.geometry("400x500")
     nueva_ventana.resizable(False, False)
     nueva_ventana.focus_set()
 
@@ -356,20 +444,55 @@ def configurar_punto(event):
     boton_borrar_caja_engranes = tk.Button(frame_caja_engranes, text="Eliminar", command=cancelar, bg="#ff4040") 
     boton_borrar_caja_engranes.grid(row=0, column=2, padx=5)
 
+    # ejes
+    # Crear un nuevo frame
+    frame_caja_ejes = tk.LabelFrame(nueva_ventana, text="Ejes")
+    frame_caja_ejes.pack()
+
+    global entrada_ejes_cargada
+    entrada_ejes_cargada = tk.Text(frame_caja_ejes, height=4, width=20)
+    entrada_ejes_cargada.grid(row=0, column=0, padx=5)
+    entrada_ejes_cargada.configure(state="disabled")
+
+    boton_agregar_ejes = tk.Button(frame_caja_ejes, text="Agregar", command=buscar_ejes, bg="#9b9b9b") 
+    boton_agregar_ejes.grid(row=0, column=1, padx=5)
+
+    boton_borrar_ejes = tk.Button(frame_caja_ejes, text="Eliminar", command=cancelar, bg="#ff4040") 
+    boton_borrar_ejes.grid(row=0, column=2, padx=5)
+
+    # rotores
+    # Crear un nuevo frame
+    frame_rotor = tk.LabelFrame(nueva_ventana, text="Caja de engranes")
+    frame_rotor.pack()
+
+    global entrada_rotor_cargada
+    entrada_rotor_cargada = tk.Text(frame_rotor, height=4, width=20)
+    entrada_rotor_cargada.grid(row=0, column=0, padx=5)
+    entrada_rotor_cargada.configure(state="disabled")
+
+    boton_agregar_rotor = tk.Button(frame_rotor, text="Agregar", command=buscar_rotor, bg="#9b9b9b") 
+    boton_agregar_rotor.grid(row=0, column=1, padx=5)
+
+    boton_borrar_rotor = tk.Button(frame_rotor, text="Eliminar", command=cancelar, bg="#ff4040") 
+    boton_borrar_rotor.grid(row=0, column=2, padx=5)
+
+    #codigo phantom
     # Crear un nuevo frame
     frame_phantom = tk.LabelFrame(nueva_ventana, text="Phantom")
     frame_phantom.pack()
 
-    global entrada_phantom_cargado
-    entrada_phantom_cargado = tk.Text(frame_phantom, height=4, width=20)
-    entrada_phantom_cargado.grid(row=0, column=0, padx=5)
-    entrada_phantom_cargado.configure(state="disabled")
+    entrada_phantom = tk.Entry(frame_phantom)
+    entrada_phantom.grid(row=0, column=0, padx=5)
+    #global entrada_phantom_cargado
+    #entrada_phantom_cargado = tk.Text(frame_phantom, height=4, width=20)
+    #entrada_phantom_cargado.grid(row=0, column=0, padx=5)
+    #entrada_phantom_cargado.configure(state="disabled")
 
-    boton_agregar_phantom = tk.Button(frame_phantom, text="Agregar", command=buscar_phantom, bg="#9b9b9b") 
-    boton_agregar_phantom.grid(row=0, column=1, padx=5)
+    #boton_agregar_phantom = tk.Button(frame_phantom, text="Agregar", command=buscar_phantom, bg="#9b9b9b") 
+    #boton_agregar_phantom.grid(row=0, column=1, padx=5)
 
-    boton_borrar_phantom = tk.Button(frame_phantom, text="Eliminar", command=cancelar, bg="#ff4040") 
-    boton_borrar_phantom.grid(row=0, column=2, padx=5)
+    #boton_borrar_phantom = tk.Button(frame_phantom, text="Eliminar", command=cancelar, bg="#ff4040") 
+    #boton_borrar_phantom.grid(row=0, column=2, padx=5)
 
     # Crear un nuevo frame
     botones_frame = tk.Frame(nueva_ventana)
