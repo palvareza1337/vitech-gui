@@ -64,7 +64,7 @@ def nueva_maquina(root):
             diccionario_zonas[combo_zona.get()] = id_zona
         
         
-        ventana_nueva_maquina.destroy()
+        #ventana_nueva_maquina.destroy()
 
     def cancelar():
         ventana_nueva_maquina.destroy()
@@ -140,7 +140,11 @@ def nueva_maquina(root):
     # Empaquetar la tabla dentro del frame
     table.pack()#expand=1, fill=tk.BOTH)
 
-    table.bind("<Double-1>", punto.configurar_punto)
+    def configurar_punto(event):
+        guardar_nueva_maquina()
+        punto.configurar_punto(event)
+
+    table.bind("<Double-1>", configurar_punto)
 
 
     frame3 = tk.Frame(ventana_nueva_maquina)
@@ -285,5 +289,10 @@ def nueva_maquina(root):
     boton_cancelar = tk.Button(botones_frame, text="Cancelar", command=cancelar, bg="#9b9b9b") 
     boton_cancelar.grid(row=0, column=0, padx=5)
 
-    boton_guardar = tk.Button(botones_frame, text="Guardar", command=guardar_nueva_maquina, bg="#3366CC") 
+    
+    def boton_guardar_func(event):
+        guardar_nueva_maquina()
+        ventana_nueva_maquina.destroy()
+
+    boton_guardar = tk.Button(botones_frame, text="Guardar", command=boton_guardar_func, bg="#3366CC") 
     boton_guardar.grid(row=0, column=1, padx=5)
