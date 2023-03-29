@@ -199,7 +199,7 @@ def configurar_punto(event):
     def buscar_ejes():
         # Crear una nueva ventana de tkinter
         ventana_buscar_ejes = tk.Toplevel()
-        ventana_buscar_ejes.title("Buscador de sensores")
+        ventana_buscar_ejes.title("Buscador de ejes")
         ventana_buscar_ejes.geometry("600x500")
         ventana_buscar_ejes.resizable(False, False)
         ventana_buscar_ejes.focus_set()
@@ -289,7 +289,7 @@ def configurar_punto(event):
     def buscar_rotor():
         # Crear una nueva ventana de tkinter
         ventana_buscar_rotor = tk.Toplevel()
-        ventana_buscar_rotor.title("Buscador de sensores")
+        ventana_buscar_rotor.title("Buscador de rotores")
         ventana_buscar_rotor.geometry("600x500")
         ventana_buscar_rotor.resizable(False, False)
         ventana_buscar_rotor.focus_set()
