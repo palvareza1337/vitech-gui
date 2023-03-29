@@ -202,6 +202,15 @@ def get_pestana(filename):
 
 
 
+def agregar_rotores(id_punto, largo, diametro, masa, rigidez, fabricante, modelo):
+  cursor.execute(f"INSERT INTO `rotor` (`id_rotor`, `id_punto`, `largo`, `diametro`, `masa`, `rigidez`, `fabricante`, `modelo`)\
+                   VALUES ('', '{id_punto}', '{largo}', '{diametro}', '{masa}', '{rigidez}', '{fabricante}', '{modelo}')")
+  db.commit()
+  cursor.execute(f"SELECT rotor FROM id_rotor ORDER BY id_rotor DESC LIMIT 1")
+  result = cursor.fetchone()
+  return result[0]
+
+
 def agregar_engrane(id_punto, diametro_total, manzana_diametro, hueco_estandar_diametro, numero_dientes, grosor_total_pinon, largo_manzana_solo, rigidez, masa, tipo):
   cursor.execute(f"INSERT INTO `engrane` (`id_engrane`, `id_punto`, `diametro_total`, `manzana_diametro`, `hueco_estandar_diametro`, `numero_dientes`, `grosor_total_pinon`, `largo_manzana_solo`, `rigidez`, `masa`, `tipo`)\
                    VALUES ('', '{id_punto}', '{diametro_total}', '{manzana_diametro}', '{hueco_estandar_diametro}', '{numero_dientes}', '{grosor_total_pinon}', '{largo_manzana_solo}', '{rigidez}', '{masa}', '{tipo}')")

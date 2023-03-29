@@ -462,7 +462,7 @@ def configurar_punto(event):
 
     # rotores
     # Crear un nuevo frame
-    frame_rotor = tk.LabelFrame(nueva_ventana, text="Caja de engranes")
+    frame_rotor = tk.LabelFrame(nueva_ventana, text="Rotores")
     frame_rotor.pack()
 
     global entrada_rotor_cargada
