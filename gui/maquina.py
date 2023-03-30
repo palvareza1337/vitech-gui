@@ -43,7 +43,6 @@ def nueva_maquina(root):
             cant_puntos_monitoreo = spinbox_cant_monitoreo.get()
             criticidad = 2 #combo_criticidad.get()
             pendiente_degradacion = 1 #entrada_pendiente_deg.get()
-            notas = entrada_descripcion.get('1.0', tk.END)
             nombre = combo_maquina.get()
             modelo = entrada_modelo.get()
             query = sql_service.agregar_maquina(id_area, tipo_maquina, modelo, cant_puntos_monitoreo, criticidad, nombre)
@@ -71,7 +70,7 @@ def nueva_maquina(root):
 
     ventana_nueva_maquina = tk.Toplevel(root)
     ventana_nueva_maquina.title("Configurar Máquina")
-    ventana_nueva_maquina.geometry("800x450")
+    ventana_nueva_maquina.geometry("700x350")
     ventana_nueva_maquina.resizable(False, False)
     #ventana_nueva_maquina.attributes('-topmost', 'true')
     ventana_nueva_maquina.focus_force()
@@ -297,13 +296,6 @@ def nueva_maquina(root):
     actualizar_puntos_cmbx_partial = partial(actualizar_puntos_cmbx, combo_zona)
     combo_zona.bind("<<ComboboxSelected>>", actualizar_puntos_cmbx_partial)
 
-
-    etiqueta_descripcion = tk.Label(frame5, text="Descripción:")
-    etiqueta_descripcion.pack()
-
-    # Creamos el widget "Text"
-    entrada_descripcion = tk.Text(frame5, height=4, width=50)
-    entrada_descripcion.pack()
 
     botones_frame = tk.Frame(frame7)
     botones_frame.pack(pady=10)

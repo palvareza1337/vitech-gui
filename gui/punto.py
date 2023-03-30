@@ -88,12 +88,6 @@ def configurar_punto(event):
         botones_frame = tk.Frame(ventana_buscar_rodamiento)
         botones_frame.pack(side="top", pady=10)
 
-        def cancelar():
-            ventana_buscar_rodamiento.destroy()
-
-        boton_cancelar = tk.Button(botones_frame, text="Cancelar", command=cancelar, bg="#9b9b9b") 
-        boton_cancelar.pack(side=tk.LEFT, padx=5)
-
         boton_guardar = tk.Button(botones_frame, text="Guardar", command=cancelar, bg="#3366CC") 
         boton_guardar.pack(side=tk.LEFT, padx=5)
 
@@ -182,12 +176,6 @@ def configurar_punto(event):
         botones_frame = tk.Frame(ventana_buscar_engrane)
         botones_frame.pack(side="top", pady=10)
 
-        def cancelar():
-            ventana_buscar_engrane.destroy()
-
-        boton_cancelar = tk.Button(botones_frame, text="Cancelar", command=cancelar, bg="#9b9b9b") 
-        boton_cancelar.pack(side=tk.LEFT, padx=5)
-
         boton_guardar = tk.Button(botones_frame, text="Guardar", command=cancelar, bg="#3366CC") 
         boton_guardar.pack(side=tk.LEFT, padx=5)
 
@@ -271,12 +259,6 @@ def configurar_punto(event):
         # Crear un Frame para los botones y colocarlos en él
         botones_frame = tk.Frame(ventana_buscar_ejes)
         botones_frame.pack(side="top", pady=10)
-
-        def cancelar():
-            ventana_buscar_ejes.destroy()
-
-        boton_cancelar = tk.Button(botones_frame, text="Cancelar", command=cancelar, bg="#9b9b9b") 
-        boton_cancelar.pack(side=tk.LEFT, padx=5)
 
         boton_guardar = tk.Button(botones_frame, text="Guardar", command=cancelar, bg="#3366CC") 
         boton_guardar.pack(side=tk.LEFT, padx=5)
@@ -362,12 +344,6 @@ def configurar_punto(event):
         botones_frame = tk.Frame(ventana_buscar_rotor)
         botones_frame.pack(side="top", pady=10)
 
-        def cancelar():
-            ventana_buscar_rotor.destroy()
-
-        boton_cancelar = tk.Button(botones_frame, text="Cancelar", command=cancelar, bg="#9b9b9b") 
-        boton_cancelar.pack(side=tk.LEFT, padx=5)
-
         boton_guardar = tk.Button(botones_frame, text="Guardar", command=cancelar, bg="#3366CC") 
         boton_guardar.pack(side=tk.LEFT, padx=5)
 
@@ -405,13 +381,13 @@ def configurar_punto(event):
     etiqueta_min = tk.Label(frame_rpm, text="Min")
     etiqueta_min.grid(row=1, column=0, sticky="w")
     # Crear un nuevo widget de entrada dentro del frame
-    spinbox_min = tk.Spinbox(frame_rpm, from_=0, to=10)
+    spinbox_min = tk.Spinbox(frame_rpm, from_=-1, to=100000)
     spinbox_min.grid(row=1, column=1, padx=5, pady=5)
     # Crear etiqueta para el Spinbox
     etiqueta_max = tk.Label(frame_rpm, text="Max")
     etiqueta_max.grid(row=1, column=2, sticky="w")
     # Crear un nuevo widget de entrada dentro del frame
-    spinbox_max = tk.Spinbox(frame_rpm, from_=0, to=10)
+    spinbox_max = tk.Spinbox(frame_rpm, from_=-1, to=100000)
     spinbox_max.grid(row=1, column=3, padx=5, pady=5)
 
     # Crear un nuevo frame
