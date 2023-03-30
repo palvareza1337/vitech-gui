@@ -3,11 +3,19 @@ from functools import partial
 import random
 import string
 from tkinter import ttk
+import sql_service
 
 import pandas as pd
 from pandastable import Table
 
-def configurar_punto(event):
+import random
+import string
+
+def configurar_punto(event, id_zona):
+
+    print("id_zona: ", id_zona)
+
+    print(event.widget.selection()[0])
 
     def cancelar():
         pass
@@ -89,12 +97,8 @@ def configurar_punto(event):
         botones_frame = tk.Frame(ventana_buscar_rodamiento)
         botones_frame.pack(side="top", pady=10)
 
-        boton_guardar = tk.Button(botones_frame, text="Guardar", command=cancelar, bg="#3366CC") 
+        boton_guardar = tk.Button(botones_frame, text="Guardar", command=ventana_buscar_rodamiento.destroy, bg="#3366CC") 
         boton_guardar.pack(side=tk.LEFT, padx=5)
-
-
-        item = table.selection()[0]
-        values = table.item(item, "values")
 
 
 
@@ -177,7 +181,7 @@ def configurar_punto(event):
         botones_frame = tk.Frame(ventana_buscar_engrane)
         botones_frame.pack(side="top", pady=10)
 
-        boton_guardar = tk.Button(botones_frame, text="Guardar", command=cancelar, bg="#3366CC") 
+        boton_guardar = tk.Button(botones_frame, text="Guardar", command=ventana_buscar_engrane.destroy, bg="#3366CC") 
         boton_guardar.pack(side=tk.LEFT, padx=5)
 
 
@@ -261,7 +265,7 @@ def configurar_punto(event):
         botones_frame = tk.Frame(ventana_buscar_ejes)
         botones_frame.pack(side="top", pady=10)
 
-        boton_guardar = tk.Button(botones_frame, text="Guardar", command=cancelar, bg="#3366CC") 
+        boton_guardar = tk.Button(botones_frame, text="Guardar", command=ventana_buscar_ejes.destroy, bg="#3366CC") 
         boton_guardar.pack(side=tk.LEFT, padx=5)
 
 
@@ -345,7 +349,7 @@ def configurar_punto(event):
         botones_frame = tk.Frame(ventana_buscar_rotor)
         botones_frame.pack(side="top", pady=10)
 
-        boton_guardar = tk.Button(botones_frame, text="Guardar", command=cancelar, bg="#3366CC") 
+        boton_guardar = tk.Button(botones_frame, text="Guardar", command=ventana_buscar_rotor.destroy, bg="#3366CC") 
         boton_guardar.pack(side=tk.LEFT, padx=5)
 
 
@@ -354,7 +358,15 @@ def configurar_punto(event):
 
 
 
-
+    def guardar_punto():
+        #TODO:
+        nombre_punto = entrada_nombre_punto.get()
+        tipo_sensor = combo_tipo.get()
+        codigo_sensor = entrada_phantom.get()
+        rpm_min = spinbox_min.get()
+        rpm_max = spinbox_max.get()
+        axiales = ""
+        sql_service.agregar_punto( id_zona, nombre_punto, tipo_sensor, codigo_sensor, rpm_min, rpm_max, axiales)
 
 
     # Aquí empieza el código para la nueva ventana de tkinter
@@ -480,5 +492,5 @@ def configurar_punto(event):
     boton_cancelar = tk.Button(botones_frame, text="Cancelar", command=cancelar, bg="#9b9b9b") 
     boton_cancelar.grid(row=0, column=0, padx=5)
 
-    boton_guardar = tk.Button(botones_frame, text="Guardar", command=cancelar, bg="#3366CC") 
+    boton_guardar = tk.Button(botones_frame, text="Guardar", command=guardar_punto, bg="#3366CC") 
     boton_guardar.grid(row=0, column=1, padx=5)

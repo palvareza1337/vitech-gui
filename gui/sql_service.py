@@ -235,7 +235,7 @@ def agregar_punto(id_zona_analisis, nombre_punto, tipo_sensor, codigo_sensor, rp
   cursor.execute(f"INSERT INTO punto (`id_punto`, `id_zona_analisis`, `nombre_punto`, `tipo_sensor`, `codigo_sensor`, `rpm_min`, `rpm_max`, `Axiales`)\
                   VALUES (NULL, '{id_zona_analisis}', '{nombre_punto}', '{tipo_sensor}', '{codigo_sensor}', '{rpm_min}', '{rpm_max}', '{axiales}')")
   db.commit()
-  cursor.execute(f"SELECT punto FROM id_punto ORDER BY id_punto DESC LIMIT 1")
+  cursor.execute(f"SELECT punto FROM punto ORDER BY id_punto DESC LIMIT 1")
   result = cursor.fetchone()
   return result[0]
 
