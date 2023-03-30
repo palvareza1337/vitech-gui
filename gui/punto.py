@@ -2,6 +2,7 @@ import tkinter as tk
 from functools import partial
 import random
 import string
+from tkinter import ttk
 
 import pandas as pd
 from pandastable import Table
@@ -360,7 +361,7 @@ def configurar_punto(event):
     nueva_ventana = tk.Toplevel()
     #nueva_ventana.lift()
     nueva_ventana.title("Configuración de puntos")
-    nueva_ventana.geometry("400x500")
+    nueva_ventana.geometry("400x550")
     nueva_ventana.resizable(False, False)
     nueva_ventana.focus_set()
 
@@ -457,18 +458,17 @@ def configurar_punto(event):
     frame_phantom = tk.LabelFrame(nueva_ventana, text="Phantom")
     frame_phantom.pack()
 
+    etiqueta_phantom = tk.Label(frame_phantom, text="Codigo del sensor:")
+    etiqueta_phantom.grid(row=0, column=0, sticky="w")
     entrada_phantom = tk.Entry(frame_phantom)
-    entrada_phantom.grid(row=0, column=0, padx=5)
-    #global entrada_phantom_cargado
-    #entrada_phantom_cargado = tk.Text(frame_phantom, height=4, width=20)
-    #entrada_phantom_cargado.grid(row=0, column=0, padx=5)
-    #entrada_phantom_cargado.configure(state="disabled")
+    entrada_phantom.grid(row=1, column=1, padx=5)
 
-    #boton_agregar_phantom = tk.Button(frame_phantom, text="Agregar", command=buscar_phantom, bg="#9b9b9b") 
-    #boton_agregar_phantom.grid(row=0, column=1, padx=5)
-
-    #boton_borrar_phantom = tk.Button(frame_phantom, text="Eliminar", command=cancelar, bg="#ff4040") 
-    #boton_borrar_phantom.grid(row=0, column=2, padx=5)
+    etiqueta_tipo = tk.Label(frame_phantom, text="Tipo:")
+    etiqueta_tipo.grid(row=0, column=2, sticky="w")
+    opciones_tipo = ["Alta", "Baja"]
+    global combo_tipo
+    combo_tipo = ttk.Combobox(frame_phantom, values=opciones_tipo, state="readonly") 
+    combo_tipo.grid(row=1, column=2, padx=5, pady=5)
 
     # Crear un nuevo frame
     botones_frame = tk.Frame(nueva_ventana)
