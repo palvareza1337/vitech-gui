@@ -15,6 +15,8 @@ def configurar_punto(event, id_zona):
 
     print("id_zona: ", id_zona)
 
+    global datos_rodamiento, datos_engrane, datos_eje, datos_rotores
+
     print(event.widget.selection()[0])
 
     def cancelar():
@@ -57,7 +59,7 @@ def configurar_punto(event, id_zona):
 
         # Funcion para mostrar datos de rodamiento
         def cargar_data(event):
-            global entrada_descripcion, table, new_dataframe, entrada_rodamiento_cargado
+            global entrada_descripcion, table, new_dataframe, entrada_rodamiento_cargado, datos_rodamiento
             entrada_descripcion.configure(state="normal")
             entrada_rodamiento_cargado.configure(state="normal")
             entrada_descripcion.delete('1.0',tk.END)
@@ -66,10 +68,12 @@ def configurar_punto(event, id_zona):
             try:
                 entrada_descripcion.insert(tk.INSERT, new_dataframe.iloc[int(table.getSelectedRow())])
                 entrada_rodamiento_cargado.insert(tk.INSERT, new_dataframe.iloc[int(table.getSelectedRow())])
+                datos_rodamiento = new_dataframe.iloc[int(table.getSelectedRow())]
 
             except:
                 entrada_descripcion.insert(tk.INSERT, df.iloc[int(table.getSelectedRow())])
                 entrada_rodamiento_cargado.insert(tk.INSERT, df.iloc[int(table.getSelectedRow())])
+                datos_rodamiento = df.iloc[int(table.getSelectedRow())]
 
             entrada_rodamiento_cargado.configure(state="disabled")
             entrada_descripcion.configure(state="disabled")
@@ -139,7 +143,7 @@ def configurar_punto(event, id_zona):
 
         # Funcion para mostrar datos de rodamiento
         def cargar_data(event):
-            global entrada_descripcion, table, new_dataframe, entrada_caja_cargada
+            global entrada_descripcion, table, new_dataframe, entrada_caja_cargada, datos_engrane
             entrada_descripcion.configure(state="normal")
             entrada_caja_cargada.configure(state="normal")
             entrada_descripcion.delete('1.0',tk.END)
@@ -149,10 +153,12 @@ def configurar_punto(event, id_zona):
             try:
                 entrada_descripcion.insert(tk.INSERT, new_dataframe.iloc[int(table.getSelectedRow())])
                 entrada_caja_cargada.insert(tk.INSERT, new_dataframe.iloc[int(table.getSelectedRow())])
+                datos_engrane = new_dataframe.iloc[int(table.getSelectedRow())]
 
             except:
                 entrada_descripcion.insert(tk.INSERT, df.iloc[int(table.getSelectedRow())])
                 entrada_caja_cargada.insert(tk.INSERT, df.iloc[int(table.getSelectedRow())])
+                datos_engrane = df.iloc[int(table.getSelectedRow())]
             
             entrada_descripcion.configure(state="disabled")
             entrada_caja_cargada.configure(state="disabled")
@@ -226,7 +232,7 @@ def configurar_punto(event, id_zona):
 
         # Funcion para mostrar datos de rodamiento
         def cargar_data(event):
-            global entrada_descripcion, table, new_dataframe, entrada_ejes_cargada
+            global entrada_descripcion, table, new_dataframe, entrada_ejes_cargada, datos_eje
             entrada_descripcion.configure(state="normal")
             entrada_ejes_cargada.configure(state="normal")
             entrada_descripcion.delete('1.0',tk.END)
@@ -235,10 +241,12 @@ def configurar_punto(event, id_zona):
             try:
                 entrada_descripcion.insert(tk.INSERT, new_dataframe.iloc[int(table.getSelectedRow())])
                 entrada_ejes_cargada.insert(tk.INSERT, new_dataframe.iloc[int(table.getSelectedRow())])
+                datos_eje = new_dataframe.iloc[int(table.getSelectedRow())]
             except:
                 entrada_descripcion.insert(tk.INSERT, df.iloc[int(table.getSelectedRow())])
                 entrada_ejes_cargada.insert(tk.INSERT, df.iloc[int(table.getSelectedRow())])
-            
+                datos_eje = df.iloc[int(table.getSelectedRow())]
+
             entrada_ejes_cargada.configure(state="disabled")
             entrada_descripcion.configure(state="disabled")
             print(table.getSelectedRow())
@@ -310,7 +318,7 @@ def configurar_punto(event, id_zona):
 
         # Funcion para mostrar datos de rodamiento
         def cargar_data(event):
-            global entrada_descripcion, table, new_dataframe, entrada_rotor_cargada
+            global entrada_descripcion, table, new_dataframe, entrada_rotor_cargada, datos_rotor
             entrada_descripcion.configure(state="normal")
             entrada_rotor_cargada.configure(state="normal")
             entrada_descripcion.delete('1.0',tk.END)
@@ -319,10 +327,12 @@ def configurar_punto(event, id_zona):
             try:
                 entrada_descripcion.insert(tk.INSERT, new_dataframe.iloc[int(table.getSelectedRow())])
                 entrada_rotor_cargada.insert(tk.INSERT, new_dataframe.iloc[int(table.getSelectedRow())])
+                datos_rotor = new_dataframe.iloc[int(table.getSelectedRow())]
             except:
                 entrada_descripcion.insert(tk.INSERT, df.iloc[int(table.getSelectedRow())])
                 entrada_rotor_cargada.insert(tk.INSERT, df.iloc[int(table.getSelectedRow())])
-            
+                datos_rotor = df.iloc[int(table.getSelectedRow())]
+
             entrada_rotor_cargada.configure(state="disabled")
             entrada_descripcion.configure(state="disabled")
             print(table.getSelectedRow())
@@ -366,7 +376,68 @@ def configurar_punto(event, id_zona):
         rpm_min = spinbox_min.get()
         rpm_max = spinbox_max.get()
         axiales = ""
-        sql_service.agregar_punto( id_zona, nombre_punto, tipo_sensor, codigo_sensor, rpm_min, rpm_max, axiales)
+        id_punto = sql_service.agregar_punto(id_zona, nombre_punto, tipo_sensor, codigo_sensor, rpm_min, rpm_max, axiales)
+
+        global datos_eje, datos_engrane, datos_rodamiento, datos_rotor
+        print("datos_eje: ", datos_eje)
+        print("datos_engrane: ", datos_engrane)
+        print("datos_rodamiento: ", datos_rodamiento)
+        print("datos_rotor: ", datos_rotor)
+        
+        # Generador de string
+        longitud = 10
+        caracteres = string.ascii_letters + string.digits
+        id_rodamiento = ''.join(random.choice(caracteres) for i in range(longitud))
+        altura = datos_rodamiento["altura"] 
+        rigidez = datos_rodamiento["rigidez"] 
+        diametro_externo = datos_rodamiento["diametro_externo"] 
+        masa = datos_rodamiento["masa"] 
+        marca = datos_rodamiento["marca"]
+        fabricante = datos_rodamiento["fabricante"]
+        modelo = datos_rodamiento["modelo"]
+        id_rodamiento = sql_service.agregar_rodamiento(id_rodamiento, id_punto, altura, rigidez, diametro_externo, masa, marca, fabricante, modelo)
+        
+
+        # Generador de string
+        longitud = 10
+        caracteres = string.ascii_letters + string.digits
+        id_rotores = ''.join(random.choice(caracteres) for i in range(longitud))
+        largo = datos_rotor["largo"] 
+        diametro = datos_rotor["diametro"] 
+        masa = datos_rotor["masa"] 
+        rigidez = datos_rotor["rigidez"] 
+        fabricante = datos_rotor["fabricante"] 
+        modelo = datos_rotor["modelo"] 
+        id_rotores = sql_service.agregar_rotores(id_rotores, id_punto, largo, diametro, masa, rigidez, fabricante, modelo)
+
+        # Generador de string
+        longitud = 10
+        caracteres = string.ascii_letters + string.digits
+        id_engrane = ''.join(random.choice(caracteres) for i in range(longitud))
+        diametro_total = datos_engrane["diametro_total"] 
+        manzana_diametro = datos_engrane["manzana_diametro"] 
+        hueco_estandar_diametro = datos_engrane["hueco_estandar_diametro"] 
+        numero_dientes = datos_engrane["numero_dientes"] 
+        grosor_total_pinon = datos_engrane["grosor_total_pinon"] 
+        largo_manzana_solo = datos_engrane["largo_manzana_solo"] 
+        rigidez = datos_engrane["rigidez"]  
+        masa = datos_engrane["masa"] 
+        tipo = datos_engrane["tipo"] 
+        id_engrane = sql_service.agregar_engrane(id_engrane, id_punto, diametro_total, manzana_diametro, hueco_estandar_diametro, numero_dientes, grosor_total_pinon, largo_manzana_solo, rigidez, masa, tipo)
+
+        # Generador de string
+        longitud = 10
+        caracteres = string.ascii_letters + string.digits
+        id_eje = ''.join(random.choice(caracteres) for i in range(longitud))
+        largo = datos_eje["largo"]
+        diametro = datos_eje["diametro"]
+        masa = datos_eje["masa"]
+        rigidez = datos_eje["rigidez"]
+        fabricante = datos_eje["fabricante"]
+        id_eje = sql_service.agregar_eje(id_eje, id_punto, largo, diametro, masa, rigidez, fabricante)
+
+
+        
 
 
     # Aquí empieza el código para la nueva ventana de tkinter
