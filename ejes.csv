@@ -1,28 +1,31 @@
-ID,Largo,Diametro,Masa,Rigidez,Fabricante
-1,100,20,5,2000,Eje Corp
-2,110,22,6,2200,Eje Inc
-3,120,24,7,2400,Eje Corp
-4,130,26,8,2600,Eje Inc
-5,140,28,9,2800,Eje Corp
-6,150,30,10,3000,Eje Inc
-7,160,32,11,3200,Eje Corp
-8,170,34,12,3400,Eje Inc
-9,180,36,13,3600,Eje Corp
-10,190,38,14,3800,Eje Inc
-11,200,40,15,4000,Eje Corp
-12,210,42,16,4200,Eje Inc
-13,220,44,17,4400,Eje Corp
-14,230,46,18,4600,Eje Inc
-15,240,48,19,4800,Eje Corp
-16,250,50,20,5000,Eje Inc
-17,260,52,21,5200,Eje Corp
-18,270,54,22,5400,Eje Inc
-19,280,56,23,5600,Eje Corp
-20,290,58,24,5800,Eje Inc
-21,300,60,25,6000,Eje Corp
-22,310,62,26,6200,Eje Inc
-23,320,64,27,6400,Eje Corp
-24,330,66,28,6600,Eje Inc
-25,340,68,29,6800,Eje Corp
-26,350,70,30,7000,Eje Inc
-27,360,72,31,7200,Eje Corp
+id,largo,diametro,masa,rigidez,fabricante,marca,modelo
+1,200,30,20,300,Fabricante A,Marca A,Modelo A1
+2,205,35,25,350,Fabricante B,Marca B,Modelo B1
+3,210,40,30,400,Fabricante C,Marca C,Modelo C1
+4,215,45,35,450,Fabricante A,Marca A,Modelo A2
+5,220,50,40,500,Fabricante B,Marca B,Modelo B2
+6,225,55,45,550,Fabricante C,Marca C,Modelo C2
+7,230,60,50,600,Fabricante A,Marca A,Modelo A3
+8,235,65,55,650,Fabricante B,Marca B,Modelo B3
+9,240,70,60,700,Fabricante C,Marca C,Modelo C3
+10,245,75,65,750,Fabricante A,Marca A,Modelo A4
+11,250,80,70,800,Fabricante B,Marca B,Modelo B4
+12,255,85,75,850,Fabricante C,Marca C,Modelo C4
+13,260,90,80,900,Fabricante A,Marca A,Modelo A5
+14,265,95,85,950,Fabricante B,Marca B,Modelo B5
+15,270,100,90,1000,Fabricante C,Marca C,Modelo C5
+16,275,105,95,1050,Fabricante A,Marca A,Modelo A6
+17,280,110,100,1100,Fabricante B,Marca B,Modelo B6
+18,285,115,105,1150,Fabricante C,Marca C,Modelo C6
+19,290,120,110,1200,Fabricante A,Marca A,Modelo A7
+20,295,125,115,1250,Fabricante B,Marca B,Modelo B7
+21,300,130,120,1300,Fabricante C,Marca C,Modelo C7
+22,305,135,125,1350,Fabricante A,Marca A,Modelo A8
+23,310,140,130,1400,Fabricante B,Marca B,Modelo B8
+24,315,145,135,1450,Fabricante C,Marca C,Modelo C8
+25,320,150,140,1500,Fabricante A,Marca A,Modelo A9
+26,325,155,145,1550,Fabricante B,Marca B,Modelo B9
+27,330,160,150,1600,Fabricante C,Marca C,Modelo C9
+28,335,165,155,1650,Fabricante A,Marca A,Modelo A10
+29,340,170,160,1700,Fabricante B,Marca B,Modelo B10
+30,345,175,165,1750,Fabricante C,Marca C,Modelo C10

@@ -1,24 +1,28 @@
-ID,Largo,Diametro,Masa,Rigidez,Fabricante,Modelo
-1,50,20,1.5,1000,Rotor Corp,A
-2,55,22,1.6,1100,Rotor Inc,B
-3,60,24,1.7,1200,Rotor Corp,C
-4,65,26,1.8,1300,Rotor Inc,D
-5,70,28,1.9,1400,Rotor Corp,E
-6,75,30,2,1500,Rotor Inc,F
-7,80,32,2.1,1600,Rotor Corp,G
-8,85,34,2.2,1700,Rotor Inc,H
-9,90,36,2.3,1800,Rotor Corp,I
-10,95,38,2.4,1900,Rotor Inc,J
-11,100,40,2.5,2000,Rotor Corp,K
-12,105,42,2.6,2100,Rotor Inc,L
-13,110,44,2.7,2200,Rotor Corp,M
-14,115,46,2.8,2300,Rotor Inc,N
-15,120,48,2.9,2400,Rotor Corp,O
-16,125,50,3,2500,Rotor Inc,P
-17,130,52,3.1,2600,Rotor Corp,Q
-18,135,54,3.2,2700,Rotor Inc,R
-19,140,56,3.3,2800,Rotor Corp,S
-20,145,58,3.4,2900,Rotor Inc,T
-21,150,60,3.5,3000,Rotor Corp,U
-22,155,62,3.6,3100,Rotor Inc,V
-23,160,64,3.7,3200,Rotor Corp,W
+id, largo, diametro, masa, rigidez, fabricante, modelo, marca
+1, 50, 20, 10, 100, DynaRotor, DR-1000, RotoParts
+2, 40, 15, 7, 75, MegaProp, MP-3000, RotoTech
+3, 60, 25, 12, 120, AeroBlade, AB-5000, RotoGear
+4, 35, 18, 8, 80, TurboRotor, TR-2000, RotoCorp
+5, 45, 22, 9, 90, PowerProp, PP-4000, RotoTech
+6, 55, 24, 11, 110, SkyBlade, SB-5500, RotoParts
+7, 30, 12, 5, 50, AeroRotor, AR-1000, RotoCorp
+8, 65, 27, 13, 130, SpeedProp, SP-6000, RotoTech
+9, 75, 30, 15, 150, DynaBlade, DB-7000, RotoGear
+10, 80, 32, 16, 160, AeroProp, AP-8000, RotoCorp
+11, 70, 28, 14, 140, TurboBlade, TB-9000, RotoParts
+12, 90, 35, 18, 180, PowerRotor, PR-10000, RotoTech
+13, 100, 40, 20, 200, SkyProp, SP-11000, RotoCorp
+14, 120, 50, 25, 250, AeroBlade, AB-12000, RotoGear
+15, 110, 45, 22, 220, TurboRotor, TR-13000, RotoTech
+16, 130, 55, 28, 280, MegaProp, MP-14000, RotoCorp
+17, 140, 60, 30, 300, DynaRotor, DR-15000, RotoGear
+18, 150, 65, 32, 320, AeroProp, AP-16000, RotoTech
+19, 160, 70, 35, 350, PowerBlade, PB-17000, RotoCorp
+20, 170, 75, 37, 370, SkyRotor, SR-18000, RotoGear
+21, 180, 80, 40, 400, TurboProp, TP-19000, RotoTech
+22, 190, 85, 42, 420, AeroBlade, AB-20000, RotoCorp
+23, 200, 90, 45, 450, SpeedRotor, SR-21000, RotoGear
+24, 220, 95, 48, 480, DynaProp, DP-22000, RotoTech
+25, 240, 100, 50, 500, AeroRotor, AR-23000, RotoCorp
+26, 260, 110, 55, 550, PowerProp, PP-24000, RotoGear
+27, 280, 120, 60, 600, SkyBlade, SB-25000, RotoTech
