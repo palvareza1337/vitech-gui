@@ -11,7 +11,7 @@ from pandastable import Table
 import random
 import string
 
-def configurar_punto(event, id_zona):
+def configurar_punto(event, id_zona, ventana):
 
     print("id_zona: ", id_zona)
 
@@ -441,13 +441,14 @@ def configurar_punto(event, id_zona):
         marca = datos_eje["Marca"]
         modelo = datos_eje["Modelo"]
         id_eje = sql_service.agregar_eje(id_eje, id_punto, largo, diametro, masa, rigidez, fabricante, marca, modelo)
-
+        nueva_ventana.master.destroy()
+        
 
         
 
 
     # Aquí empieza el código para la nueva ventana de tkinter
-    nueva_ventana = tk.Toplevel()
+    nueva_ventana = tk.Toplevel(ventana)
     #nueva_ventana.lift()
     nueva_ventana.title("Configuración de puntos")
     nueva_ventana.geometry("400x550")

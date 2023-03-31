@@ -151,7 +151,7 @@ def nueva_maquina(root):
     def configurar_punto(event):
         guardar_nueva_maquina()
         id_zona = diccionario_zonas[combo_zona.get()]
-        punto.configurar_punto(event, id_zona)
+        punto.configurar_punto(event, id_zona, ventana_nueva_maquina)
 
     table.bind("<Double-1>", configurar_punto)
 
