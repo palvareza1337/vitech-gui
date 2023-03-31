@@ -15,7 +15,7 @@ class CustomToolbar(NavigationToolbar2Tk):
             ('Zoom', 'Zoom to rectangle', 'zoom_to_rect', 'zoom'),
             ('Subplots', 'Configure subplots', 'subplots', 'configure_subplots'),
             (None, None, None, None),
-            ('Save', 'Save the figure', 'filesave', 'save_figure'),
+            #('Save', 'Save the figure', 'filesave', 'save_figure'),
             ('Save', 'Export to PDF', 'filesave', 'my_icon_callback'),
         )
         NavigationToolbar2Tk.__init__(self, canvas, parent)
