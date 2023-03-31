@@ -1,28 +1,31 @@
-id, largo, diametro, masa, rigidez, fabricante, modelo, marca
-1, 50, 20, 10, 100, DynaRotor, DR-1000, RotoParts
-2, 40, 15, 7, 75, MegaProp, MP-3000, RotoTech
-3, 60, 25, 12, 120, AeroBlade, AB-5000, RotoGear
-4, 35, 18, 8, 80, TurboRotor, TR-2000, RotoCorp
-5, 45, 22, 9, 90, PowerProp, PP-4000, RotoTech
-6, 55, 24, 11, 110, SkyBlade, SB-5500, RotoParts
-7, 30, 12, 5, 50, AeroRotor, AR-1000, RotoCorp
-8, 65, 27, 13, 130, SpeedProp, SP-6000, RotoTech
-9, 75, 30, 15, 150, DynaBlade, DB-7000, RotoGear
-10, 80, 32, 16, 160, AeroProp, AP-8000, RotoCorp
-11, 70, 28, 14, 140, TurboBlade, TB-9000, RotoParts
-12, 90, 35, 18, 180, PowerRotor, PR-10000, RotoTech
-13, 100, 40, 20, 200, SkyProp, SP-11000, RotoCorp
-14, 120, 50, 25, 250, AeroBlade, AB-12000, RotoGear
-15, 110, 45, 22, 220, TurboRotor, TR-13000, RotoTech
-16, 130, 55, 28, 280, MegaProp, MP-14000, RotoCorp
-17, 140, 60, 30, 300, DynaRotor, DR-15000, RotoGear
-18, 150, 65, 32, 320, AeroProp, AP-16000, RotoTech
-19, 160, 70, 35, 350, PowerBlade, PB-17000, RotoCorp
-20, 170, 75, 37, 370, SkyRotor, SR-18000, RotoGear
-21, 180, 80, 40, 400, TurboProp, TP-19000, RotoTech
-22, 190, 85, 42, 420, AeroBlade, AB-20000, RotoCorp
-23, 200, 90, 45, 450, SpeedRotor, SR-21000, RotoGear
-24, 220, 95, 48, 480, DynaProp, DP-22000, RotoTech
-25, 240, 100, 50, 500, AeroRotor, AR-23000, RotoCorp
-26, 260, 110, 55, 550, PowerProp, PP-24000, RotoGear
-27, 280, 120, 60, 600, SkyBlade, SB-25000, RotoTech
+id,largo,diametro,masa,rigidez,fabricante,modelo,marca
+RTR001,40,25,2.5,100,Aerotech,AER001,Aerotech Industries
+RTR002,50,30,3.2,120,Dynamic,DYN002,Dynamic Rotors
+RTR003,60,35,4.1,150,Flightline,FLT003,Flightline Rotorcraft
+RTR004,70,40,5.5,180,Innovative,INN004,Innovative Rotors
+RTR005,80,45,6.8,200,Precision,PRC005,Precision Rotorworks
+RTR006,90,50,8.2,230,Revolution,REV006,Revolution Rotors
+RTR007,100,55,10.1,260,Skyline,SKL007,Skyline Rotors
+RTR008,110,60,12.3,290,Turbine,TBN008,Turbine Rotor Technologies
+RTR009,120,65,14.7,320,Velocity,VEL009,Velocity Rotorcraft
+RTR010,130,70,17.2,350,Xtreme,XTR010,Xtreme Rotors
+RTR011,140,75,20.1,380,Yorkshire,YRK011,Yorkshire Rotors
+RTR012,150,80,23.2,410,Zenith,ZNT012,Zenith Rotors
+RTR013,160,85,26.5,440,Alpha,ALP013,Alpha Rotorworks
+RTR014,170,90,30,470,Beta,BTA014,Beta Rotors
+RTR015,180,95,33.7,500,Gamma,GMA015,Gamma Industries
+RTR016,190,100,37.6,530,Delta,DLT016,Delta Rotorcraft
+RTR017,200,105,41.7,560,Epsilon,EPS017,Epsilon Rotors
+RTR018,210,110,46,590,Zeta,ZTA018,Zeta Rotors
+RTR019,220,115,50.5,620,Theta,THT019,Thetan Rotorcraft
+RTR020,230,120,55.2,650,Iota,IOT020,Iota Industries
+RTR021,240,125,60.1,680,Kappa,KPP021,Kappa Rotors
+RTR022,250,130,65.2,710,Lambda,LMD022,Lambda Rotorworks
+RTR023,260,135,70.5,740,Mu,MUO023,Mu Rotorcraft
+RTR024,270,140,76,770,Nu,NUU024,Nu Industries
+RTR025,280,145,81.7,800,Xi,XII025,Xi Rotors
+RTR026,290,150,87.6,830,Omicron,OMI026,Omicron Rotorcraft
+RTR027,300,155,93.7,860,Pi,PII027,Pi Industries
+RTR028,310,160,100,890,Rho,RHO028,Rho Rotors
+RTR029,320,165,106.5,920,Sigma,SIG029,Sigma Rotorcraft
+RTR030,330,170,113.2,950,Tau,TAU030,Tau Rotors
