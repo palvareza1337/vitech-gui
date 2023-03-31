@@ -1,4 +1,4 @@
-id,largo,diametro,masa,rigidez,fabricante,marca,modelo
+id,largo,diametro,masa,rigidez,Fabricante,Marca,Modelo
 1,200,30,20,300,Fabricante A,Marca A,Modelo A1
 2,205,35,25,350,Fabricante B,Marca B,Modelo B1
 3,210,40,30,400,Fabricante C,Marca C,Modelo C1
