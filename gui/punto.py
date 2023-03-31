@@ -388,13 +388,13 @@ def configurar_punto(event, id_zona):
         longitud = 10
         caracteres = string.ascii_letters + string.digits
         id_rodamiento = ''.join(random.choice(caracteres) for i in range(longitud))
-        altura = datos_rodamiento["altura"] 
-        rigidez = datos_rodamiento["rigidez"] 
-        diametro_externo = datos_rodamiento["diametro_externo"] 
-        masa = datos_rodamiento["masa"] 
-        marca = datos_rodamiento["marca"]
-        fabricante = datos_rodamiento["fabricante"]
-        modelo = datos_rodamiento["modelo"]
+        altura = datos_rodamiento["Altura"] 
+        rigidez = datos_rodamiento["Rigidez"] 
+        diametro_externo = datos_rodamiento["Diametro externo"] 
+        masa = datos_rodamiento["Masa"] 
+        marca = datos_rodamiento["Marca"]
+        fabricante = datos_rodamiento["Fabricante"]
+        modelo = datos_rodamiento["Modelo"]
         id_rodamiento = sql_service.agregar_rodamiento(id_rodamiento, id_punto, altura, rigidez, diametro_externo, masa, marca, fabricante, modelo)
         
 
@@ -402,38 +402,38 @@ def configurar_punto(event, id_zona):
         longitud = 10
         caracteres = string.ascii_letters + string.digits
         id_rotores = ''.join(random.choice(caracteres) for i in range(longitud))
-        largo = datos_rotor["largo"] 
-        diametro = datos_rotor["diametro"] 
-        masa = datos_rotor["masa"] 
-        rigidez = datos_rotor["rigidez"] 
-        fabricante = datos_rotor["fabricante"] 
-        modelo = datos_rotor["modelo"] 
+        largo = datos_rotor["Largo"] 
+        diametro = datos_rotor["Diametro"] 
+        masa = datos_rotor["Masa"] 
+        rigidez = datos_rotor["Rigidez"] 
+        fabricante = datos_rotor["Fabricante"] 
+        modelo = datos_rotor["Modelo"] 
         id_rotores = sql_service.agregar_rotores(id_rotores, id_punto, largo, diametro, masa, rigidez, fabricante, modelo)
 
         # Generador de string
         longitud = 10
         caracteres = string.ascii_letters + string.digits
         id_engrane = ''.join(random.choice(caracteres) for i in range(longitud))
-        diametro_total = datos_engrane["diametro_total"] 
-        manzana_diametro = datos_engrane["manzana_diametro"] 
-        hueco_estandar_diametro = datos_engrane["hueco_estandar_diametro"] 
-        numero_dientes = datos_engrane["numero_dientes"] 
-        grosor_total_pinon = datos_engrane["grosor_total_pinon"] 
-        largo_manzana_solo = datos_engrane["largo_manzana_solo"] 
-        rigidez = datos_engrane["rigidez"]  
-        masa = datos_engrane["masa"] 
-        tipo = datos_engrane["tipo"] 
+        diametro_total = datos_engrane["Diametro_total"] 
+        manzana_diametro = datos_engrane["Manzana_diametro"] 
+        hueco_estandar_diametro = datos_engrane["Hueco_estandar_diametro"] 
+        numero_dientes = datos_engrane["Numero_dientes"] 
+        grosor_total_pinon = datos_engrane["Grosor_total_pinon"] 
+        largo_manzana_solo = datos_engrane["Largo_manzana_solo"] 
+        rigidez = datos_engrane["Rigidez"]  
+        masa = datos_engrane["Masa"] 
+        tipo = datos_engrane["Tipo"] 
         id_engrane = sql_service.agregar_engrane(id_engrane, id_punto, diametro_total, manzana_diametro, hueco_estandar_diametro, numero_dientes, grosor_total_pinon, largo_manzana_solo, rigidez, masa, tipo)
 
         # Generador de string
         longitud = 10
         caracteres = string.ascii_letters + string.digits
         id_eje = ''.join(random.choice(caracteres) for i in range(longitud))
-        largo = datos_eje["largo"]
-        diametro = datos_eje["diametro"]
-        masa = datos_eje["masa"]
-        rigidez = datos_eje["rigidez"]
-        fabricante = datos_eje["fabricante"]
+        largo = datos_eje["Largo"]
+        diametro = datos_eje["Diametro"]
+        masa = datos_eje["Masa"]
+        rigidez = datos_eje["Rigidez"]
+        fabricante = datos_eje["Fabricante"]
         id_eje = sql_service.agregar_eje(id_eje, id_punto, largo, diametro, masa, rigidez, fabricante)
 
 

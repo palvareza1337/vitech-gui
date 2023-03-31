@@ -1,4 +1,4 @@
-id,largo,diametro,masa,rigidez,fabricante,modelo,marca
+ID,Largo,Diametro,Masa,Rigidez,Fabricante,Modelo,Marca
 RTR001,40,25,2.5,100,Aerotech,AER001,Aerotech Industries
 RTR002,50,30,3.2,120,Dynamic,DYN002,Dynamic Rotors
 RTR003,60,35,4.1,150,Flightline,FLT003,Flightline Rotorcraft
