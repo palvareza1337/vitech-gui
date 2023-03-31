@@ -408,7 +408,8 @@ def configurar_punto(event, id_zona):
         rigidez = datos_rotor["Rigidez"] 
         fabricante = datos_rotor["Fabricante"] 
         modelo = datos_rotor["Modelo"] 
-        id_rotores = sql_service.agregar_rotores(id_rotores, id_punto, largo, diametro, masa, rigidez, fabricante, modelo)
+        marca = datos_rotor["Marca"]
+        id_rotores = sql_service.agregar_rotores(id_rotores, id_punto, largo, diametro, masa, rigidez, fabricante, modelo, marca)
 
         # Generador de string
         longitud = 10
@@ -423,7 +424,10 @@ def configurar_punto(event, id_zona):
         rigidez = datos_engrane["Rigidez"]  
         masa = datos_engrane["Masa"] 
         tipo = datos_engrane["Tipo"] 
-        id_engrane = sql_service.agregar_engrane(id_engrane, id_punto, diametro_total, manzana_diametro, hueco_estandar_diametro, numero_dientes, grosor_total_pinon, largo_manzana_solo, rigidez, masa, tipo)
+        marca = datos_engrane["Marca"]
+        fabricante = datos_engrane["Fabricante"]
+        modelo = datos_engrane["Modelo"]
+        id_engrane = sql_service.agregar_engrane(id_engrane, id_punto, diametro_total, manzana_diametro, hueco_estandar_diametro, numero_dientes, grosor_total_pinon, largo_manzana_solo, rigidez, masa, tipo, marca, fabricante, modelo)
 
         # Generador de string
         longitud = 10
@@ -434,7 +438,9 @@ def configurar_punto(event, id_zona):
         masa = datos_eje["Masa"]
         rigidez = datos_eje["Rigidez"]
         fabricante = datos_eje["Fabricante"]
-        id_eje = sql_service.agregar_eje(id_eje, id_punto, largo, diametro, masa, rigidez, fabricante)
+        marca = datos_eje["Marca"]
+        modelo = datos_eje["Modelo"]
+        id_eje = sql_service.agregar_eje(id_eje, id_punto, largo, diametro, masa, rigidez, fabricante, marca, modelo)
 
 
         

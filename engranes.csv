@@ -1,51 +1,49 @@
-ID,Altura,Rigidez,Diametro externo,Masa,Marca,Fabricante,Modelo
-1,20,1000,50,2.5,GearCo,Manufacturer A,Model A1
-2,25,1100,55,2.7,GearCo,Manufacturer B,Model B1
-3,30,1200,60,3.0,GearCo,Manufacturer C,Model C1
-4,35,1300,65,3.2,GearCo,Manufacturer A,Model A2
-5,40,1400,70,3.5,GearCo,Manufacturer B,Model B2
-6,45,1500,75,3.7,GearCo,Manufacturer C,Model C2
-7,50,1600,80,4.0,GearCo,Manufacturer A,Model A3
-8,55,1700,85,4.2,GearCo,Manufacturer B,Model B3
-9,60,1800,90,4.5,GearCo,Manufacturer C,Model C3
-10,65,1900,95,4.7,GearCo,Manufacturer A,Model A4
-11,70,2000,100,5.0,GearCo,Manufacturer B,Model B4
-12,75,2100,105,5.2,GearCo,Manufacturer C,Model C4
-13,80,2200,110,5.5,GearCo,Manufacturer A,Model A5
-14,85,2300,115,5.7,GearCo,Manufacturer B,Model B5
-15,90,2400,120,6.0,GearCo,Manufacturer C,Model C5
-16,95,2500,125,6.2,GearCo,Manufacturer A,Model A6
-17,100,2600,130,6.5,GearCo,Manufacturer B,Model B6
-18,105,2700,135,6.7,GearCo,Manufacturer C,Model C6
-19,110,2800,140,7.0,GearCo,Manufacturer A,Model A7
-20,115,2900,145,7.2,GearCo,Manufacturer B,Model B7
-21,120,3000,150,7.5,GearCo,Manufacturer C,Model C7
-22,125,3100,155,7.7,GearCo,Manufacturer A,Model A8
-23,130,3200,160,8.0,GearCo,Manufacturer B,Model B8
-24,135,3300,165,8.2,GearCo,Manufacturer C,Model C8
-25,140,3400,170,8.5,GearCo,Manufacturer A,Model A9
-26,145,3500,175,8.7,GearCo,Manufacturer B,Model B9
-27,150,3600,180,9.0,GearCo,Manufacturer C,Model C9
-28,155,3700,185,9.2,GearCo,Manufacturer A,Model A10
-29,160,3800,190,9.5,GearCo,Manufacturer B,Model B10
-30,165,3900,195,9.7,GearCo,Manufacturer C,Model C10
-31,170,4000,200,10.0,GearCo,Manufacturer A,Model A11
-32,175,4100,205,10.2,GearCo,Manufacturer B,Model B11
-33,180,4200,210,10.5,GearCo,Manufacturer C,Model C11
-34,185,4300,215,10.7,GearCo,Manufacturer A,Model A12
-35,190,4400,220,11.0,GearCo,Manufacturer B,Model B12
-36,195,4500,225,11.2,GearCo,Manufacturer C,Model C12
-37,200,4600,230,11.5,GearCo,Manufacturer A,Model A13
-38,205,4700,235,11.7,GearCo,Manufacturer B,Model B13
-39,210,4800,240,12.0,GearCo,Manufacturer C,Model C13
-40,215,4900,245,12.2,GearCo,Manufacturer A,Model A14
-41,220,5000,250,12.5,GearCo,Manufacturer B,Model B14
-42,225,5100,255,12.7,GearCo,Manufacturer C,Model C14
-43,230,5200,260,13.0,GearCo,Manufacturer A,Model A15
-44,235,5300,265,13.2,GearCo,Manufacturer B,Model B15
-45,240,5400,270,13.5,GearCo,Manufacturer C,Model C15
-46,245,5500,275,13.7,GearCo,Manufacturer A,Model A16
-47,250,5600,280,14.0,GearCo,Manufacturer B,Model B16
-48,255,5700,285,14.2,GearCo,Manufacturer C,Model C16
-49,260,5800,290,14.5,GearCo,Manufacturer A,Model A17
-50,265,5900,295,14.7,GearCo,Manufacturer B,Model B17
+ID,Diametro_total,Manzana_diametro,Hueco_estandar_diametro,Numero_dientes,Grosor_total_pinon,Largo_manzana_solo,Rigidez,Masa,Tipo,Marca,Modelo,Fabricante
+1,100,75,20,20,15,50,1200,10,fijo,ACME,XYZ,ACME Corp.
+2,150,120,40,30,20,75,1800,20,movil,ABC,123,ABC Inc.
+3,80,60,15,16,12,40,900,8,fijo,XYZ,789,XYZ Corp.
+4,200,160,50,40,25,100,2500,30,movil,DEF,456,DEF Inc.
+5,120,90,25,24,18,60,1500,15,fijo,GHI,789,GHI Corp.
+6,90,70,18,18,14,45,1000,9,fijo,JKL,234,JKL Inc.
+7,130,100,30,28,22,70,1600,18,movil,MNO,567,MNO Corp.
+8,85,65,16,15,10,35,800,7,fijo,PQR,901,PQR Inc.
+9,175,140,45,36,30,90,2200,25,movil,STU,345,STU Corp.
+10,110,80,22,21,16,55,1300,12,fijo,VWX,678,VWX Inc.
+11,95,72,18,17,12,40,950,8,fijo,ACME,XYZ,ACME Corp.
+12,145,115,35,26,20,65,1500,17,movil,ABC,123,ABC Inc.
+13,75,55,12,14,10,30,700,6,fijo,XYZ,789,XYZ Corp.
+14,190,150,50,42,28,110,2800,32,movil,DEF,456,DEF Inc.
+15,115,85,24,22,18,50,1200,11,fijo,GHI,789,GHI Corp.
+16,88,67,16,15,11,40,800,7,fijo,JKL,234,JKL Inc.
+17,125,95,28,27,23,80,1700,19,movil,MNO,567,MNO Corp.
+18,80,60,15,16,12,40,900,8,fijo,PQR,901,PQR Inc.
+19,165,130,40,34,28,85,2000,23,movil,STU,345,STU Corp.
+20,100,75,20,20,15,50,1200,10,fijo,VWX,678,VWX Inc.
+21,105,78,20,19,14,45,1100,9,fijo,ACME,XYZ,ACME Corp.
+22,155,125,38,32,24,80,1900,21,movil,ABC,123,ABC Inc.
+23,85,65,16,15,10,35,800,7,fijo,XYZ,789,XYZ Corp.
+26,120,90,25,24,18,60,1500,15,fijo,GHI,789,GHI Corp.
+27,90,70,18,18,14,45,1000,9,fijo,JKL,234,JKL Inc.
+28,140,110,32,30,20,75,1700,16,movil,MNO,567,MNO Corp.
+29,75,55,12,14,10,30,700,6,fijo,PQR,901,PQR Inc.
+30,185,145,45,38,26,95,2400,27,movil,STU,345,STU Corp.
+31,95,72,18,17,12,40,950,8,fijo,VWX,678,VWX Inc.
+32,115,85,24,22,18,50,1200,11,fijo,ACME,XYZ,ACME Corp.
+33,165,130,40,34,28,85,2000,23,movil,ABC,123,ABC Inc.
+34,80,60,15,16,12,40,900,8,fijo,XYZ,789,XYZ Corp.
+35,195,155,50,44,30,100,2600,29,movil,DEF,456,DEF Inc.
+36,125,95,28,27,23,80,1700,19,movil,GHI,789,GHI Corp.
+37,88,67,16,15,11,40,800,7,fijo,JKL,234,JKL Inc.
+38,135,105,30,28,22,70,1600,18,movil,MNO,567,MNO Corp.
+39,85,65,16,15,10,35,800,7,fijo,PQR,901,PQR Inc.
+40,175,140,45,36,30,90,2200,25,movil,STU,345,STU Corp.
+41,100,75,20,20,15,50,1200,10,fijo,VWX,678,VWX Inc.
+42,110,80,22,21,16,55,1300,12,fijo,ACME,XYZ,ACME Corp.
+43,160,125,38,32,24,80,1900,21,movil,ABC,123,ABC Inc.
+44,75,55,12,14,10,30,700,6,fijo,XYZ,789,XYZ Corp.
+45,190,150,50,42,28,110,2800,32,movil,DEF,456,DEF Inc.
+46,120,90,25,24,18,60,1500,15,fijo,GHI,789,GHI Corp.
+47,90,70,18,18,14,45,1000,9,fijo,JKL,234,JKL Inc.
+48,145,115,35,26,20,65,1500,17,movil,MNO,567,MNO Corp.
+49,80,60,15,16,12,40,900,8,fijo,PQR,901,PQR Inc.
+50,170,135,42,40,25,95,2300,24,movil,STU,345,STU Corp.

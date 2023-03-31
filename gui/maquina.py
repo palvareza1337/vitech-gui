@@ -127,7 +127,7 @@ def nueva_maquina(root):
         if(len(table.get_children()) > 9):
             return
         try:
-            new_index = int(max(table.get_children())) + 1
+            new_index = max(list(map(int, table.get_children()))) + 1
         except:
             new_index = 0
         table.insert(parent="", index=new_index, iid=new_index, values=("LD", "80,180", "H,V,A", "V,AE", "Acelerati..", "", "Agregar"))

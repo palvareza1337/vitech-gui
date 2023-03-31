@@ -206,24 +206,24 @@ def agregar_rodamiento(id_rodamiento, id_punto, altura, rigidez, diametro_extern
   cursor.execute(f"INSERT INTO `rodamiento` (`id_rodamiento`, `id_punto`, `altura`, `rigidez`, `diametro_externo`, `masa`, `marca`, `fabricante`, `modelo`)\
                   VALUES ('{id_rodamiento}', '{id_punto}', '{altura}', '{rigidez}', '{diametro_externo}', '{masa}', '{marca}', '{fabricante}', '{modelo}')")
   db.commit()
-  cursor.execute(f"SELECT id_rodamiento FROM rodamiento ORDER BY id_rotor DESC LIMIT 1")
+  cursor.execute(f"SELECT id_rodamiento FROM rodamiento ORDER BY id_rodamiento DESC LIMIT 1")
   result = cursor.fetchone()
   return result[0]
 
 
 
-def agregar_rotores(id_rotores, id_punto, largo, diametro, masa, rigidez, fabricante, modelo):
-  cursor.execute(f"INSERT INTO `rotor` (`id_rotor`, `id_punto`, `largo`, `diametro`, `masa`, `rigidez`, `fabricante`, `modelo`)\
-                   VALUES ('{id_rotores}', '{id_punto}', '{largo}', '{diametro}', '{masa}', '{rigidez}', '{fabricante}', '{modelo}')")
+def agregar_rotores(id_rotores, id_punto, largo, diametro, masa, rigidez, fabricante, modelo, marca):
+  cursor.execute(f"INSERT INTO `rotor` (`id_rotor`, `id_punto`, `largo`, `diametro`, `masa`, `rigidez`, `fabricante`, `modelo`, `marca`)\
+                   VALUES ('{id_rotores}', '{id_punto}', '{largo}', '{diametro}', '{masa}', '{rigidez}', '{fabricante}', '{modelo}', '{marca}')")
   db.commit()
   cursor.execute(f"SELECT id_rotor FROM rotor ORDER BY id_rotor DESC LIMIT 1")
   result = cursor.fetchone()
   return result[0]
 
 
-def agregar_engrane(id_engrane, id_punto, diametro_total, manzana_diametro, hueco_estandar_diametro, numero_dientes, grosor_total_pinon, largo_manzana_solo, rigidez, masa, tipo):
-  cursor.execute(f"INSERT INTO `engrane` (`id_engrane`, `id_punto`, `diametro_total`, `manzana_diametro`, `hueco_estandar_diametro`, `numero_dientes`, `grosor_total_pinon`, `largo_manzana_solo`, `rigidez`, `masa`, `tipo`)\
-                   VALUES ('{id_engrane}', '{id_punto}', '{diametro_total}', '{manzana_diametro}', '{hueco_estandar_diametro}', '{numero_dientes}', '{grosor_total_pinon}', '{largo_manzana_solo}', '{rigidez}', '{masa}', '{tipo}')")
+def agregar_engrane(id_engrane, id_punto, diametro_total, manzana_diametro, hueco_estandar_diametro, numero_dientes, grosor_total_pinon, largo_manzana_solo, rigidez, masa, tipo, marca, fabricante, modelo):
+  cursor.execute(f"INSERT INTO `engrane` (`id_engrane`, `id_punto`, `diametro_total`, `manzana_diametro`, `hueco_estandar_diametro`, `numero_dientes`, `grosor_total_pinon`, `largo_manzana_solo`, `rigidez`, `masa`, `tipo`, `marca`, `fabricante`, `modelo`)\
+                   VALUES ('{id_engrane}', '{id_punto}', '{diametro_total}', '{manzana_diametro}', '{hueco_estandar_diametro}', '{numero_dientes}', '{grosor_total_pinon}', '{largo_manzana_solo}', '{rigidez}', '{masa}', '{tipo}', '{marca}', '{fabricante}', '{modelo}')")
   db.commit()
   cursor.execute(f"SELECT id_engrane FROM engrane ORDER BY id_engrane DESC LIMIT 1")
   result = cursor.fetchone()
@@ -231,9 +231,9 @@ def agregar_engrane(id_engrane, id_punto, diametro_total, manzana_diametro, huec
 
 
 
-def agregar_eje(id_eje, id_punto, largo, diametro, masa, rigidez, fabricante):
-  cursor.execute(f"INSERT INTO `eje` (`id_eje`, `id_punto`, `largo`, `diametro`, `masa`, `rigidez`, `fabricante`)\
-                   VALUES ('{id_eje}', '{id_punto}', '{largo}', '{diametro}', '{masa}', '{rigidez}', '{fabricante}')")
+def agregar_eje(id_eje, id_punto, largo, diametro, masa, rigidez, fabricante, marca, modelo):
+  cursor.execute(f"INSERT INTO `eje` (`id_eje`, `id_punto`, `largo`, `diametro`, `masa`, `rigidez`, `fabricante`, `marca`, `modelo`)\
+                   VALUES ('{id_eje}', '{id_punto}', '{largo}', '{diametro}', '{masa}', '{rigidez}', '{fabricante}', '{marca}', '{modelo}')")
   db.commit()
   cursor.execute(f"SELECT id_eje FROM eje ORDER BY id_eje DESC LIMIT 1")
   result = cursor.fetchone()
