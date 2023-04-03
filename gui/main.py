@@ -44,10 +44,15 @@ mapping_ejes = {'X': 'Horizontal', 'Y': 'Vertical', 'Z': 'Axial'}
 
 # creacion de la ventana principal
 root = tk.Tk()
-root.wm_title("Graficador")
+root.wm_title("VITECH")
 root.geometry("1000x700")
+
+"""
 icon = os.path.join(sys.path[0], "LOGO_VITECH.ico")
 root.iconbitmap(icon)
+
+"""
+
 
 
 ribbon = ttk.Notebook(root)
