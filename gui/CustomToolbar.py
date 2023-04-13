@@ -29,7 +29,7 @@ class CustomToolbar(NavigationToolbar2Tk):
         #fig.savefig('ax2_figure.png', bbox_inches=extent)
         #
         ## Pad the saved area by 10% in the x-direction and 20% in the y-direction
-        self.canvas.figure.savefig('ax2_figure_expanded.png', bbox_inches=extent.expanded(1.1, 1.2))
+        self.canvas.figure.savefig('ax2_figure_expanded.png', bbox_inches=extent.expanded(1.2, 1.1))
 
         # Guardar el gráfico en un archivo png
         self.canvas.figure.savefig("signal.png")
@@ -38,16 +38,14 @@ class CustomToolbar(NavigationToolbar2Tk):
         pdf = FPDF()
         pdf.add_page()
         pdf.set_font('Arial', 'B', 16)
-        #fpdf.cell(w, h = 0, txt = '', border = 0, ln = 0, align = '', fill = False, link = '')
-        #pdf.cell(40, 10, 'Área 2 - Máquina 4 - Zona 8 - Punto 9.', 0, 20)
         
-        pdf.cell(40, 40, "G", 0, 20)
-        #pdf.cell(40, 10, 'Área 2 - Máquina 4 - Zona 8 - Punto 9.', 0, 1, 'C')
-        pdf.image('ax2_figure_expanded.png', x=20, y=-5, w=180, h=0, type='png', link='')
-        #pdf.setTextAlignment('C')
-        #pdf.setX(20)
-        pdf.cell(190, 30, "Hz", 0, 10,'C')
-        pdf.cell(40, 10, self.var_nombre_tentativo, 0, 20)
+        pdf.image('ax2_figure_expanded.png', x=10, y=30, w=200, h=70, type='png', link='')
+
+
+        pdf.cell(40, 10, self.var_nombre_tentativo, 0, 10)
+
+        pdf.ln(h=100)
+        
         
         pdf.cell(42,0,'',0,1)  # Agregar una celda vacía con altura de 0 para separar
 
@@ -94,4 +92,3 @@ class CustomToolbar(NavigationToolbar2Tk):
 
         pdf.output('tuto1.pdf', 'F')
         os.system('tuto1.pdf')
-
