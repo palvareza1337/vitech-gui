@@ -29,7 +29,7 @@ class CustomToolbar(NavigationToolbar2Tk):
         #fig.savefig('ax2_figure.png', bbox_inches=extent)
         #
         ## Pad the saved area by 10% in the x-direction and 20% in the y-direction
-        self.canvas.figure.savefig('ax2_figure_expanded.png', bbox_inches=extent.expanded(1.2, 1.1))
+        self.canvas.figure.savefig('ax2_figure_expanded.png', bbox_inches=extent.expanded(1.2, 1.5))
 
         # Guardar el gráfico en un archivo png
         self.canvas.figure.savefig("signal.png")
@@ -39,10 +39,12 @@ class CustomToolbar(NavigationToolbar2Tk):
         pdf.add_page()
         pdf.set_font('Arial', 'B', 16)
         
-        pdf.image('ax2_figure_expanded.png', x=10, y=30, w=200, h=70, type='png', link='')
+        
 
 
         pdf.cell(40, 10, self.var_nombre_tentativo, 0, 10)
+        
+        pdf.image('ax2_figure_expanded.png', x=10, y=20, w=200, h=70, type='png', link='')
 
         pdf.ln(h=100)
         
