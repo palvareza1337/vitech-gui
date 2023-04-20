@@ -367,8 +367,7 @@ FodyWeavers.xsd
 gui/testdata/**
 
 
-gui/.env
-ConsoleApp1/.env
+
 
 cache/**
 
