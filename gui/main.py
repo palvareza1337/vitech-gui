@@ -233,6 +233,9 @@ def newtab(filename, name, sample_rate):
     # creacion de plot 2 de 2 en la figura
     ax2 = fig.add_subplot(212)
 
+    # agregar espacio entre subplots
+    fig.subplots_adjust(hspace=0.5)
+
     # conexion de matplotlib a tkinter, junto con la figura
     canvas = FigureCanvasTkAgg(fig, master=tab1)  # CREAR AREA DE DIBUJO DE TKINTER.
     
