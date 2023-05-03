@@ -23,6 +23,9 @@ from math import *
 import sys, os
 from fpdf import FPDF
 
+import ttkbootstrap as ttk
+from ttkbootstrap.constants import *
+
 # Custom Creations
 import sesion
 import sql_service
@@ -61,22 +64,21 @@ ribbon.pack(side=tk.TOP, fill=tk.BOTH)
 # creacion de la barra lateral con la informacion de las areas, maquinas, zonas, puntos y mediciones
 sidebar = tk.Frame(root, bg="blue")
 sidebar.pack(side=tk.LEFT, fill=tk.BOTH, expand=0)
-treeview = ttk.Treeview(sidebar, selectmode="browse")
+treeview = ttk.Treeview(sidebar, selectmode="browse", bootstyle='info')
 # place the Treeview widget on the root window
 treeview.pack(fill=tk.BOTH, expand=1)
     
-tab1 = tk.Frame(ribbon)
+tab1 = ttk.Frame(ribbon)
 ribbon.add(tab1, text='Iniciar')
-tk.Button(tab1, text='Iniciar Sesion').pack(side=tk.LEFT)
-tk.Button(tab1, text='Cerrar Sesion', command=partial(sesion.cerrar_sesion, root)).pack(side=tk.LEFT)
-#tk.Button(tab1, text='Nueva Máquina').pack(side=tk.LEFT)
-tk.Button(tab1, text='Nueva Máquina', command=partial(maquina.nueva_maquina, root)).pack(side=tk.LEFT)
-tk.Button(tab1, text='Actualizar Lista', command=partial(Sidebar.populate_sidebar, treeview)).pack(side=tk.LEFT)
-tk.Button(tab1, text='Nuevo Reporte').pack(side=tk.LEFT)
+ttk.Button(tab1, text='Iniciar Sesion', bootstyle=(SUCCESS, OUTLINE)).pack(side=tk.LEFT)
 
+ttk.Button(tab1, text='Nueva Máquina', command=partial(maquina.nueva_maquina, root), bootstyle=(INFO, OUTLINE)).pack(side=tk.LEFT)
+ttk.Button(tab1, text='Actualizar Lista', command=partial(Sidebar.populate_sidebar, treeview), bootstyle=(INFO, OUTLINE)).pack(side=tk.LEFT)
+ttk.Button(tab1, text='Nuevo Reporte', bootstyle=(INFO, OUTLINE)).pack(side=tk.LEFT)
+ttk.Button(tab1, text='Soporte', bootstyle=(INFO, OUTLINE)).pack(side=tk.LEFT)
+ttk.Button(tab1, text='Tutoriales', bootstyle=(INFO, OUTLINE)).pack(side=tk.LEFT) 
 
-tk.Button(tab1, text='Soporte').pack(side=tk.LEFT)
-tk.Button(tab1, text='Tutoriales').pack(side=tk.LEFT) 
+ttk.Button(tab1, text='Cerrar Sesion', command=partial(sesion.cerrar_sesion, root), bootstyle=(DANGER, OUTLINE)).pack(side=tk.RIGHT)
 
 tab2 = tk.Frame(ribbon)
 ribbon.add(tab2, text='BBDD')
@@ -122,8 +124,6 @@ def OnSelect(event):
 
 
 treeview.bind("<Double-1>", OnDoubleClick)
-#treeview.bind("<Button-1>", OnSingleClick)
-#treeview.bind("<<TreeviewSelect>>", OnSelect)
 
 # creacion de tabs
 graphs = tk.Frame(root, bg="green")
@@ -209,7 +209,7 @@ def listar_mediciones():
     tabControl.add(mediciones_historicas, text='Mediciónes historica') 
     tabControl.select(mediciones_historicas)
 
-tk.Button(tab1, text='Mediciones Historicas', command=partial(listar_mediciones)).pack(side=tk.LEFT)
+ttk.Button(tab1, text='Mediciones Historicas', command=partial(listar_mediciones), bootstyle=(INFO, OUTLINE)).pack(side=tk.LEFT)
 
 
 def newtab(filename, name, sample_rate):

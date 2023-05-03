@@ -5,6 +5,8 @@ from tkinter import ttk
 
 import punto
 
+import ttkbootstrap as ttk
+from ttkbootstrap.constants import *
 
 global id_empresa 
 id_empresa = 17123456
@@ -158,25 +160,25 @@ def nueva_maquina(root):
 
     frame3 = tk.Frame(ventana_nueva_maquina)
     # Crear frame para la información básica
-    frame_info_basica = tk.LabelFrame(frame3, text="Información básica")
+    frame_info_basica = ttk.LabelFrame(frame3, text="Información básica", bootstyle="info")
     frame_info_basica.pack(padx=10, pady=10, anchor="w")
 
-    etiqueta_tipo = tk.Label(frame_info_basica, text="Tipo:")
+    etiqueta_tipo = ttk.Label(frame_info_basica, text="Tipo:")
     etiqueta_tipo.grid(row=0, column=0, sticky="w")
     opciones_tipo = ["Fija", "Movil"]
     global combo_tipo
-    combo_tipo = ttk.Combobox(frame_info_basica, values=opciones_tipo, state="readonly") 
+    combo_tipo = ttk.Combobox(frame_info_basica, values=opciones_tipo, state="readonly", bootstyle="info") 
     combo_tipo.grid(row=0, column=1, padx=5, pady=5)
     etiqueta_modelo = tk.Label(frame_info_basica, text="Modelo:")
     etiqueta_modelo.grid(row=1, column=0, sticky="w")
     global entrada_modelo
-    entrada_modelo = tk.Entry(frame_info_basica)
+    entrada_modelo = ttk.Entry(frame_info_basica, bootstyle="info")
     entrada_modelo.grid(row=1, column=1, padx=5, pady=5)
 
     # Crear etiqueta para el Spinbox
     etiqueta_spinbox = tk.Label(frame_info_basica, text="Cant. Puntos de monitoreo:")
     etiqueta_spinbox.grid(row=2, column=0, sticky="w")
-    spinbox_cant_monitoreo = ttk.Spinbox(frame_info_basica, from_=1, to=10)
+    spinbox_cant_monitoreo = ttk.Spinbox(frame_info_basica, from_=1, to=10, bootstyle="info")
     spinbox_cant_monitoreo.grid(row=2, column=1, padx=5, pady=5)
     print("ta bueno el bind")
     spinbox_cant_monitoreo.bind("<<Increment>>", add_to_table)
@@ -202,7 +204,7 @@ def nueva_maquina(root):
 
 
     # Crear frame para la información previa
-    frame_info_previa = tk.LabelFrame(frame1, text="Información Previa")
+    frame_info_previa = ttk.LabelFrame(frame1, text="Información Previa", bootstyle="info")
     frame_info_previa.pack(padx=10, pady=10, anchor="w")
     
 
@@ -221,7 +223,7 @@ def nueva_maquina(root):
     diccionario_sucursales = {sucursal["nombre_sucursal"]: sucursal["id_sucursal"] for sucursal in query_sucursales}
     print(list(diccionario_sucursales.keys()))
     opciones_sucursal_id = list(diccionario_sucursales.keys())
-    combo_sucursal_id = ttk.Combobox(frame_info_previa, values=opciones_sucursal_id, state="readonly") 
+    combo_sucursal_id = ttk.Combobox(frame_info_previa, values=opciones_sucursal_id, state="readonly", bootstyle="info") 
     combo_sucursal_id.grid(row=0, column=2, padx=5, pady=5)
 
 
@@ -237,7 +239,7 @@ def nueva_maquina(root):
     etiqueta_area = tk.Label(frame_info_previa, text="Área:")
     etiqueta_area.grid(row=1, column=1, sticky="w")
     opciones_area = []
-    combo_area = ttk.Combobox(frame_info_previa, values=opciones_area, state="normal") 
+    combo_area = ttk.Combobox(frame_info_previa, values=opciones_area, state="normal", bootstyle="info") 
     combo_area.grid(row=1, column=2, padx=5, pady=5)
     
     
@@ -274,14 +276,14 @@ def nueva_maquina(root):
     etiqueta_maquina = tk.Label(frame_info_previa, text="Máquina:")
     etiqueta_maquina.grid(row=2, column=1, sticky="w")
     opciones_maquina = []#["Fija", "Movil"]
-    combo_maquina = ttk.Combobox(frame_info_previa, values=opciones_maquina, state="normal") 
+    combo_maquina = ttk.Combobox(frame_info_previa, values=opciones_maquina, state="normal", bootstyle="info") 
     combo_maquina.grid(row=2, column=2, padx=5, pady=5)
     
 
     etiqueta_zona = tk.Label(frame_info_previa, text="Zona:")
     etiqueta_zona.grid(row=3, column=1, sticky="w")
     opciones_zona = []
-    combo_zona = ttk.Combobox(frame_info_previa, values=opciones_zona, state="normal") 
+    combo_zona = ttk.Combobox(frame_info_previa, values=opciones_zona, state="normal", bootstyle="info") 
     combo_zona.grid(row=3, column=2, padx=5, pady=5)
     
 
@@ -301,7 +303,7 @@ def nueva_maquina(root):
     botones_frame = tk.Frame(frame7)
     botones_frame.pack(pady=10)
 
-    boton_cancelar = tk.Button(botones_frame, text="Cancelar", command=cancelar, bg="#9b9b9b") 
+    boton_cancelar = tk.Button(botones_frame, text="Cancelar", command=cancelar, bootstyle=(INFO, OUTLINE)) 
     boton_cancelar.grid(row=0, column=0, padx=5)
 
     
@@ -309,5 +311,7 @@ def nueva_maquina(root):
         guardar_nueva_maquina()
         ventana_nueva_maquina.destroy()
 
-    boton_guardar = tk.Button(botones_frame, text="Guardar", command=boton_guardar_func, bg="#3366CC") 
+    #boton_guardar = tk.Button(botones_frame, text="Guardar", command=boton_guardar_func, bg="#3366CC") 
+    boton_guardar = tk.Button(botones_frame, text="Guardar", command=boton_guardar_func, bootstyle=SUCCESS)
+    #b1.pack(side=LEFT, padx=5, pady=10)
     boton_guardar.grid(row=0, column=1, padx=5)
