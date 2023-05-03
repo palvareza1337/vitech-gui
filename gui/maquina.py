@@ -82,9 +82,9 @@ def nueva_maquina(root):
     frame1 = tk.Frame(ventana_nueva_maquina)
     
     
-    frame2 = tk.Frame(ventana_nueva_maquina)
+    frame2 = ttk.Frame(ventana_nueva_maquina, bootstyle="info")
     # Crear Treeview
-    table = ttk.Treeview(frame2, show='headings', selectmode="browse")
+    table = ttk.Treeview(frame2, show='headings', selectmode="browse", bootstyle="info")
 
     
 
