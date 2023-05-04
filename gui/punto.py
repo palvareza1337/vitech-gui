@@ -57,7 +57,7 @@ def configurar_punto(event, id_zona, ventana):
 
         # Crear un botón para iniciar la búsqueda
         busqueda = partial(buscar, df)
-        boton_busqueda = tk.Button(frame_busqueda, text="Buscar", command=busqueda)
+        boton_busqueda = ttk.Button(frame_busqueda, text="Buscar", command=busqueda, bootstyle=(INFO, OUTLINE))
         boton_busqueda.pack(side=tk.LEFT, padx=5, pady=5)
 
         # Funcion para mostrar datos de rodamiento
@@ -104,7 +104,7 @@ def configurar_punto(event, id_zona, ventana):
         botones_frame = tk.Frame(ventana_buscar_rodamiento)
         botones_frame.pack(side="top", pady=10)
 
-        boton_guardar = tk.Button(botones_frame, text="Guardar", command=ventana_buscar_rodamiento.destroy, bg="#3366CC") 
+        boton_guardar = ttk.Button(botones_frame, text="Guardar", command=ventana_buscar_rodamiento.destroy, bootstyle=(PRIMARY, OUTLINE)) 
         boton_guardar.pack(side=tk.LEFT, padx=5)
 
 
@@ -133,7 +133,7 @@ def configurar_punto(event, id_zona, ventana):
         frame_busqueda.pack(side="top", fill=tk.X)
 
         # Crear una entrada de texto para la búsqueda
-        entrada_busqueda = tk.Entry(frame_busqueda, width=30)
+        entrada_busqueda = ttk.Entry(frame_busqueda, width=30, bootstyle="info")
         entrada_busqueda.pack(side=tk.LEFT, padx=5, pady=5)
 
         # Leer el archivo de Excel con Pandas
@@ -141,7 +141,7 @@ def configurar_punto(event, id_zona, ventana):
 
         # Crear un botón para iniciar la búsqueda
         busqueda = partial(buscar, df)
-        boton_busqueda = tk.Button(frame_busqueda, text="Buscar", command=busqueda)
+        boton_busqueda = ttk.Button(frame_busqueda, text="Buscar", command=busqueda, bootstyle=(INFO, OUTLINE))
         boton_busqueda.pack(side=tk.LEFT, padx=5, pady=5)
 
         # Funcion para mostrar datos de rodamiento
@@ -190,7 +190,7 @@ def configurar_punto(event, id_zona, ventana):
         botones_frame = tk.Frame(ventana_buscar_engrane)
         botones_frame.pack(side="top", pady=10)
 
-        boton_guardar = tk.Button(botones_frame, text="Guardar", command=ventana_buscar_engrane.destroy, bg="#3366CC") 
+        boton_guardar = ttk.Button(botones_frame, text="Guardar", command=ventana_buscar_engrane.destroy, bootstyle=(PRIMARY, OUTLINE)) 
         boton_guardar.pack(side=tk.LEFT, padx=5)
 
 
@@ -222,7 +222,7 @@ def configurar_punto(event, id_zona, ventana):
         frame_busqueda.pack(side="top", fill=tk.X)
 
         # Crear una entrada de texto para la búsqueda
-        entrada_busqueda = tk.Entry(frame_busqueda, width=30)
+        entrada_busqueda = ttk.Entry(frame_busqueda, width=30, bootstyle=INFO)
         entrada_busqueda.pack(side=tk.LEFT, padx=5, pady=5)
 
         # Leer el archivo de Excel con Pandas
@@ -230,7 +230,7 @@ def configurar_punto(event, id_zona, ventana):
 
         # Crear un botón para iniciar la búsqueda
         busqueda = partial(buscar, df)
-        boton_busqueda = tk.Button(frame_busqueda, text="Buscar", command=busqueda)
+        boton_busqueda = ttk.Button(frame_busqueda, text="Buscar", command=busqueda, bootstyle=(INFO, OUTLINE))
         boton_busqueda.pack(side=tk.LEFT, padx=5, pady=5)
 
         # Funcion para mostrar datos de rodamiento
@@ -276,7 +276,7 @@ def configurar_punto(event, id_zona, ventana):
         botones_frame = tk.Frame(ventana_buscar_ejes)
         botones_frame.pack(side="top", pady=10)
 
-        boton_guardar = tk.Button(botones_frame, text="Guardar", command=ventana_buscar_ejes.destroy, bg="#3366CC") 
+        boton_guardar = ttk.Button(botones_frame, text="Guardar", command=ventana_buscar_ejes.destroy, bootstyle=(PRIMARY, OUTLINE)) 
         boton_guardar.pack(side=tk.LEFT, padx=5)
 
 
@@ -308,7 +308,7 @@ def configurar_punto(event, id_zona, ventana):
         frame_busqueda.pack(side="top", fill=tk.X)
 
         # Crear una entrada de texto para la búsqueda
-        entrada_busqueda = tk.Entry(frame_busqueda, width=30)
+        entrada_busqueda = ttk.Entry(frame_busqueda, width=30, bootstyle=INFO)
         entrada_busqueda.pack(side=tk.LEFT, padx=5, pady=5)
 
         # Leer el archivo de Excel con Pandas
@@ -316,7 +316,7 @@ def configurar_punto(event, id_zona, ventana):
 
         # Crear un botón para iniciar la búsqueda
         busqueda = partial(buscar, df)
-        boton_busqueda = tk.Button(frame_busqueda, text="Buscar", command=busqueda)
+        boton_busqueda = ttk.Button(frame_busqueda, text="Buscar", command=busqueda, bootstyle=(INFO, OUTLINE))
         boton_busqueda.pack(side=tk.LEFT, padx=5, pady=5)
 
         # Funcion para mostrar datos de rodamiento
@@ -362,7 +362,7 @@ def configurar_punto(event, id_zona, ventana):
         botones_frame = tk.Frame(ventana_buscar_rotor)
         botones_frame.pack(side="top", pady=10)
 
-        boton_guardar = tk.Button(botones_frame, text="Guardar", command=ventana_buscar_rotor.destroy, bg="#3366CC") 
+        boton_guardar = ttk.Button(botones_frame, text="Guardar", command=ventana_buscar_rotor.destroy, bootstyle=(PRIMARY, OUTLINE)) 
         boton_guardar.pack(side=tk.LEFT, padx=5)
 
 
@@ -493,10 +493,10 @@ def configurar_punto(event, id_zona, ventana):
     entrada_rodamiento_cargado.grid(row=0, column=0, padx=5)
     entrada_rodamiento_cargado.configure(state="disabled")
 
-    boton_agregar_rodamiento = tk.Button(frame_rodamiento, text="Agregar", command=buscar_rodamiento, bg="#9b9b9b") 
+    boton_agregar_rodamiento = ttk.Button(frame_rodamiento, text="Agregar", command=buscar_rodamiento, bootstyle="success-outline") 
     boton_agregar_rodamiento.grid(row=0, column=1, padx=5)
 
-    boton_borrar_rodamiento = tk.Button(frame_rodamiento, text="Eliminar", command=cancelar, bg="#ff4040") 
+    boton_borrar_rodamiento = ttk.Button(frame_rodamiento, text="Borrar", command=cancelar, bootstyle="danger-outline") 
     boton_borrar_rodamiento.grid(row=0, column=2, padx=5)
 
     # Crear un nuevo frame
@@ -508,10 +508,10 @@ def configurar_punto(event, id_zona, ventana):
     entrada_caja_cargada.grid(row=0, column=0, padx=5)
     entrada_caja_cargada.configure(state="disabled")
 
-    boton_agregar_caja_engranes = tk.Button(frame_caja_engranes, text="Agregar", command=buscar_engranes, bg="#9b9b9b") 
+    boton_agregar_caja_engranes = ttk.Button(frame_caja_engranes, text="Agregar", command=buscar_engranes, bootstyle="success-outline") 
     boton_agregar_caja_engranes.grid(row=0, column=1, padx=5)
 
-    boton_borrar_caja_engranes = tk.Button(frame_caja_engranes, text="Eliminar", command=cancelar, bg="#ff4040") 
+    boton_borrar_caja_engranes = ttk.Button(frame_caja_engranes, text="Borrar", command=cancelar, bootstyle="danger-outline") 
     boton_borrar_caja_engranes.grid(row=0, column=2, padx=5)
 
     # ejes
@@ -524,10 +524,10 @@ def configurar_punto(event, id_zona, ventana):
     entrada_ejes_cargada.grid(row=0, column=0, padx=5)
     entrada_ejes_cargada.configure(state="disabled")
 
-    boton_agregar_ejes = tk.Button(frame_caja_ejes, text="Agregar", command=buscar_ejes, bg="#9b9b9b") 
+    boton_agregar_ejes = ttk.Button(frame_caja_ejes, text="Agregar", command=buscar_ejes, bootstyle="success-outline") 
     boton_agregar_ejes.grid(row=0, column=1, padx=5)
 
-    boton_borrar_ejes = tk.Button(frame_caja_ejes, text="Eliminar", command=cancelar, bg="#ff4040") 
+    boton_borrar_ejes = ttk.Button(frame_caja_ejes, text="Borrar", command=cancelar, bootstyle="danger-outline") 
     boton_borrar_ejes.grid(row=0, column=2, padx=5)
 
     # rotores
@@ -540,10 +540,10 @@ def configurar_punto(event, id_zona, ventana):
     entrada_rotor_cargada.grid(row=0, column=0, padx=5)
     entrada_rotor_cargada.configure(state="disabled")
 
-    boton_agregar_rotor = tk.Button(frame_rotor, text="Agregar", command=buscar_rotor, bg="#9b9b9b") 
+    boton_agregar_rotor = ttk.Button(frame_rotor, text="Agregar", command=buscar_rotor, bootstyle="success-outline") 
     boton_agregar_rotor.grid(row=0, column=1, padx=5)
 
-    boton_borrar_rotor = tk.Button(frame_rotor, text="Eliminar", command=cancelar, bg="#ff4040") 
+    boton_borrar_rotor = ttk.Button(frame_rotor, text="Borrar", command=cancelar, bootstyle="danger-outline") 
     boton_borrar_rotor.grid(row=0, column=2, padx=5)
 
     #codigo phantom
@@ -570,8 +570,10 @@ def configurar_punto(event, id_zona, ventana):
     def cancelar():
         nueva_ventana.destroy()
 
-    boton_cancelar = tk.Button(botones_frame, text="Cancelar", command=cancelar, bg="#9b9b9b") 
-    boton_cancelar.grid(row=0, column=0, padx=5)
+    boton_guardar = ttk.Button(botones_frame, text="Guardar", command=guardar_punto, bootstyle="primary-outline") 
+    boton_guardar.grid(row=0, column=0, padx=5)
 
-    boton_guardar = tk.Button(botones_frame, text="Guardar", command=guardar_punto, bg="#3366CC") 
-    boton_guardar.grid(row=0, column=1, padx=5)
+    boton_cancelar = ttk.Button(botones_frame, text="Cancelar", command=cancelar, bootstyle="secondary-outline") 
+    boton_cancelar.grid(row=0, column=1, padx=5)
+
+    
