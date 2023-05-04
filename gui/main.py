@@ -133,7 +133,8 @@ tabControl.pack(fill=tk.BOTH, expand=1)
 
 mediciones_historicas = tk.Canvas(tabControl)
 
-table = ttk.Treeview(mediciones_historicas, columns=('#0'), show="headings")
+#table = ttk.Treeview(mediciones_historicas, columns=('#0'), show="headings", bootstyle=INFO)
+table = ttk.Treeview(mediciones_historicas, columns=('#0'), show="headings", bootstyle=LIGHT)
 table.pack(fill=tk.BOTH, side=tk.LEFT, expand=1)
 
 def change_table(event):
