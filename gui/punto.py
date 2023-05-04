@@ -11,6 +11,9 @@ from pandastable import Table
 import random
 import string
 
+import ttkbootstrap as ttk
+from ttkbootstrap.constants import *
+
 def configurar_punto(event, id_zona, ventana):
 
     print("id_zona: ", id_zona)
@@ -46,7 +49,7 @@ def configurar_punto(event, id_zona, ventana):
         frame_busqueda.pack(side="top", fill=tk.X)
 
         # Crear una entrada de texto para la búsqueda
-        entrada_busqueda = tk.Entry(frame_busqueda, width=30)
+        entrada_busqueda = ttk.Entry(frame_busqueda, width=30, bootstyle="info")
         entrada_busqueda.pack(side=tk.LEFT, padx=5, pady=5)
 
         # Leer el archivo de Excel con Pandas
@@ -451,7 +454,7 @@ def configurar_punto(event, id_zona, ventana):
     nueva_ventana = tk.Toplevel(ventana)
     #nueva_ventana.lift()
     nueva_ventana.title("Configuración de puntos")
-    nueva_ventana.geometry("400x550")
+    nueva_ventana.geometry("450x575")
     nueva_ventana.resizable(False, False)
     nueva_ventana.focus_set()
 
@@ -462,27 +465,27 @@ def configurar_punto(event, id_zona, ventana):
     etiqueta_nombre_punto = tk.Label(frame_nombre_punto, text="Nombre del punto:")
     etiqueta_nombre_punto.pack(side="left")
     # Crear un nuevo widget de entrada dentro del frame
-    entrada_nombre_punto = tk.Entry(frame_nombre_punto)
+    entrada_nombre_punto = ttk.Entry(frame_nombre_punto, bootstyle="info")
     entrada_nombre_punto.pack(side="left")
 
     # Crear un nuevo frame
-    frame_rpm = tk.LabelFrame(nueva_ventana, text="RPM")
+    frame_rpm = ttk.LabelFrame(nueva_ventana, text="RPM", bootstyle="info")
     frame_rpm.pack()
     # Crear etiqueta para el Spinbox
     etiqueta_min = tk.Label(frame_rpm, text="Min")
     etiqueta_min.grid(row=1, column=0, sticky="w")
     # Crear un nuevo widget de entrada dentro del frame
-    spinbox_min = tk.Spinbox(frame_rpm, from_=-1, to=100000)
+    spinbox_min = ttk.Spinbox(frame_rpm, from_=-1, to=100000, bootstyle="info")
     spinbox_min.grid(row=1, column=1, padx=5, pady=5)
     # Crear etiqueta para el Spinbox
     etiqueta_max = tk.Label(frame_rpm, text="Max")
     etiqueta_max.grid(row=1, column=2, sticky="w")
     # Crear un nuevo widget de entrada dentro del frame
-    spinbox_max = tk.Spinbox(frame_rpm, from_=-1, to=100000)
+    spinbox_max = ttk.Spinbox(frame_rpm, from_=-1, to=100000, bootstyle="info")
     spinbox_max.grid(row=1, column=3, padx=5, pady=5)
 
     # Crear un nuevo frame
-    frame_rodamiento = tk.LabelFrame(nueva_ventana, text="Rodamiento")
+    frame_rodamiento = ttk.LabelFrame(nueva_ventana, text="Rodamiento", bootstyle="info")
     frame_rodamiento.pack()
     
     global entrada_rodamiento_cargado
@@ -497,7 +500,7 @@ def configurar_punto(event, id_zona, ventana):
     boton_borrar_rodamiento.grid(row=0, column=2, padx=5)
 
     # Crear un nuevo frame
-    frame_caja_engranes = tk.LabelFrame(nueva_ventana, text="Caja de engranes")
+    frame_caja_engranes = ttk.LabelFrame(nueva_ventana, text="Caja de engranes", bootstyle="info")
     frame_caja_engranes.pack()
 
     global entrada_caja_cargada
@@ -513,7 +516,7 @@ def configurar_punto(event, id_zona, ventana):
 
     # ejes
     # Crear un nuevo frame
-    frame_caja_ejes = tk.LabelFrame(nueva_ventana, text="Ejes")
+    frame_caja_ejes = ttk.LabelFrame(nueva_ventana, text="Ejes", bootstyle="info")
     frame_caja_ejes.pack()
 
     global entrada_ejes_cargada
@@ -529,7 +532,7 @@ def configurar_punto(event, id_zona, ventana):
 
     # rotores
     # Crear un nuevo frame
-    frame_rotor = tk.LabelFrame(nueva_ventana, text="Rotores")
+    frame_rotor = ttk.LabelFrame(nueva_ventana, text="Rotores", bootstyle="info")
     frame_rotor.pack()
 
     global entrada_rotor_cargada
@@ -545,19 +548,19 @@ def configurar_punto(event, id_zona, ventana):
 
     #codigo phantom
     # Crear un nuevo frame
-    frame_phantom = tk.LabelFrame(nueva_ventana, text="Phantom")
+    frame_phantom = ttk.LabelFrame(nueva_ventana, text="Phantom", bootstyle="info")
     frame_phantom.pack()
 
     etiqueta_phantom = tk.Label(frame_phantom, text="Codigo del sensor:")
     etiqueta_phantom.grid(row=0, column=0, sticky="w")
-    entrada_phantom = tk.Entry(frame_phantom)
+    entrada_phantom = ttk.Entry(frame_phantom, bootstyle="info")
     entrada_phantom.grid(row=1, column=1, padx=5)
 
     etiqueta_tipo = tk.Label(frame_phantom, text="Tipo:")
     etiqueta_tipo.grid(row=0, column=2, sticky="w")
     opciones_tipo = ["Alta", "Baja"]
     global combo_tipo
-    combo_tipo = ttk.Combobox(frame_phantom, values=opciones_tipo, state="readonly") 
+    combo_tipo = ttk.Combobox(frame_phantom, values=opciones_tipo, state="readonly", bootstyle="info") 
     combo_tipo.grid(row=1, column=2, padx=5, pady=5)
 
     # Crear un nuevo frame
