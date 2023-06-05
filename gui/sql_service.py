@@ -50,7 +50,7 @@ def buscar_sucursales_por_empresa(id_empresa):
   return out
 
 def buscar_areas_por_sucursal(id_sucursal):
-  cursor.execute(f"SELECT id_area, id_sucursal, numero_maquinas, nombre_area FROM area WHERE id_sucursal={id_sucursal}")
+  cursor.execute(f"SELECT id_area, id_sucursal, numero_maquinas, nombre_area FROM area WHERE id_sucursal='{id_sucursal}'")
   results = cursor.fetchall()
   out = []
   for result in results:
